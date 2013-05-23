@@ -1,23 +1,88 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <meta charset="utf-8">
+    <title>Angular Timer Directive, a simple AngularJS directive demonstrating its usefulness</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="jquery/jquery-1.9.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
     <script src="app/js/timer.js"></script>
 </head>
+
 <body ng-app="timer">
 
-<div>
-    Timer 1: <timer id="timer1"/>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Angular Timer Directive</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">From AngularJS</a></li>
+                            <li><a href="#">From native JavaScript</a></li>
+                            <li><a href="#">From jQuery</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
 </div>
 
-<div>
-    Timer 2: <timer id="timer2" interval="1000"/>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Introduction</h2>
+            <p>AngularJS directive is a powerful way of building reusable components.
+                This simple project will serve as a sample/reference implementation demonstrating the power & flexibilities of
+                AngularJS directives by making it truly usable across runtime libraries (AngularJS, plain old JavaScript, jQuery etc.)</p>
+            <p>
+                <h3>Timer 1 Example</h3>
+                <div>
+                    <timer id="timer1"/>
+                </div>
+            </p>
+            <p>
+                <h3>Timer 2 Example</h3>
+                <div>
+                    <timer id="timer2" interval="1000"/>
+                </div>
+            </p>
+            <p>
+                <h3>Timer 3 Example</h3>
+                <div>
+                    <timer id="timer3">{{minutes}} minutes, {{seconds}} seconds</timer>
+                </div>
+            </p>
+        </div>
+    </div>
 
-<div>
-    Timer 3: <timer id="timer3" interval="1000">
-                <h4>Time taken: {{minutes}} minutes, {{seconds}} seconds.</h4>
-             </timer>
+    <hr>
+
+    <footer>
+        <p>&copy; Siddique Hameed 2013</p>
+    </footer>
+
 </div>
 
 </body>
