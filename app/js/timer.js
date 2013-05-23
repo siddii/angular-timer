@@ -2,10 +2,24 @@ angular.module('timer', [])
   .directive('timer', function ($timeout) {
     return  {
       restrict: 'E',
-      template: "<h3>{{timeTaken}}</h3>",
+//      template: "<h3>{{timeTaken}}</h3>",
       replace: false,
       scope: {interval: '=interval'},
-      controller: function ($scope, $element) {
+      link: function ($scope, $element) {
+
+
+        console.log('###### $element = ', $element);
+
+        console.log('###### BEFORE $element.html() = ', $element.html());
+
+//        $element[0].innerHTML = '<h3>{{timeTaken}}</h3>';
+
+        if ($element.html() === '') {
+          console.log('###### setting default template', $element);
+          $element.html('<h3>{{timeTaken}}</h3>');
+        }
+
+        console.log('###### AFTER $element.html() = ', $element.html());
 
         $scope.startTime = null;
         $scope.timeoutId = null;
