@@ -19,6 +19,15 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
     <script src="app/js/timer.js"></script>
+    <script>
+        function startTimer(timerId, btn) {
+            document.getElementById(timerId).start();
+        }
+
+        function stopTimer(timerId, btn) {
+            document.getElementById(timerId).stop();
+        }
+    </script>
 </head>
 
 <body ng-app="timer">
@@ -57,9 +66,17 @@
                 This simple project will serve as a sample/reference implementation demonstrating the power & flexibilities of
                 AngularJS directives by making it truly usable across runtime libraries (AngularJS, plain old JavaScript, jQuery etc.)</p>
             <p>
-                <h3>Timer 1 Example</h3>
-                <div>
-                    <timer id="timer1"/>
+                <h3>Basic Example</h3>
+                <div class="row">
+                    <div class="span12">
+                        <timer id="timer1"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
+                        <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
+                    </div>
                 </div>
             </p>
             <p>
