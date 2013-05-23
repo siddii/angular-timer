@@ -8,6 +8,9 @@
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="docs/css/docs.css" rel="stylesheet">
+    <link href="docs/css/prettify.css" rel="stylesheet">
+
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -19,6 +22,10 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
     <script src="app/js/timer.js"></script>
+
+
+
+
     <script>
         function startTimer(timerId, btn) {
             document.getElementById(timerId).start();
@@ -67,31 +74,41 @@
                 AngularJS directives by making it truly usable across runtime libraries (AngularJS, plain old JavaScript, jQuery etc.)</p>
             <p>
                 <h3>Basic Example</h3>
-                <div class="row">
-                    <div class="span12">
-                        <timer id="timer1"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span12">
+                <div class="bs-docs-example">
+                        <p>This simple directive <code>&lt;timer id="timer1"/&gt;</code> markup code will start the timer with the default configuration option</p>
+                        <div><timer id="timer1"/></div>
                         <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
                         <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
                     </div>
                 </div>
             </p>
-            <p>
-                <h3>Timer 2 Example</h3>
-                <div>
-                    <timer id="timer2" interval="1000"/>
+    </div>
+    <div class="row">
+        <div class="span12">
+        <p>
+                <h3>Timer with interval example</h3>
+                <div class="bs-docs-example">
+                        <p>This directive <code>&lt;timer interval="1000" id="timer2"/&gt;</code> markup code will run the timer tick every second</p>
+                        <div><timer interval="1000" id="timer2"/></div>
+                        <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
+                        <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
+                    </div>
                 </div>
             </p>
-            <p>
-                <h3>Timer 3 Example</h3>
-                <div>
-                    <timer id="timer3">{{minutes}} minutes, {{seconds}} seconds</timer>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+        <p>
+                <h3>Formatted timer</h3>
+                <div class="bs-docs-example">
+                        <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
+                        <div><timer id="timer3"/>{{minutes}} minutes, {{seconds}} seconds.</div>
+                        <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
+                        <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
+                    </div>
                 </div>
             </p>
-        </div>
     </div>
 
     <hr>
@@ -101,6 +118,9 @@
     </footer>
 
 </div>
+
+<script src="docs/prettify.js"></script>
+<script src="docs/application.js"></script>
 
 </body>
 </html>
