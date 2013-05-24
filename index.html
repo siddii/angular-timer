@@ -105,13 +105,11 @@
         <h3>Formatted timer</h3>
         <div class="bs-docs-example">
             <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
-            <div><timer id="timer3"/>{{minutes}} minutes, {{seconds}} seconds.</div>
+            <div><timer id="timer3">{{minutes}} minutes, {{seconds}} seconds.</timer></div>
             <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
         </div>
     </section>
-
-    <hr>
     <h2>Examples</h2>
     <section id="angularjs-example">
         <h3>Using timer directive from Angular</h3>
