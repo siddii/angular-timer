@@ -55,7 +55,7 @@ h3 code {
 
 /* padding for in-page bookmarks and fixed navbar */
 section {
-  padding-top: 0px;
+  padding-top: 30px;
 }
 section > .page-header,
 section > .lead {

@@ -62,7 +62,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">From AngularJS</a></li>
+                            <li><a href="#angularjs-example">From AngularJS</a></li>
                             <li><a href="#">From native JavaScript</a></li>
                             <li><a href="#">From jQuery</a></li>
                         </ul>
@@ -75,13 +75,12 @@
 
 <div class="container">
     <section id="introduction">
-        <h2>Introduction</h2>
-        <p>Directives in AngularJS is a powerful way of building reusable UI components.
+        <h1>Introduction</h1>
+        <p>Directives in <a target="_new" href="http://angularjs.org">AngularJS</a> is a powerful way of building reusable <em>UI components</em>.
             This simple project will serve as a sample/reference implementation demonstrating its
-            flexibilities by making it usable across runtime libraries (AngularJS, plain simple JavaScript & jQuery)</p>
+            flexibilities by making it usable across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
 
     </section>
-
     <section id="basic-example">
         <h3>Basic Example</h3>
         <div class="bs-docs-example">
@@ -113,12 +112,33 @@
     </section>
 
     <hr>
+    <h2>Examples</h2>
+    <section id="angularjs-example">
+        <h3>Using timer directive from Angular</h3>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
+            <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="angularjs-example-source">
+                <pre class="prettyprint linenums">
+                <code>
+                    &lt;a data-toggle="modal" href="remote.html" data-target="#modal"&gt;click me&lt;/a&gt;
+                </code>
+                </pre>
+            </div>
+            <div class="tab-pane" id="angularjs-example-demo">
+                <h1>Demo</h1>
+            </div>
+        </div>
+    </section>
+
 
     <footer>
         <p>&copy; Siddique Hameed 2013</p>
     </footer>
 
-</div>
 </div>
 
 <script src="docs/prettify.js"></script>
