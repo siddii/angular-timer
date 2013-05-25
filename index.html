@@ -47,14 +47,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Angular Timer Directive</a>
+            <a class="brand" href="#">Angular Timer</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="#introduction">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#basic-example">Basic Example</a></li>
+                            <li><a href="#timer-with-interval">Timer with interval</a></li>
+                            <li><a href="#formatted-timer">Formatted Timer</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">From AngularJS</a></li>
+                            <li><a href="#angularjs-example">From AngularJS</a></li>
                             <li><a href="#">From native JavaScript</a></li>
                             <li><a href="#">From jQuery</a></li>
                         </ul>
@@ -66,52 +74,66 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="span12">
-            <h2>Introduction</h2>
-            <p>AngularJS directive is a powerful way of building reusable components.
-                This simple project will serve as a sample/reference implementation demonstrating the power & flexibilities of
-                AngularJS directives by making it truly usable across runtime libraries (AngularJS, plain old JavaScript, jQuery etc.)</p>
-            <p>
-                <h3>Basic Example</h3>
-                <div class="bs-docs-example">
-                        <p>This simple directive <code>&lt;timer id="timer1"/&gt;</code> markup code will start the timer with the default configuration option</p>
-                        <div><timer id="timer1"/></div>
-                        <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
-                        <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
-                    </div>
-                </div>
-            </p>
-    </div>
-    <div class="row">
-        <div class="span12">
-        <p>
-                <h3>Timer with interval example</h3>
-                <div class="bs-docs-example">
-                        <p>This directive <code>&lt;timer interval="1000" id="timer2"/&gt;</code> markup code will run the timer tick every second</p>
-                        <div><timer interval="1000" id="timer2"/></div>
-                        <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
-                        <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
-                    </div>
-                </div>
-            </p>
-    </div>
+    <section id="introduction">
+        <h1>Introduction</h1>
+        <p>Directives in <a target="_new" href="http://angularjs.org">AngularJS</a> is a powerful way of building reusable <em>UI components</em>.
+            This simple project will serve as a sample/reference implementation demonstrating its
+            flexibilities by making it usable across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
 
-    <div class="row">
-        <div class="span12">
-        <p>
-                <h3>Formatted timer</h3>
-                <div class="bs-docs-example">
-                        <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
-                        <div><timer id="timer3"/>{{minutes}} minutes, {{seconds}} seconds.</div>
-                        <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
-                        <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
-                    </div>
-                </div>
-            </p>
-    </div>
+    </section>
+    <section id="basic-example">
+        <h3>Basic Example</h3>
+        <div class="bs-docs-example">
+            <p>This simple directive <code>&lt;timer /&gt;</code> markup code will start the timer with the default option of ticking every 1 millisecond</p>
+            <div><timer id="timer1"/></div>
+            <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
+            <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
+        </div>
+    </section>
+
+    <section id="timer-with-interval">
+        <h3>Timer with interval example</h3>
+        <div class="bs-docs-example">
+            <p>This directive <code>&lt;timer interval="1000" id="timer2"/&gt;</code> markup code will run the timer tick every second</p>
+            <div><timer interval="1000" id="timer2"/></div>
+            <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
+            <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
+        </div>
+    </section>
+
+    <section id="formatted-timer">
+        <h3>Formatted timer</h3>
+        <div class="bs-docs-example">
+            <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
+            <div><timer id="timer3"/>{{minutes}} minutes, {{seconds}} seconds.</div>
+            <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
+            <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
+        </div>
+    </section>
 
     <hr>
+    <h2>Examples</h2>
+    <section id="angularjs-example">
+        <h3>Using timer directive from Angular</h3>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
+            <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="angularjs-example-source">
+                <pre class="prettyprint linenums">
+                <code>
+                    &lt;a data-toggle="modal" href="remote.html" data-target="#modal"&gt;click me&lt;/a&gt;
+                </code>
+                </pre>
+            </div>
+            <div class="tab-pane" id="angularjs-example-demo">
+                <h1>Demo</h1>
+            </div>
+        </div>
+    </section>
+
 
     <footer>
         <p>&copy; Siddique Hameed 2013</p>
@@ -121,6 +143,7 @@
 
 <script src="docs/prettify.js"></script>
 <script src="docs/application.js"></script>
+
 
 </body>
 </html>
