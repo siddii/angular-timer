@@ -6,11 +6,19 @@ angular.module('timer', [])
       scope: {interval: '=interval'},
       controller: function ($scope, $element) {
         if ($element.html().trim().length === 0) {
-          $element.append($compile('<h3>{{timeTaken}}</h3>')($scope));
+          $element.append($compile('<span>{{timeTaken}}</span>')($scope));
         }
 
         $scope.startTime = null;
         $scope.timeoutId = null;
+
+        $scope.$on('timer-start', function (){
+          $scope.start();
+        });
+
+        $scope.$on('timer-stop', function (){
+          $scope.stop();
+        });
 
         $scope.start = $element[0].start = function () {
           $scope.startTime = new Date();

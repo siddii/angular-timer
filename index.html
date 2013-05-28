@@ -85,7 +85,7 @@
         <h3>Basic Example</h3>
         <div class="bs-docs-example">
             <p>This simple directive <code>&lt;timer /&gt;</code> markup code will start the timer with the default option of ticking every 1 millisecond</p>
-            <div><timer id="timer1"/></div>
+            <h3><timer id="timer1"/></h3>
             <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
         </div>
@@ -95,7 +95,7 @@
         <h3>Timer with interval example</h3>
         <div class="bs-docs-example">
             <p>This directive <code>&lt;timer interval="1000" id="timer2"/&gt;</code> markup code will run the timer tick every second</p>
-            <div><timer interval="1000" id="timer2"/></div>
+            <h3><timer interval="1000" id="timer2"/></h3>
             <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
         </div>
@@ -105,7 +105,7 @@
         <h3>Formatted timer</h3>
         <div class="bs-docs-example">
             <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
-            <div><timer id="timer3">{{minutes}} minutes, {{seconds}} seconds.</timer></div>
+            <h3><timer id="timer3">{{minutes}} minutes, {{seconds}} seconds.</timer></h3>
             <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
         </div>
