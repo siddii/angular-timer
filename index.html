@@ -110,9 +110,9 @@
             <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
         </div>
     </section>
-    <h2>Examples</h2>
+    <h3>Examples</h3>
     <section id="angularjs-example">
-        <h3>Using timer directive from Angular</h3>
+        <h4>Using timer directive from Angular</h4>
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
             <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
@@ -121,13 +121,50 @@
         <div class="tab-content">
             <div class="tab-pane active" id="angularjs-example-source">
                 <pre class="prettyprint linenums">
-                <code>
-                    &lt;a data-toggle="modal" href="remote.html" data-target="#modal"&gt;click me&lt;/a&gt;
-                </code>
-                </pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Timer Directive used from AngularJS&lt;/title&gt;
+&lt;script src="angular/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="app/js/timer.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+angular.module('MyApp', ['timer']);
+function MyAppController($scope) {
+$scope.timerRunning = true;
+
+$scope.startTimer = function (){
+$scope.$broadcast('timer-start');
+$scope.timerRunning = true;
+};
+
+$scope.stopTimer = function (){
+$scope.$broadcast('timer-stop');
+$scope.timerRunning = false;
+};
+}
+MyAppController.$inject = ['$scope'];
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app="MyApp"&gt;
+&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+&lt;h2&gt;Single Timer&lt;/h2&gt;
+&lt;h3&gt;&lt;timer/&gt;&lt;/h3&gt;
+&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
+&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+&lt;h2&gt;Multiple Timers&lt;/h2&gt;
+&lt;h3&gt;Timer 1: &lt;timer interval="2000"/&gt;&lt;/h3&gt;
+&lt;h3&gt;Timer 2: &lt;timer&gt;{{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;&lt;/h3&gt;
+&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timers&lt;/button&gt;
+&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timers&lt;/button&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
             </div>
             <div class="tab-pane" id="angularjs-example-demo">
-                <h1>Demo</h1>
+                <iframe src="examples/angular-js-example.html" width="100%" height="350px"></iframe>
             </div>
         </div>
     </section>
