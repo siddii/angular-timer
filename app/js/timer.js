@@ -6,7 +6,7 @@ angular.module('timer', [])
       scope: {interval: '=interval'},
       controller: function ($scope, $element) {
         if ($element.html().trim().length === 0) {
-          $element.html($compile('<h3>{{timeTaken}}</h3>')($scope));
+          $element.append($compile('<h3>{{timeTaken}}</h3>')($scope));
         }
 
         $scope.startTime = null;

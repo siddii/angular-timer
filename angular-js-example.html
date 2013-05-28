@@ -2,15 +2,24 @@
 <html>
 <head>
     <title>Angular Timer Directive - Simple AngularJS Example</title>
+
     <script src="angular/angular.min.js"></script>
     <script src="app/js/timer.js"></script>
     <script>
         angular.module('MyApp', ['timer']);
-
     </script>
 </head>
-<html ng-app="MyApp">
-<body>
-    {{ 1 + 1}}
+<body ng-app="MyApp">
+    <div>
+        <timer id="timer1"></timer>
+    </div>
+    <div>
+        <timer interval="5000" id="timer2"></timer>
+    </div>
+    <div>
+        <timer id="timer3">
+            {{minutes}} minutes, {{seconds}} seconds.
+        </timer>
+    </div>
 </body>
 </html>
