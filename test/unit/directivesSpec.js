@@ -8,20 +8,18 @@ describe('timer directive', function() {
   describe('default timer', function() {
     it('should run timer with 1 millisecond interval', function() {
 
-      inject(function($compile, $rootScope, $browser, $timeout) {
+      inject(function($compile, $rootScope, $browser, $timeout, $exceptionHandler) {
         var $scope = $rootScope.$new();
         var element = $compile('<timer/>')($scope);
+        $scope.$digest();
         $timeout(function() {
-          console.log('######### $scope = ', element.html());
-          console.log('########## $scope.startTime = ', $scope.startTime);
-        }, 100);
-        $timeout(function() {
-          console.log('######### $scope = ', element.html());
-          console.log('########## $scope.startTime = ', $scope.startTime);
-        }, 200);
-        $browser.defer.flush();
+          expect(element.html()).toMatch(/^<span class="ng-scope ng-binding">/);
+          expect(element.html().indexOf('</span>')).toBeGreaterThan(-1);
+          $rootScope.$broadcast('timer-stop');
+        }, 300);
+        $timeout.flush();
+        expect($exceptionHandler.errors).toEqual(undefined);
       });
     });
   });
-
 });
