@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Angular Timer Directive, a simple AngularJS directive demonstrating its usefulness</title>
+    <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
 
@@ -72,6 +72,7 @@
                             <li><a href="#formatted-timer">Formatted Timer</a></li>
                         </ul>
                     </li>
+                    <li><a href="#introduction">Markup Reference</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -91,13 +92,13 @@
         <h1>Introduction</h1>
         <p>Directives in <a target="_new" href="http://angularjs.org">AngularJS</a> is a powerful way of building reusable <em>UI components</em>.
             This simple project will serve as a sample/reference implementation demonstrating its
-            flexibilities by making it usable across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
-
+            flexibilities by making it <em>inter-operable</em> across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
     </section>
+
     <section id="basic-example">
         <h3>Basic Example</h3>
         <div class="bs-docs-example">
-            <p>This simple directive <code>&lt;timer /&gt;</code> markup code will start the timer with the default option of ticking every 1 millisecond</p>
+            <p>This simple directive <code>&lt;timer /&gt;</code> will start the timer with the default option of ticking every 1 millisecond</p>
             <h3><timer id="timer1"/></h3>
             <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
