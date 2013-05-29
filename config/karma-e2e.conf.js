@@ -1,6 +1,7 @@
 basePath = '../';
 
 files = [
+  'jquery/jquery-1.9.1.min.js',
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
   'test/e2e/**/*.js'
