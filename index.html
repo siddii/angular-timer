@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Angular Timer Directive, a simple AngularJS directive demonstrating its usefulness</title>
+    <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
     <link href="docs/css/docs.css" rel="stylesheet">
     <link href="docs/css/prettify.css" rel="stylesheet">
 
     <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
+        .page-content {
+            padding-top: 15px;
+        }
+        .navbar .brand {
+            padding-left: 75px;
+        }
+
+        #fork-me {
+            position: absolute;
+        }
+
+        @media (max-width: 979px) {
+            #fork-me {
+                display: none;
+            }
         }
     </style>
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="jquery/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
@@ -38,9 +51,9 @@
 </head>
 
 <body ng-app="timer">
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
+        <div id="fork-me"><a href="https://github.com/siddii/angular-timer/fork" title="Fork me on GitHub"><img alt="Fork me on GitHub" src="images/icon-fork-me.png"></a></div>
         <div class="container">
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
@@ -50,7 +63,7 @@
             <a class="brand" href="#">Angular Timer</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="#introduction">Home</a></li>
+                    <!--<li class="active"><a href="#introduction">Home</a></li>-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -59,6 +72,7 @@
                             <li><a href="#formatted-timer">Formatted Timer</a></li>
                         </ul>
                     </li>
+                    <li><a href="#introduction">Markup Reference</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -73,19 +87,19 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container page-content">
     <section id="introduction">
         <h1>Introduction</h1>
         <p>Directives in <a target="_new" href="http://angularjs.org">AngularJS</a> is a powerful way of building reusable <em>UI components</em>.
             This simple project will serve as a sample/reference implementation demonstrating its
-            flexibilities by making it usable across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
-
+            flexibilities by making it <em>inter-operable</em> across runtime (AngularJS, plain simple JavaScript & jQuery)</p>
     </section>
+
     <section id="basic-example">
         <h3>Basic Example</h3>
         <div class="bs-docs-example">
-            <p>This simple directive <code>&lt;timer /&gt;</code> markup code will start the timer with the default option of ticking every 1 millisecond</p>
-            <div><timer id="timer1"/></div>
+            <p>This simple directive <code>&lt;timer /&gt;</code> will start the timer with the default option of ticking every 1 millisecond</p>
+            <h3><timer id="timer1"/></h3>
             <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
         </div>
@@ -95,7 +109,7 @@
         <h3>Timer with interval example</h3>
         <div class="bs-docs-example">
             <p>This directive <code>&lt;timer interval="1000" id="timer2"/&gt;</code> markup code will run the timer tick every second</p>
-            <div><timer interval="1000" id="timer2"/></div>
+            <h3><timer interval="1000" id="timer2"/></h3>
             <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
         </div>
@@ -105,16 +119,14 @@
         <h3>Formatted timer</h3>
         <div class="bs-docs-example">
             <p>This directive <code>&lt;timer interval="1000" id="timer3"/&gt;</code> markup code will run the timer tick every second</p>
-            <div><timer id="timer3"/>{{minutes}} minutes, {{seconds}} seconds.</div>
+            <h3><timer id="timer3">{{minutes}} minutes, {{seconds}} seconds.</timer></h3>
             <button type="button" class="btn" onclick="startTimer('timer3', this)">Start</button>
             <button type="button" class="btn" onclick="stopTimer('timer3', this)">Stop</button>
         </div>
     </section>
-
-    <hr>
-    <h2>Examples</h2>
+    <h3>Examples</h3>
     <section id="angularjs-example">
-        <h3>Using timer directive from Angular</h3>
+        <h4>Using timer directive from Angular</h4>
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
             <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
@@ -123,13 +135,50 @@
         <div class="tab-content">
             <div class="tab-pane active" id="angularjs-example-source">
                 <pre class="prettyprint linenums">
-                <code>
-                    &lt;a data-toggle="modal" href="remote.html" data-target="#modal"&gt;click me&lt;/a&gt;
-                </code>
-                </pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Timer Directive used from AngularJS&lt;/title&gt;
+&lt;script src="angular/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="app/js/timer.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+angular.module('MyApp', ['timer']);
+function MyAppController($scope) {
+$scope.timerRunning = true;
+
+$scope.startTimer = function (){
+$scope.$broadcast('timer-start');
+$scope.timerRunning = true;
+};
+
+$scope.stopTimer = function (){
+$scope.$broadcast('timer-stop');
+$scope.timerRunning = false;
+};
+}
+MyAppController.$inject = ['$scope'];
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app="MyApp"&gt;
+&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+&lt;h2&gt;Single Timer&lt;/h2&gt;
+&lt;h3&gt;&lt;timer/&gt;&lt;/h3&gt;
+&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
+&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+&lt;h2&gt;Multiple Timers&lt;/h2&gt;
+&lt;h3&gt;Timer 1: &lt;timer interval="2000"/&gt;&lt;/h3&gt;
+&lt;h3&gt;Timer 2: &lt;timer&gt;{{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;&lt;/h3&gt;
+&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timers&lt;/button&gt;
+&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timers&lt;/button&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
             </div>
             <div class="tab-pane" id="angularjs-example-demo">
-                <h1>Demo</h1>
+                <iframe src="examples/angular-js-example.html" width="100%" height="350px"></iframe>
             </div>
         </div>
     </section>
