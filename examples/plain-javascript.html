@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Example - Single Timer</title>
+    <style type="text/css">
+        div {
+            border: 1px solid gainsboro;
+            text-align: center;
+            margin: 15px;
+            padding: 15px;
+        }
+    </style>
+    <script src="../angular/angular.min.js"></script>
+    <script src="../app/js/timer.js"></script>
+    <script>
+        function startTimer() {
+            document.getElementsByTagName('timer')[0].start();
+        }
+
+        function stopTimer() {
+            document.getElementsByTagName('timer')[0].stop();
+        }
+    </script>
+</head>
+<body>
+<div ng-controller="MyAppController">
+    <h2>Plain JavaScript - Timer Example</h2>
+    <h3 ng-app="timer"><timer/></h3>
+    <button onclick="startTimer()">Start Timer</button>
+    <button onclick="stopTimer()">Stop Timer</button>
+</div>
+<br/>
+</body>
+</html>

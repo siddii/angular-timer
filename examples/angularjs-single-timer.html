@@ -2,14 +2,20 @@
 <html>
 <head>
     <title>AngularJS Example - Single Timer</title>
+    <style type="text/css">
+        div {
+            border: 1px solid gainsboro;
+            text-align: center;
+            margin: 15px;
+            padding: 15px;
+        }
+    </style>
     <script src="../angular/angular.min.js"></script>
     <script src="../app/js/timer.js"></script>
     <script>
-        var myApp = angular.module('MyApp', ['timer']);
+        angular.module('MyApp', ['timer']);
 
         function MyAppController($scope) {
-            var timerDirective = myApp.directive('timer');
-            console.log('###### Timer Directive = ', timerDirective);
             $scope.timerRunning = true;
 
             $scope.startTimer = function (){
@@ -26,8 +32,8 @@
     </script>
 </head>
 <body ng-app="MyApp">
-    <div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;">
-        <h2>Single Timer</h2>
+    <div ng-controller="MyAppController">
+        <h2>AngularJS - Single Timer Example</h2>
         <h3><timer/></h3>
         <button ng-click="startTimer()" ng-disabled="timerRunning">Start Timer</button>
         <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop Timer</button>

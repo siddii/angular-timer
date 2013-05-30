@@ -2,10 +2,19 @@
 <html>
 <head>
     <title>AngularJS Example - Multiple Timers</title>
+    <style type="text/css">
+        div {
+            border: 1px solid gainsboro;
+            text-align: center;
+            margin: 15px;
+            padding: 15px;
+        }
+    </style>
     <script src="../angular/angular.min.js"></script>
     <script src="../app/js/timer.js"></script>
     <script>
         angular.module('MyApp', ['timer']);
+
         function MyAppController($scope) {
             $scope.timerRunning = true;
 
@@ -24,7 +33,7 @@
 </head>
 <body ng-app="MyApp">
     <div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;">
-        <h2>Multiple Timers</h2>
+        <h2>AngularJS - Multiple Timers Example</h2>
         <h3>Timer 1: <timer/></h3>
         <h3>Timer 2: <timer interval="2000"/></h3>
         <h3>Timer 3: <timer>{{minutes}} minutes, {{seconds}} seconds.</timer></h3>
