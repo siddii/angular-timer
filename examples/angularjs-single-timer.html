@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AngularJS Example - Single Timer</title>
-    <style type="text/css">
-        div {
-            border: 1px solid gainsboro;
-            text-align: center;
-            margin: 15px;
-            padding: 15px;
-        }
-    </style>
+    <title>AngularJS Example - Single Timer Example</title>
     <script src="../angular/angular.min.js"></script>
     <script src="../app/js/timer.js"></script>
     <script>
         angular.module('MyApp', ['timer']);
-
         function MyAppController($scope) {
             $scope.timerRunning = true;
 
@@ -33,7 +24,7 @@
 </head>
 <body ng-app="MyApp">
     <div ng-controller="MyAppController">
-        <h2>AngularJS - Single Timer Example</h2>
+        <h1>AngularJS - Single Timer Example</h1>
         <h3><timer/></h3>
         <button ng-click="startTimer()" ng-disabled="timerRunning">Start Timer</button>
         <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop Timer</button>
