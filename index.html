@@ -75,16 +75,15 @@
             <a class="brand" href="#">Angular Timer</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <!--<li class="active"><a href="#introduction">Home</a></li>-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="index.html#basic-timer">Basic Example</a></li>
-                            <li><a href="index.html#clock-timer">Clock timer</a></li>
+                            <li><a href="index.html#clock-timer">Clock Timer</a></li>
                             <li><a href="index.html#progressbar-timer">Progressbar Timer</a></li>
                         </ul>
                     </li>
-                    <li><a href="#introduction">Markup</a></li>
+                    <li ng-non-bindable><a href="index.html#markup">&lt;timer/&gt;</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -129,6 +128,22 @@
 
     <section id="progressbar-timer">
         <h3>Progressbar Timer</h3>
+        <div class="bs-docs-example">
+            <p>Timer directive along with <a target="_new" href="http://twitter.github.io/bootstrap/components.html#progress">Twitter Bootstrap's Progressbar</a> will set the timer on Progressbar control.</p>
+            <code ng-non-bindable>&lt;timer interval="1000"&gt;&lt;div class="progress progress-striped active"&gt;
+                &lt;div class="bar" style="width: {{seconds}}%;"&gt;&lt;/div&gt;
+                &lt;/div&gt;&lt;/timer&gt;
+            </code>
+            <h3><timer><div class="progress progress-striped active">
+                <div class="bar" style="width: {{seconds}}%;"></div>
+            </div></timer></h3>
+            <button type="button" class="btn" onclick="startTimer('progressbar-timer')">Start</button>
+            <button type="button" class="btn" onclick="stopTimer('progressbar-timer')">Stop</button>
+        </div>
+    </section>
+
+    <section id="markup">
+        <h3>Markup</h3>
         <div class="bs-docs-example">
             <p>Timer directive along with <a target="_new" href="http://twitter.github.io/bootstrap/components.html#progress">Twitter Bootstrap's Progressbar</a> will set the timer on Progressbar control.</p>
             <code ng-non-bindable>&lt;timer interval="1000"&gt;&lt;div class="progress progress-striped active"&gt;

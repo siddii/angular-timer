@@ -30,15 +30,12 @@ angular.module('timer', [])
         };
 
         $scope.resume = $element[0].resume = function () {
+          $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
           tick();
         };
 
         $scope.stop = $element[0].stop = function () {
-          $timeout.cancel($scope.timeoutId);
-        };
-
-
-        $element[0].stop = function () {
+          $scope.stoppedTime = new Date();
           $timeout.cancel($scope.timeoutId);
         };
 
