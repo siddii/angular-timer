@@ -105,6 +105,18 @@
         </div>
     </section>
 
+    <section id="progress-bar-example">
+        <h3>Progressbar Example</h3>
+        <div class="bs-docs-example">
+            <p>This simple directive <code>&lt;timer /&gt;</code> will start the timer with the default option of ticking every 1 millisecond</p>
+            <h3><timer id="timer3"><div class="progress progress-striped active">
+                <div class="bar" style="width: {{seconds}}%;"></div>
+            </div></timer></h3>
+            <button type="button" class="btn" onclick="startTimer('timer1', this)">Start</button>
+            <button type="button" class="btn" onclick="stopTimer('timer1', this)">Stop</button>
+        </div>
+    </section>
+
     <section id="timer-with-interval">
         <h3>Timer with interval example</h3>
         <div class="bs-docs-example">
