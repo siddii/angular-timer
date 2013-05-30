@@ -6,7 +6,7 @@ angular.module('timer', [])
       scope: {interval: '=interval'},
       controller: function ($scope, $element) {
         if ($element.html().trim().length === 0) {
-          $element.append($compile('<span>{{timeTaken}}</span>')($scope));
+          $element.append($compile('<span>{{millis}}</span>')($scope));
         }
 
         $scope.startTime = null;
@@ -47,10 +47,10 @@ angular.module('timer', [])
         });
 
         var tick = function (){
-            $scope.timeTaken = new Date() - $scope.startTime;
-            $scope.minutes = Math.floor($scope.timeTaken / (1000 * 60));
-            $scope.seconds = Math.floor(($scope.timeTaken - ($scope.minutes * 60)) / 1000) % 60;
-
+            $scope.millis = new Date() - $scope.startTime;
+            $scope.seconds = Math.floor(($scope.millis / 1000) % 60) ;
+            $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));
+            $scope.hours = Math.floor((($scope.millis / (1000*60*60)) % 24));
             $scope.timeoutId = $timeout(function () {
               tick();
             }, $scope.interval);
