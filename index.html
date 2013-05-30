@@ -87,7 +87,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#angularjs-example">From AngularJS</a></li>
+                            <li><a href="examples.html#angularjs-single-timer">From AngularJS - Single Timer</a></li>
+                            <li><a href="examples.html#angularjs-multiple-timers">From AngularJS - Multiple Timers</a></li>
                             <li><a href="#">From native JavaScript</a></li>
                             <li><a href="#">From jQuery</a></li>
                         </ul>
@@ -144,79 +145,69 @@
 
     <section id="markup">
         <h3>Markup</h3>
+        <p>Timer directive can be declared using following options. By default, it will display milliseconds inside <code>span</code> tag.
+            It can also take <em>template</em> string to display user defined display formats.</p>
+
         <div class="bs-docs-example">
-            <p>Timer directive along with <a target="_new" href="http://twitter.github.io/bootstrap/components.html#progress">Twitter Bootstrap's Progressbar</a> will set the timer on Progressbar control.</p>
-            <code ng-non-bindable>&lt;timer interval="1000"&gt;&lt;div class="progress progress-striped active"&gt;
-                &lt;div class="bar" style="width: {{seconds}}%;"&gt;&lt;/div&gt;
-                &lt;/div&gt;&lt;/timer&gt;
-            </code>
-            <h3><timer><div class="progress progress-striped active">
-                <div class="bar" style="width: {{seconds}}%;"></div>
-            </div></timer></h3>
-            <button type="button" class="btn" onclick="startTimer('progressbar-timer')">Start</button>
-            <button type="button" class="btn" onclick="stopTimer('progressbar-timer')">Stop</button>
+        <p>
+        <code ng-nonbindable>
+            &lt;timer interval="1000" /&gt;
+        </code>
+        </p>
         </div>
-    </section>
 
-    <h3>Examples</h3>
-    <section id="angularjs-example">
-        <h4>Using timer directive from Angular</h4>
-        <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
-            <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane active" id="angularjs-example-source">
-                <pre class="prettyprint linenums">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Timer Directive used from AngularJS&lt;/title&gt;
-&lt;script src="angular/angular.min.js"&gt;&lt;/script&gt;
-&lt;script src="app/js/timer.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-angular.module('MyApp', ['timer']);
-function MyAppController($scope) {
-$scope.timerRunning = true;
-
-$scope.startTimer = function (){
-$scope.$broadcast('timer-start');
-$scope.timerRunning = true;
-};
-
-$scope.stopTimer = function (){
-$scope.$broadcast('timer-stop');
-$scope.timerRunning = false;
-};
-}
-MyAppController.$inject = ['$scope'];
-&lt;/script&gt;
-&lt;/head&gt;
-&lt;body ng-app="MyApp"&gt;
-&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
-&lt;h2&gt;Single Timer&lt;/h2&gt;
-&lt;h3&gt;&lt;timer/&gt;&lt;/h3&gt;
-&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
-&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-&lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
-&lt;h2&gt;Multiple Timers&lt;/h2&gt;
-&lt;h3&gt;Timer 1: &lt;timer interval="2000"/&gt;&lt;/h3&gt;
-&lt;h3&gt;Timer 2: &lt;timer&gt;{{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;&lt;/h3&gt;
-&lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timers&lt;/button&gt;
-&lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timers&lt;/button&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-            </div>
-            <div class="tab-pane" id="angularjs-example-demo">
-                <iframe src="examples/angular-js-example.html" width="100%" height="350px"></iframe>
-            </div>
+        <div class="bs-docs-example">
+        <p>
+            <code ng-non-bindable>&lt;timer interval="1000"&gt;{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds, {{millis}} milliseconds.&lt;/timer&gt;</code>
+        </p>
         </div>
-    </section>
 
+        <h4>Attributes</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+            <th>Name</th>
+            <th>Required</th>
+            <th>Default value</th>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    interval
+                </td>
+                <td>
+                    false
+                </td>
+                <td>
+                    1 millisecond
+                </td>
+            </tr>
+        </table>
+
+
+        <h4>Events</h4>
+        <p>Following events can be triggered to timer directive</p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                <th>Event name</th>
+                <th>Description</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>start</td>
+                <td>Triggered to start the timer. Will reset the start time</td>
+            </tr>
+            <tr>
+                <td>stop</td>
+                <td>Triggered to stop the timer.</td>
+            </tr>
+            <tr>
+                <td>resume</td>
+                <td>Triggered to resume the timer. Will NOT reset the start time</td>
+            </tr>
+        </table>
+    </section>
 
     <footer>
         <p>&copy; Siddique Hameed 2013</p>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <link href="docs/css/docs.css" rel="stylesheet">
+    <link href="docs/css/prettify.css" rel="stylesheet">
+
+    <style type="text/css">
+        .page-content {
+            padding-top: 15px;
+        }
+        .navbar .brand {
+            padding-left: 75px;
+        }
+
+        #fork-me {
+            position: absolute;
+        }
+
+        @media (max-width: 979px) {
+            #fork-me {
+                display: none;
+            }
+        }
+    </style>
+    <script src="jquery/jquery-1.9.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="app/js/timer.js"></script>
+
+
+
+
+    <script>
+        function startTimer(sectionId) {
+            document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
+        }
+
+        function stopTimer(sectionId) {
+            document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
+        }
+
+        function stopResumeTimer(sectionId, btn) {
+            if (btn.innerHTML === 'Stop') {
+                document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
+                btn.innerHTML = 'Resume';
+            }
+            else {
+                document.getElementById(sectionId).getElementsByTagName('timer')[0].resume();
+                btn.innerHTML = 'Stop';
+            }
+        }
+
+    </script>
+</head>
+
+<body ng-app="timer">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div id="fork-me"><a href="https://github.com/siddii/angular-timer/fork" title="Fork me on GitHub"><img alt="Fork me on GitHub" src="images/icon-fork-me.png"></a></div>
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Angular Timer</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html#basic-timer">Basic Example</a></li>
+                            <li><a href="index.html#clock-timer">Clock Timer</a></li>
+                            <li><a href="index.html#progressbar-timer">Progressbar Timer</a></li>
+                        </ul>
+                    </li>
+                    <li ng-non-bindable><a href="index.html#markup">&lt;timer/&gt;</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="examples.html#angularjs-single-timer">From AngularJS - Single Timer</a></li>
+                            <li><a href="examples.html#angularjs-multiple-timers">From AngularJS - Multiple Timers</a></li>
+                            <li><a href="#">From native JavaScript</a></li>
+                            <li><a href="#">From jQuery</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<div class="container page-content">
+    <section id="angularjs-single-timer">
+        <h3>AngularJS Example - Single Timer</h3>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#angularjs-example-source">index.html</a></li>
+            <li><a data-toggle="tab" href="#angularjs-example-demo">Demo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="angularjs-example-source">
+                <pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;AngularJS Example - Single Timer&lt;/title&gt;
+    &lt;script src="../angular/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="../app/js/timer.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module('MyApp', ['timer']);
+        function MyAppController($scope) {
+            $scope.timerRunning = true;
+
+            $scope.startTimer = function (){
+                $scope.$broadcast('timer-start');
+                $scope.timerRunning = true;
+            };
+
+            $scope.stopTimer = function (){
+                $scope.$broadcast('timer-stop');
+                $scope.timerRunning = false;
+            };
+        }
+        MyAppController.$inject = ['$scope'];
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app="MyApp"&gt;
+    &lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+        &lt;h2&gt;Single Timer&lt;/h2&gt;
+        &lt;h3&gt;&lt;timer/&gt;&lt;/h3&gt;
+        &lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
+        &lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;br/&gt;
+    &lt;div ng-controller="MyAppController" style="border: 1px solid gainsboro; text-align: center;"&gt;
+        &lt;h2&gt;Multiple Timers&lt;/h2&gt;
+        &lt;h3&gt;Timer 1: &lt;timer interval="2000"/&gt;&lt;/h3&gt;
+        &lt;h3&gt;Timer 2: &lt;timer&gt;{{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;&lt;/h3&gt;
+        &lt;button ng-click="startTimer()" ng-disabled="timerRunning"&gt;Start Timers&lt;/button&gt;
+        &lt;button ng-click="stopTimer()" ng-disabled="!timerRunning"&gt;Stop Timers&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+            <div class="tab-pane" id="angularjs-example-demo">
+                <iframe src="examples/angularjs-single-timer.html" width="100%" height="350px"></iframe>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; Siddique Hameed 2013</p>
+    </footer>
+
+</div>
+
+<script src="docs/prettify.js"></script>
+<script src="docs/application.js"></script>
+
+
+</body>
+</html>
