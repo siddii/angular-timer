@@ -3,7 +3,10 @@ angular.module('timer', [])
     return  {
       restrict: 'E',
       replace: false,
-      scope: {interval: '=interval'},
+      scope: {
+          interval: '=interval',
+          countdownattr: '=countdown'
+      },
       controller: function ($scope, $element) {
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -11,6 +14,7 @@ angular.module('timer', [])
 
         $scope.startTime = null;
         $scope.timeoutId = null;
+        $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
 
         $scope.$on('timer-start', function (){
           $scope.start();
@@ -44,6 +48,12 @@ angular.module('timer', [])
         });
 
         var tick = function (){
+            if ($scope.countdown > 0) {
+                $scope.countdown--;
+            }
+            else if ($scope.countdown <= 0) {
+                $scope.stop();
+            }
             $scope.millis = new Date() - $scope.startTime;
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60) ;
             $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));

@@ -81,6 +81,7 @@
                             <li><a href="index.html#basic-timer">Basic Example</a></li>
                             <li><a href="index.html#clock-timer">Clock Timer</a></li>
                             <li><a href="index.html#progressbar-timer">Progressbar Timer</a></li>
+                            <li><a href="index.html#countdown-timer">Countdown Timer</a></li>
                         </ul>
                     </li>
                     <li ng-non-bindable><a href="index.html#markup">&lt;timer/&gt;</a></li>
@@ -150,6 +151,15 @@
         </div>
     </section>
 
+    <section id="countdown-timer">
+        <h3>Countdown Timer</h3>
+        <div class="bs-docs-example">
+            <p>The countdown timer <code ng-non-bindable>&lt;timer interval="1000" countdown="100"/&gt;</code> will start its countdown from 100 until it reaches 0 by ticking every second</p>
+            <h3><timer interval="1000" countdown="100">{{countdown}}</timer></h3>
+        </div>
+    </section>
+
+
     <section id="markup">
         <h3>Markup</h3>
         <p>Timer directive can be declared using following options. By default, it will display milliseconds inside <code>span</code> tag.
@@ -189,6 +199,17 @@
                     1 millisecond
                 </td>
             </tr>
+            <tr>
+                <td>
+                    countdown
+                </td>
+                <td>
+                    false
+                </td>
+                <td>
+
+                </td>
+            </tr>
         </table>
 
 
@@ -204,15 +225,15 @@
             </thead>
             <tr>
                 <td>start</td>
-                <td>Triggered to start the timer. Will reset the start time</td>
+                <td>Starts the timer</td>
             </tr>
             <tr>
                 <td>stop</td>
-                <td>Triggered to stop the timer.</td>
+                <td>Stops the timer</td>
             </tr>
             <tr>
                 <td>resume</td>
-                <td>Triggered to resume the timer. Will NOT reset the start time</td>
+                <td>Resumes the timer. Will NOT reset the start time</td>
             </tr>
         </table>
     </section>
