@@ -29,7 +29,7 @@ angular.module('timer', [])
           $scope.stop();
         });
         
-        function reset() {
+        function resetTimeout() {
           if ($scope.timeoutId) {
             $timeout.cancel($scope.timeoutId);
           }  
@@ -37,12 +37,12 @@ angular.module('timer', [])
 
         $scope.start = $element[0].start = function () {
           $scope.startTime = new Date();
-          reset();
+          resetTimeout();
           tick();
         };
 
         $scope.resume = $element[0].resume = function () {
-          reset();
+          resetTimeout();
           $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
           tick();
         };
