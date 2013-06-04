@@ -13,8 +13,9 @@ angular.module('timer', [])
         }
 
         $scope.startTime = null;
-        $scope.timeoutId = null;
+        $scope.timeoutId = null; 
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+        $scope.isRunning = false;
 
         $scope.$on('timer-start', function (){
           $scope.start();
@@ -27,13 +28,21 @@ angular.module('timer', [])
         $scope.$on('timer-stop', function (){
           $scope.stop();
         });
+        
+        function init() {
+          if ($scope.timeoutId) {
+            $timeout.cancel($scope.timeoutId);
+          }  
+        }
 
         $scope.start = $element[0].start = function () {
           $scope.startTime = new Date();
+          init();
           tick();
         };
 
         $scope.resume = $element[0].resume = function () {
+          init();
           $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
           tick();
         };
@@ -41,6 +50,7 @@ angular.module('timer', [])
         $scope.stop = $element[0].stop = function () {
           $scope.stoppedTime = new Date();
           $timeout.cancel($scope.timeoutId);
+          $scope.timeoutId = null;
         };
 
         $element.bind('$destroy', function () {
