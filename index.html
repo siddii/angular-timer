@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8" />
-  <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta content="" name="description" />
-<!-- Le styles -->  <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-  <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-  <link href="docs/css/docs.css" rel="stylesheet" />
-  <link href="docs/css/prettify.css" rel="stylesheet" />
-  <style type="text/css">
-.page-content {
+<head>
+    <meta charset="utf-8"/>
+    <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="docs/css/docs.css" rel="stylesheet"/>
+    <link href="docs/css/prettify.css" rel="stylesheet"/>
+    <style type="text/css">
+        .page-content {
             padding-top: 15px;
         }
+
         .navbar .brand {
             padding-left: 75px;
         }
@@ -25,8 +27,13 @@
             #fork-me {
                 display: none;
             }
-        }  </style>
-<script src="jquery/jquery-1.9.1.min.js"></script><script src="bootstrap/js/bootstrap.min.js"></script><script src="angular/angular.min.js"></script><script src="app/js/timer.js"></script><script>
+        }
+    </style>
+    <script src="jquery/jquery-1.9.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="app/js/timer.js"></script>
+    <script>
         function startTimer(sectionId) {
             document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
         }
@@ -45,198 +52,268 @@
                 btn.innerHTML = 'Stop';
             }
         }
+    </script>
+</head>
+<body ng-app="timer">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div id="fork-me">
+            <a href="https://github.com/siddii/angular-timer/fork" title="Fork me on GitHub"><img
+                    alt="Fork me on GitHub" src="images/icon-fork-me.png"/></a></div>
+        <div class="container">
+            <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"></button>
+            <a class="brand" href="index.html#introduction">Angular Timer</a>
 
-    </script> </head>
- <body ng-app="timer">
-  <div class="navbar navbar-inverse navbar-fixed-top">
-   <div class="navbar-inner">
-    <div id="fork-me">
-     <a href="https://github.com/siddii/angular-timer/fork" title="Fork me on GitHub"><img alt="Fork me on GitHub" src="images/icon-fork-me.png" /></a></div>
-    <div class="container">
-     <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"></button><a class="brand" href="index.html#introduction">Angular Timer</a>
-     <div class="nav-collapse collapse">
-      <ul class="nav">
-       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples </a>
-        <ul class="dropdown-menu">
-         <li>
-          <a href="index.html#basic-timer">Basic Example</a></li>
-         <li>
-          <a href="index.html#clock-timer">Clock Timer</a></li>
-         <li>
-          <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
-         <li>
-          <a href="index.html#countdown-timer">Countdown Timer</a></li>
-        </ul>
-       </li>
-       <li ng-non-bindable="">
-        <a href="index.html#markup">&lt;timer/&gt;</a></li>
-       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usage From</a>
-        <ul class="dropdown-menu">
-         <li>
-          <a href="examples.html#angularjs-single-timer">AngularJS - Single Timer</a></li>
-         <li>
-          <a href="examples.html#angularjs-multiple-timer">AngularJS - Multiple Timers</a></li>
-         <li>
-          <a href="examples.html#jquery-timer">jQuery</a></li>
-         <li>
-          <a href="examples.html#plain-javascript">Plain JavaScript</a></li>
-        </ul>
-       </li>
-       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code</a>
-        <ul class="dropdown-menu">
-         <li>
-          <a href="https://github.com/siddii/angular-timer" target="_new">View on Github</a></li>
-         <li>
-          <a href="https://github.com/siddii/angular-timer/archive/master.zip" target="_new">Download</a></li>
-         <li>
-          <a href="index.html#contribute">Contribute</a></li>
-        </ul>
-       </li>
-      </ul>
-     </div>
-<!--/.nav-collapse -->    </div>
-   </div>
-  </div>
-  <div class="container page-content">
-   <section id="introduction">
-   <h1>
-    Introduction</h1>
-   <p>
-    Directives in <a href="http://angularjs.org" target="_new">AngularJS</a> is a powerful way of building reusable <em>UI components</em>. This simple project will serve as a sample/reference implementation demonstrating its flexibilities by making it <em>inter-operable</em> across runtime (AngularJS, plain simple JavaScript &amp; jQuery)</p>
-   <p>
-    For basic understanding of how directives work in AngularJS, please head to this <a href="http://docs.angularjs.org/guide/directive" target="_new">developer guide</a>.</p>
-   </section> <section id="basic-timer">
-   <h3>
-    Basic Example</h3>
-   <div class="bs-docs-example">
-    <p>
-     This simple directive <code>&lt;timer /&gt;</code> will start the timer with the default option of ticking every 1 millisecond</p>
-    <h3>
-     <timer></timer></h3>
-    <button class="btn" onclick="startTimer('basic-timer')" type="button">Start</button><button class="btn" onclick="stopTimer('basic-timer')" type="button">Stop</button></div>
-   </section> <section id="clock-timer">
-   <h3>
-    Timer with hours, minutes &amp; seconds</h3>
-   <div class="bs-docs-example">
-    <p>
-     This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second</p>
-    <h3>
-     <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer></h3>
-    <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button></div>
-   </section> <section id="progressbar-timer">
-   <h3>
-    Progressbar Timer</h3>
-   <div class="bs-docs-example">
-    <p>
-     Timer directive along with <a href="http://twitter.github.io/bootstrap/components.html#progress" target="_new">Twitter Bootstrap&#39;s Progressbar</a> will set the timer on Progressbar control.</p>
-    <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress progress-striped active&quot;&gt; &lt;div class=&quot;bar&quot; style=&quot;width: {{seconds}}%;&quot;&gt;&lt;/div&gt; &lt;/div&gt;&lt;/timer&gt; </code>
-    <h3>
-     <timer>
-     <div class="progress progress-striped active">
-      <div class="bar" style="width: {{seconds}}%;">
-       &nbsp;</div>
-     </div>
-     </timer></h3>
-    <button class="btn" onclick="startTimer('progressbar-timer')" type="button">Start</button><button class="btn" onclick="stopTimer('progressbar-timer')" type="button">Stop</button></div>
-   </section> <section id="countdown-timer">
-   <h3>
-    Countdown Timer</h3>
-   <div class="bs-docs-example">
-    <p>
-     The countdown timer <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; countdown=&quot;100&quot;/&gt;</code> will start its countdown from 100 until it reaches 0 by ticking every second</p>
-    <h3>
-     <timer countdown="100" interval="1000">{{countdown}}</timer></h3>
-   </div>
-   </section> <section id="markup">
-   <h3>
-    Markup</h3>
-   <p>
-    Timer directive can be declared using following options. By default, it will display milliseconds inside <code>span</code> tag. It can also take <em>template</em> string to display user-defined formats.</p>
-   <div class="bs-docs-example">
-    <p>
-     <code ng-nonbindable="">&lt;timer interval=&quot;1000&quot; /&gt; </code></p>
-   </div>
-   <div class="bs-docs-example">
-    <p>
-     <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds, {{millis}} milliseconds.&lt;/timer&gt;</code></p>
-   </div>
-   <h4>
-    Attributes</h4>
-   <table class="table table-bordered table-striped">
-    <thead>
-     <tr>
-      <th>
-       Name</th>
-      <th>
-       Required</th>
-      <th>
-       Default value</th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       interval</td>
-      <td>
-       false</td>
-      <td>
-       1 millisecond</td>
-     </tr>
-     <tr>
-      <td>
-       countdown</td>
-      <td>
-       false</td>
-      <td>
-       &nbsp;</td>
-     </tr>
-    </tbody>
-   </table>
-   <h4>
-    Methods</h4>
-   <p>
-    Following DOM methods can be invoked to <em>timer</em>. Prepend to <code>timer-</code> for scope based events when calling from AngularJS controllers.</p>
-   <table class="table table-bordered table-striped">
-    <thead>
-     <tr>
-      <th>
-       Method name</th>
-      <th>
-       Description</th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       start</td>
-      <td>
-       Starts the timer</td>
-     </tr>
-     <tr>
-      <td>
-       stop</td>
-      <td>
-       Stops the timer</td>
-     </tr>
-     <tr>
-      <td>
-       resume</td>
-      <td>
-       Resumes the timer. Will NOT reset the start time</td>
-     </tr>
-    </tbody>
-   </table>
-   </section> <section id="contribute">
-   <h3>
-    Contributions welcome!</h3>
-   <p>
-    We welcome any or all kinds of contributions! Please submit <a href="https://github.com/siddii/angular-timer/pulls" target="_new">pull requests</a> or create <a href="https://github.com/siddii/angular-timer/issues" target="_new">issues</a> to contribute to this project :)</p>
-   </section> <footer>
-   <p>
-    &copy; Siddique Hameed 2013</p>
-   </footer></div>
-<script src="docs/prettify.js"></script><script src="docs/application.js"></script></body>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="index.html#basic-timer">Basic Example</a></li>
+                            <li>
+                                <a href="index.html#clock-timer">Clock Timer</a></li>
+                            <li>
+                                <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
+                            <li>
+                                <a href="index.html#countdown-timer">Countdown Timer</a></li>
+                        </ul>
+                    </li>
+                    <li ng-non-bindable="">
+                        <a href="index.html#markup">&lt;timer/&gt;</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usage From</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="examples.html#angularjs-single-timer">AngularJS - Single Timer</a></li>
+                            <li>
+                                <a href="examples.html#angularjs-multiple-timer">AngularJS - Multiple Timers</a></li>
+                            <li>
+                                <a href="examples.html#jquery-timer">jQuery</a></li>
+                            <li>
+                                <a href="examples.html#plain-javascript">Plain JavaScript</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://github.com/siddii/angular-timer" target="_new">View on Github</a></li>
+                            <li>
+                                <a href="https://github.com/siddii/angular-timer/archive/master.zip" target="_new">Download</a>
+                            </li>
+                            <li>
+                                <a href="index.html#contribute">Contribute</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->    </div>
+    </div>
+</div>
+<div class="container page-content">
+    <section id="introduction">
+        <h1>
+            Introduction</h1>
+
+        <p>
+            Directives in <a href="http://angularjs.org" target="_new">AngularJS</a> is a powerful way of building
+            reusable <em>UI components</em>. This simple project will serve as a sample/reference implementation
+            demonstrating its flexibilities by making it <em>inter-operable</em> across runtime (AngularJS, plain simple
+            JavaScript &amp; jQuery)</p>
+
+        <p>
+            For basic understanding of how directives work in AngularJS, please head to this <a
+                href="http://docs.angularjs.org/guide/directive" target="_new">developer guide</a>.</p>
+    </section>
+    <section id="basic-timer">
+        <h3>
+            Basic Example</h3>
+
+        <div class="bs-docs-example">
+            <p>
+                This simple directive <code>&lt;timer /&gt;</code> will start the timer with the default option of
+                ticking every 1 millisecond</p>
+
+            <h3>
+                <timer></timer>
+            </h3>
+            <button class="btn" onclick="startTimer('basic-timer')" type="button">Start</button>
+            <button class="btn" onclick="stopTimer('basic-timer')" type="button">Stop</button>
+        </div>
+    </section>
+    <section id="clock-timer">
+        <h3>
+            Timer with hours, minutes &amp; seconds</h3>
+
+        <div class="bs-docs-example">
+            <p>
+                This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}}
+                minutes, {{seconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second</p>
+
+            <h3>
+                <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+            </h3>
+            <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
+        </div>
+    </section>
+    <section id="progressbar-timer">
+        <h3>
+            Progressbar Timer</h3>
+
+        <div class="bs-docs-example">
+            <p>
+                Timer directive along with <a href="http://twitter.github.io/bootstrap/components.html#progress"
+                                              target="_new">Twitter Bootstrap&#39;s Progressbar</a> will set the timer
+                on Progressbar control.</p>
+            <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress
+                progress-striped active&quot;&gt; &lt;div class=&quot;bar&quot; style=&quot;width: {{seconds}}%;&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;&lt;/timer&gt; </code>
+
+            <h3>
+                <timer>
+                    <div class="progress progress-striped active">
+                        <div class="bar" style="width: {{seconds}}%;">
+                            &nbsp;</div>
+                    </div>
+                </timer>
+            </h3>
+            <button class="btn" onclick="startTimer('progressbar-timer')" type="button">Start</button>
+            <button class="btn" onclick="stopTimer('progressbar-timer')" type="button">Stop</button>
+        </div>
+    </section>
+    <section id="countdown-timer">
+        <h3>
+            Countdown Timer</h3>
+
+        <div class="bs-docs-example">
+            <p>
+                The countdown timer <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; countdown=&quot;100&quot;/&gt;</code>
+                will start its countdown from 100 until it reaches 0 by ticking every second</p>
+
+            <h3>
+                <timer countdown="100" interval="1000">{{countdown}}</timer>
+            </h3>
+        </div>
+    </section>
+    <section id="markup">
+        <h3>
+            Markup</h3>
+
+        <p>
+            Timer directive can be declared using following options. By default, it will display milliseconds inside
+            <code>span</code> tag. It can also take <em>template</em> string to display user-defined formats.</p>
+
+        <div class="bs-docs-example">
+            <p>
+                <code ng-nonbindable="">&lt;timer interval=&quot;1000&quot; /&gt; </code></p>
+        </div>
+        <div class="bs-docs-example">
+            <p>
+                <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}} minutes,
+                    {{seconds}} seconds, {{millis}} milliseconds.&lt;/timer&gt;</code></p>
+        </div>
+        <h4>
+            Attributes</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Required
+                </th>
+                <th>
+                    Default value
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    interval
+                </td>
+                <td>
+                    false
+                </td>
+                <td>
+                    1 millisecond
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    countdown
+                </td>
+                <td>
+                    false
+                </td>
+                <td>
+                    &nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+        <h4>
+            Methods</h4>
+
+        <p>
+            Following DOM methods can be invoked to <em>timer</em>. Prepend to <code>timer-</code> for scope based
+            events when calling from AngularJS controllers.</p>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Method name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    start
+                </td>
+                <td>
+                    Starts the timer
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    stop
+                </td>
+                <td>
+                    Stops the timer
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    resume
+                </td>
+                <td>
+                    Resumes the timer. Will NOT reset the start time
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <section id="contribute">
+        <h3>
+            Contributions welcome!</h3>
+
+        <p>
+            We welcome any or all kinds of contributions! Please submit <a
+                href="https://github.com/siddii/angular-timer/pulls" target="_new">pull requests</a> or create <a
+                href="https://github.com/siddii/angular-timer/issues" target="_new">issues</a> to contribute to this
+            project :)</p>
+    </section>
+    <footer>
+        <p>
+            &copy; Siddique Hameed 2013</p>
+    </footer>
+</div>
+<script src="docs/prettify.js"></script>
+<script src="docs/application.js"></script>
+</body>
 </html>
