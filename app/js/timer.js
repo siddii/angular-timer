@@ -1,13 +1,14 @@
 angular.module('timer', [])
-  .directive('timer', function ($timeout, $compile) {
+  .directive('timer', function ($rootScope, $timeout, $compile) {
     return  {
       restrict: 'E',
       replace: false,
       scope: {
           interval: '=interval',
-          countdownattr: '=countdown'
+          countdownattr: '=countdown',
+          intervaleventattr: '=intervalevent'
       },
-      controller: function ($scope, $element) {
+      controller: function ($rootScope, $scope, $element) {
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
         }
@@ -16,6 +17,8 @@ angular.module('timer', [])
         $scope.timeoutId = null; 
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
+        $scope.intervalEventCount = 0;
+        $scope.intervalEvent = $scope.intervaleventattr;
 
         $scope.$on('timer-start', function (){
           $scope.start();
@@ -27,6 +30,14 @@ angular.module('timer', [])
 
         $scope.$on('timer-stop', function (){
           $scope.stop();
+        });
+        
+        //example only: consume specific events in your controller
+        //$scope.$on('event:save', function () {
+        //$scope.$on('event:refreshData', function () {
+        $scope.$on($scope.intervalEvent, function () {
+        		$scope.intervalEventCount++;
+        		$scope.intervalEventName = $scope.intervalEvent        		
         });
         
         function resetTimeout() {
@@ -68,6 +79,11 @@ angular.module('timer', [])
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60) ;
             $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));
             $scope.hours = Math.floor((($scope.millis / (1000*60*60)) % 24));
+            
+            if($scope.intervalEvent != undefined) {
+            	$rootScope.$broadcast($scope.intervalEvent);
+          	}
+            
             $scope.timeoutId = $timeout(function () {
               tick();
             }, $scope.interval);

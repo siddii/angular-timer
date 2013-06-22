@@ -196,6 +196,31 @@
             </h3>
         </div>
     </section>
+    <section id="intervalevent-timer">
+        <h3>
+            Interval Event</h3>
+
+        <div class="bs-docs-example">
+            <p>
+							The interval event will fire 'your-named-event' on the $rootScope every interval.
+						</p>
+						<p>
+							Remember the single quotes around the event name. (Angular needs to know it is a string.)</p>
+						<p>
+						  <code ng-non-bindable="">
+						  &lt;timer interval=&quot;1000&quot; intervalEvent=&quot;&#39;event:timer-interval-check-a-thing&#39;&quot;>{{intervalEventName}}: {{intervalEventCount}}&lt;/timer&gt;</code>
+						</p>
+						<p>
+						  <code ng-non-bindable="">
+						  &lt;timer interval=&quot;3000&quot; intervalEvent=&quot;&#39;event:timer-interval-save-document&#39;&quot;>{{intervalEventName}}: {{intervalEventCount}}&lt;/timer&gt;</code>	                
+						</p>
+            <h3>
+                <timer interval="1000" intervalEvent="'event:timer-interval-check-a-thing'">{{intervalEventName}}: {{intervalEventCount}}</timer>
+                <br/>
+                <timer interval="5000" intervalEvent="'event:timer-interval-save-document'">{{intervalEventName}}: {{intervalEventCount}}</timer> 
+            </h3>
+        </div>
+    </section>
     <section id="markup">
         <h3>
             Markup</h3>
