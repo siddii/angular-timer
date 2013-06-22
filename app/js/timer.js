@@ -1,13 +1,14 @@
 angular.module('timer', [])
-  .directive('timer', function ($timeout, $compile) {
+  .directive('timer', function ($rootScope, $timeout, $compile) {
     return  {
       restrict: 'E',
       replace: false,
       scope: {
           interval: '=interval',
-          countdownattr: '=countdown'
+          countdownattr: '=countdown',
+          intervalevent: '=intervalevent'
       },
-      controller: function ($scope, $element) {
+      controller: function ($rootScope, $scope, $element) {
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
         }
@@ -16,6 +17,7 @@ angular.module('timer', [])
         $scope.timeoutId = null; 
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
+        $scope.intervalEvents = 0;      
 
         $scope.$on('timer-start', function (){
           $scope.start();
@@ -27,6 +29,11 @@ angular.module('timer', [])
 
         $scope.$on('timer-stop', function (){
           $scope.stop();
+        });
+        
+        //example only: should consume this event in your controller
+        $scope.$on('event:timer-interval', function () {
+        		$scope.intervalEvents++        		
         });
         
         function resetTimeout() {
@@ -68,6 +75,11 @@ angular.module('timer', [])
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60) ;
             $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));
             $scope.hours = Math.floor((($scope.millis / (1000*60*60)) % 24));
+            
+            if($scope.intervalevent != undefined && $scope.intervalevent) {
+            	$rootScope.$broadcast('event:timer-interval');            	
+          	}
+            
             $scope.timeoutId = $timeout(function () {
               tick();
             }, $scope.interval);
