@@ -6,7 +6,7 @@ angular.module('timer', [])
       scope: {
           interval: '=interval',
           countdownattr: '=countdown',
-          intervalevent: '=intervalevent'
+          intervaleventattr: '=intervalevent'
       },
       controller: function ($rootScope, $scope, $element) {
         if ($element.html().trim().length === 0) {
@@ -17,7 +17,8 @@ angular.module('timer', [])
         $scope.timeoutId = null; 
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
-        $scope.intervalEvents = 0;      
+        $scope.intervalEventCount = 0;
+        $scope.intervalEvent = $scope.intervaleventattr;
 
         $scope.$on('timer-start', function (){
           $scope.start();
@@ -31,9 +32,12 @@ angular.module('timer', [])
           $scope.stop();
         });
         
-        //example only: should consume this event in your controller
-        $scope.$on('event:timer-interval', function () {
-        		$scope.intervalEvents++        		
+        //example only: consume specific events in your controller
+        //$scope.$on('event:save', function () {
+        //$scope.$on('event:refreshData', function () {
+        $scope.$on($scope.intervalEvent, function () {
+        		$scope.intervalEventCount++;
+        		$scope.intervalEventName = $scope.intervalEvent        		
         });
         
         function resetTimeout() {
@@ -76,8 +80,8 @@ angular.module('timer', [])
             $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));
             $scope.hours = Math.floor((($scope.millis / (1000*60*60)) % 24));
             
-            if($scope.intervalevent != undefined && $scope.intervalevent) {
-            	$rootScope.$broadcast('event:timer-interval');            	
+            if($scope.intervalEvent != undefined) {
+            	$rootScope.$broadcast($scope.intervalEvent);
           	}
             
             $scope.timeoutId = $timeout(function () {

@@ -202,11 +202,22 @@
 
         <div class="bs-docs-example">
             <p>
-                The interval event <code ng-non-bindable="">&lt;timer interval=&quot;2000&quot; intervalEvent=&quot;true&quot;/&gt;</code>
-                will fire 'event:timer-interval' on the $rootScope every interval.</p>
-
+							The interval event will fire 'your-named-event' on the $rootScope every interval.
+						</p>
+						<p>
+							Remember the single quotes around the event name. (Angular needs to know it is a string.)</p>
+						<p>
+						  <code ng-non-bindable="">
+						  &lt;timer interval=&quot;1000&quot; intervalEvent=&quot;&#39;event:timer-interval-check-a-thing&#39;&quot;>{{intervalEventName}}: {{intervalEventCount}}&lt;/timer&gt;</code>
+						</p>
+						<p>
+						  <code ng-non-bindable="">
+						  &lt;timer interval=&quot;3000&quot; intervalEvent=&quot;&#39;event:timer-interval-save-document&#39;&quot;>{{intervalEventName}}: {{intervalEventCount}}&lt;/timer&gt;</code>	                
+						</p>
             <h3>
-                <timer interval="2000" intervalEvent="true">Event count: {{intervalEvents}}</timer> 
+                <timer interval="1000" intervalEvent="'event:timer-interval-check-a-thing'">{{intervalEventName}}: {{intervalEventCount}}</timer>
+                <br/>
+                <timer interval="5000" intervalEvent="'event:timer-interval-save-document'">{{intervalEventName}}: {{intervalEventCount}}</timer> 
             </h3>
         </div>
     </section>
