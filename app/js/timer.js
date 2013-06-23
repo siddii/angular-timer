@@ -36,8 +36,7 @@ angular.module('timer', [])
         //$scope.$on('event:save', function () {
         //$scope.$on('event:refreshData', function () {
         $scope.$on($scope.intervalEvent, function () {
-        		$scope.intervalEventCount++;
-        		$scope.intervalEventName = $scope.intervalEvent        		
+      		$scope.intervalEventName = $scope.intervalEvent        		
         });
         
         function resetTimeout() {
@@ -81,7 +80,10 @@ angular.module('timer', [])
             $scope.hours = Math.floor((($scope.millis / (1000*60*60)) % 24));
             
             if($scope.intervalEvent != undefined) {
-            	$rootScope.$broadcast($scope.intervalEvent);
+            	if($scope.intervalEventCount > 0) {
+            		$rootScope.$broadcast($scope.intervalEvent);
+            	}
+            	$scope.intervalEventCount++;
           	}
             
             $scope.timeoutId = $timeout(function () {
