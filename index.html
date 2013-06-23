@@ -77,6 +77,9 @@
                                 <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
                             <li>
                                 <a href="index.html#countdown-timer">Countdown Timer</a></li>
+                            <li>
+                                <a href="index.html#intervalevent-timer">Timer with Interval Events</a>
+                            </li>
                         </ul>
                     </li>
                     <li ng-non-bindable="">
@@ -198,7 +201,7 @@
     </section>
     <section id="intervalevent-timer">
         <h3>
-            Interval Event</h3>
+            Timer with Interval Events</h3>
 
         <div class="bs-docs-example">
             <p>
@@ -238,6 +241,13 @@
                 <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}} minutes,
                     {{seconds}} seconds, {{millis}} milliseconds.&lt;/timer&gt;</code></p>
         </div>
+        <div class="bs-docs-example">
+            <p>
+                <code ng-non-bindable="">
+                    &lt;timer interval=&quot;3000&quot; intervalEvent=&quot;&#39;event:timer-interval-save-document&#39;&quot;>{{intervalEventName}}: {{intervalEventCount}}&lt;/timer&gt;
+                </code>
+            </p>
+        </div>
         <h4>
             Attributes</h4>
         <table class="table table-bordered table-striped">
@@ -275,6 +285,17 @@
                 </td>
                 <td>
                     &nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    intervalEvent
+                </td>
+                <td>
+                    false
+                </td>
+                <td>
+                    The interval event will fire <code>'event:eventName'</code> on the $rootScope every interval.
+                </td>
             </tr>
             </tbody>
         </table>
