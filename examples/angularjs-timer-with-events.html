@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Example - Single Timer Example</title>
+    <script src="../angular/angular.min.js"></script>
+    <script src="../app/js/timer.js"></script>
+    <script>
+        angular.module('MyApp', ['timer']);
+        function PollingController($scope, timerConsolePrefix) {
+            $scope.timerRunning = true;
+            $scope.timerConsole = '';
+
+            $scope.timerType = '';
+
+            $scope.startTimer = function (){
+                $scope.$broadcast('timer-start');
+                $scope.timerRunning = true;
+            };
+
+            $scope.stopTimer = function (){
+                $scope.$broadcast('timer-stop');
+                $scope.timerRunning = false;
+            };
+
+            $scope.$on('timer-tick', function (event, args) {
+                $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId.$$timeoutId + ', millis = ' + args.millis +'\n';
+            });
+        }
+
+        PollingController.$inject = ['$scope'];
+    </script>
+</head>
+<body ng-app="MyApp">
+    <div>
+        <h1>AngularJS - Timer With Events Example</h1>
+        <div ng-init="timerType = 'Polling Server'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px">
+        <h2>Example Simulating Polling Server every 5000 milliseconds</h2>
+        <h3><timer interval="5000"/></h3>
+        <textarea style="height: 100px;" row=20 cols="200">{{timerConsole}}</textarea>
+        <br/>
+        <button ng-click="startTimer('poll-server')" ng-disabled="timerRunning">Start Timer</button>
+        <button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning">Stop Timer</button>
+        </div>
+
+        <div ng-init="timerType = 'Saving Documents'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px">
+        <h2>Example Simulating Saving Document every 3000 milliseconds</h2>
+        <h3><timer interval="3000"/></h3>
+        <textarea style="height: 100px;" row=20 cols="200">{{timerConsole}}</textarea>
+        <br/>
+        <button ng-click="startTimer('poll-server')" ng-disabled="timerRunning">Start Timer</button>
+        <button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning">Stop Timer</button>
+        </div>
+
+    </div>
+    <br/>
+</body>
+</html>
