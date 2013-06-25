@@ -75,6 +75,7 @@ angular.module('timer', [])
             else if ($scope.countdown <= 0) {
                 $scope.stop();
             }
+
             $scope.millis = new Date() - $scope.startTime;
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60) ;
             $scope.minutes = Math.floor((($scope.millis / (1000*60)) % 60));
@@ -87,6 +88,8 @@ angular.module('timer', [])
             $scope.timeoutId = $timeout(function () {
               tick();
             }, $scope.interval);
+
+            $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
         };
 
         $scope.start();
