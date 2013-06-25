@@ -89,6 +89,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="examples.html#angularjs-single-timer">AngularJS - Single Timer</a></li>
                             <li><a href="examples.html#angularjs-multiple-timer">AngularJS - Multiple Timers</a></li>
+                            <li><a href="examples.html#angularjs-polling-timer">AngularJS - Polling Timers</a></li>
                             <li><a href="examples.html#jquery-timer">jQuery</a></li>
                             <li><a href="examples.html#plain-javascript">Plain JavaScript</a></li>
                         </ul>
@@ -209,6 +210,81 @@
             </div>
             <div class="tab-pane" id="angularjs-multiple-timer-demo">
                 <iframe src="examples/angularjs-multiple-timers.html" width="100%" height="350px"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="angularjs-polling-timer">
+        <h3>AngularJS - Polling Timers</h3>
+        <ul class="nav nav-tabs" id="angularjs-polling-timer-tab">
+            <li class="active"><a data-toggle="tab" href="#angularjs-polling-timer-source">index.html</a></li>
+            <li><a data-toggle="tab" href="#angularjs-polling-timer-demo">Demo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="angularjs-polling-timer-source">
+                <pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;AngularJS Example - Polling Timer Example&lt;/title&gt;
+    &lt;script src="../angular/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="../app/js/timer.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module('MyApp', ['timer']);
+        function PollingController($scope) {
+            $scope.timerRunning = true;
+            $scope.timerConsole = '';
+
+            $scope.timerType = '';
+
+            $scope.startTimer = function (){
+                $scope.$broadcast('timer-start');
+                $scope.timerRunning = true;
+            };
+
+            $scope.stopTimer = function (){
+                $scope.$broadcast('timer-stop');
+                $scope.timerRunning = false;
+            };
+
+            $scope.$on('timer-tick', function (event, args) {
+                $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId.$$timeoutId + ', millis = ' + args.millis +'\n';
+            });
+        }
+
+        PollingController.$inject = ['$scope'];
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app="MyApp"&gt;
+    &lt;div&gt;
+        &lt;h1&gt;AngularJS - Polling Timer Example using &lt;code&gt;timer-tick&lt;/code&gt; event&lt;/h1&gt;
+        &lt;div ng-init="timerType = 'Polling Server'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px;margin:15px"&gt;
+        &lt;h2&gt;Polling Server every 5 seconds&lt;/h2&gt;
+        &lt;h3&gt;&lt;timer interval="5000"/&gt;&lt;/h3&gt;
+        &lt;textarea style="height: 100px;" row=20 cols="200"&gt;{{timerConsole}}&lt;/textarea&gt;
+        &lt;br/&gt;
+        &lt;button ng-click="startTimer('poll-server')" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
+        &lt;button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;
+
+        &lt;div ng-init="timerType = 'Saving Documents'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px"&gt;
+        &lt;h2&gt;Saving Document every 3 seconds&lt;/h2&gt;
+        &lt;h3&gt;&lt;timer interval="3000"/&gt;&lt;/h3&gt;
+        &lt;textarea style="height: 100px;" row=20 cols="200"&gt;{{timerConsole}}&lt;/textarea&gt;
+        &lt;br/&gt;
+        &lt;button ng-click="startTimer('poll-server')" ng-disabled="timerRunning"&gt;Start Timer&lt;/button&gt;
+        &lt;button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning"&gt;Stop Timer&lt;/button&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;br/&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+            <div class="tab-pane" id="angularjs-polling-timer-demo">
+                <iframe src="examples/angularjs-polling-timer.html" width="100%" height="350px"></iframe>
             </div>
         </div>
     </section>

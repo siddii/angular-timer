@@ -36,7 +36,7 @@
         <div ng-init="timerType = 'Polling Server'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px;margin:15px">
         <h2>Polling Server every 5 seconds</h2>
         <h3><timer interval="5000"/></h3>
-        <textarea style="height: 100px;" row=20 cols="200">{{timerConsole}}</textarea>
+        <textarea style="height: 100px;" row=20 cols="80">{{timerConsole}}</textarea>
         <br/>
         <button ng-click="startTimer('poll-server')" ng-disabled="timerRunning">Start Timer</button>
         <button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning">Stop Timer</button>
@@ -46,7 +46,7 @@
         <div ng-init="timerType = 'Saving Documents'" ng-controller="PollingController" style="border: 1px darkgray dashed; padding: 15px">
         <h2>Saving Document every 3 seconds</h2>
         <h3><timer interval="3000"/></h3>
-        <textarea style="height: 100px;" row=20 cols="200">{{timerConsole}}</textarea>
+        <textarea style="height: 100px;" row=20 cols="80">{{timerConsole}}</textarea>
         <br/>
         <button ng-click="startTimer('poll-server')" ng-disabled="timerRunning">Start Timer</button>
         <button ng-click="stopTimer('poll-server')" ng-disabled="!timerRunning">Stop Timer</button>
