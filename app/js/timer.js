@@ -74,8 +74,11 @@ angular.module('timer', [])
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    $scope.timeoutId = $timeout(function () {
+                    // Workaround to allow e2e tests ,we can't use $timout which make the
+                    // e2e to hang
+                    $scope.timeoutId = setTimeout(function() {
                         tick();
+                        $scope.$apply();
                     }, $scope.interval);
 
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
