@@ -31,7 +31,7 @@ angular.module('timer', [])
 
                 function resetTimeout() {
                     if ($scope.timeoutId) {
-                        $timeout.cancel($scope.timeoutId);
+                        clearTimeout($scope.timeoutId);
                     }
                 }
 
@@ -49,7 +49,7 @@ angular.module('timer', [])
 
                 $scope.stop = $element[0].stop = function () {
                     $scope.stoppedTime = new Date();
-                    $timeout.cancel($scope.timeoutId);
+                    clearTimeout($scope.timeoutId);
                     $scope.timeoutId = null;
                 };
 
@@ -80,6 +80,10 @@ angular.module('timer', [])
                         tick();
                         $scope.$apply();
                     }, $scope.interval);
+//                    $scope.timeoutId = $timeout(function() {
+//                        tick();
+//                        //$scope.$apply();
+//                    }, $scope.interval);
 
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
                 };
