@@ -66,24 +66,21 @@ angular.module('timer', [])
                     }
 
                     $scope.millis = new Date() - $scope.startTime;
-                    
+
                     if ($scope.countdown > 0) {
                         $scope.millis = $scope.countdown * 1000
                     }
-                    
+
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    // Workaround to allow e2e tests ,we can't use $timout which make the
-                    // e2e to hang
-                    $scope.timeoutId = setTimeout(function() {
+                    // Workaround to allow e2e tests.
+                    // We can't use $timeout which makes the e2e test to hang
+                    // https://github.com/angular/angular.js/issues/2402
+                    $scope.timeoutId = setTimeout(function () {
                         tick();
                         $scope.$apply();
                     }, $scope.interval);
-//                    $scope.timeoutId = $timeout(function() {
-//                        tick();
-//                        //$scope.$apply();
-//                    }, $scope.interval);
 
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
                 };
