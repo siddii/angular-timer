@@ -49,12 +49,12 @@ angular.module('timer', [])
 
                 $scope.stop = $element[0].stop = function () {
                     $scope.stoppedTime = new Date();
-                    clearTimeout($scope.timeoutId);
+                    resetTimeout();
                     $scope.timeoutId = null;
                 };
 
                 $element.bind('$destroy', function () {
-                    $timeout.cancel($scope.timeoutId);
+                    resetTimeout();
                 });
 
                 var tick = function () {
@@ -74,9 +74,7 @@ angular.module('timer', [])
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    // Workaround to allow e2e tests.
-                    // We can't use $timeout which makes the e2e test to hang
-                    // https://github.com/angular/angular.js/issues/2402
+                    //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
                     $scope.timeoutId = setTimeout(function () {
                         tick();
                         $scope.$apply();
