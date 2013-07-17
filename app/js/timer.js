@@ -38,7 +38,6 @@ angular.module('timer', [])
 
                 $scope.start = $element[0].start = function () {
                     $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
-                    $scope.startTimeAttr = null;
                     resetTimeout();
                     tick();
                 };
