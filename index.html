@@ -74,6 +74,8 @@
                             <li>
                                 <a href="index.html#clock-timer">Clock Timer</a></li>
                             <li>
+                                <a href="index.html#inited-timer">Timer with start time</a></li>
+                            <li>
                                 <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
                             <li>
                                 <a href="index.html#countdown-timer">Countdown Timer</a></li>
@@ -156,6 +158,19 @@
             <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
+    </div>
+</section>
+<section id="inited-timer">
+    <h3>
+        Timer initialised with some predefined start time.</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            Timer initialised with predefined start time <p class="muted">(1374019438946 millis = Tue Jul 16 2013 19:08:59 GMT-0500 (CDT))</p><code ng-non-bindable="">&lt;timer start-time=&quot;1374019438946&quot;&gt;{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;</code>
+        <h3>
+            <timer start-time="1374019438946">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+        </h3>
+        <button class="btn" onclick="stopResumeTimer('inited-timer', this)" type="button">Stop</button>
     </div>
 </section>
 <section id="progressbar-timer">
@@ -251,6 +266,16 @@
             </td>
             <td>
                 &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                start-time
+            </td>
+            <td>
+                false
+            </td>
+            <td>starts the timer with predefined time (in milliseconds).
+            </td>
         </tr>
         </tbody>
     </table>
