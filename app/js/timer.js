@@ -5,6 +5,7 @@ angular.module('timer', [])
             replace: false,
             scope: {
                 interval: '=interval',
+                startTimeAttr: '=startTime',
                 countdownattr: '=countdown'
             },
             controller: function ($scope, $element) {
@@ -12,7 +13,7 @@ angular.module('timer', [])
                     $element.append($compile('<span>{{millis}}</span>')($scope));
                 }
 
-                $scope.startTime = null;
+                $scope.startTime = $scope.startTimeAttr && parseInt($scope.startTimeAttr, 10) > 0 ? parseInt($scope.startTimeAttr, 10) : undefined;
                 $scope.timeoutId = null;
                 $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
                 $scope.isRunning = false;
@@ -31,12 +32,12 @@ angular.module('timer', [])
 
                 function resetTimeout() {
                     if ($scope.timeoutId) {
-                        $timeout.cancel($scope.timeoutId);
+                        clearTimeout($scope.timeoutId);
                     }
                 }
 
                 $scope.start = $element[0].start = function () {
-                    $scope.startTime = new Date();
+                    $scope.startTime = $scope.startTime ? new Date($scope.startTime) : new Date();
                     resetTimeout();
                     tick();
                 };
@@ -49,12 +50,12 @@ angular.module('timer', [])
 
                 $scope.stop = $element[0].stop = function () {
                     $scope.stoppedTime = new Date();
-                    $timeout.cancel($scope.timeoutId);
+                    resetTimeout();
                     $scope.timeoutId = null;
                 };
 
                 $element.bind('$destroy', function () {
-                    $timeout.cancel($scope.timeoutId);
+                    resetTimeout();
                 });
 
                 var tick = function () {
@@ -66,16 +67,18 @@ angular.module('timer', [])
                     }
 
                     $scope.millis = new Date() - $scope.startTime;
-                    
+
                     if ($scope.countdown > 0) {
                         $scope.millis = $scope.countdown * 1000
                     }
-                    
+
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    $scope.timeoutId = $timeout(function () {
+                    //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
+                    $scope.timeoutId = setTimeout(function () {
                         tick();
+                        $scope.$apply();
                     }, $scope.interval);
 
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
