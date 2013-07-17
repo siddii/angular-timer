@@ -13,7 +13,7 @@ angular.module('timer', [])
                     $element.append($compile('<span>{{millis}}</span>')($scope));
                 }
 
-                $scope.startTime = $scope.startTimeAttr && parseInt($scope.startTimeAttr, 10) > 0 ? parseInt($scope.startTimeAttr, 10) : undefined;
+                $scope.startTime = null;
                 $scope.timeoutId = null;
                 $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
                 $scope.isRunning = false;
@@ -37,7 +37,8 @@ angular.module('timer', [])
                 }
 
                 $scope.start = $element[0].start = function () {
-                    $scope.startTime = $scope.startTime ? new Date($scope.startTime) : new Date();
+                    $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
+                    $scope.startTimeAttr = null;
                     resetTimeout();
                     tick();
                 };
