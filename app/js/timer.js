@@ -75,6 +75,7 @@ angular.module('timer', [])
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
+                    $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
                     //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
                     $scope.timeoutId = setTimeout(function () {
                         tick();
