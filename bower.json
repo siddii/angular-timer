@@ -1,12 +1,12 @@
 {
-  "author": "https://github.com/cavarzan/angular-timer/graphs/contributors",
+  "author": "Siddique Hameed",
   "name": "angular-timer",
-  "description": "Angular-Timer � A simple AngularJS directive demonstrating re-usability & interoperability",
-  "version": "0.0.1",
-  "homepage": "https://github.com/cavarzan/angular-timer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/siddii/angular-timer",
+  "description": "Angular-Timer : A simple AngularJS directive demonstrating re-usability & interoperability",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cavarzan/angular-timer.git"
+    "url": "git://github.com/siddii/angular-timer.git"
   },
   "dependencies": {},
   "devDependencies": {},

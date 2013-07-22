@@ -69,7 +69,7 @@ angular.module('timer', [])
                     $scope.millis = new Date() - $scope.startTime;
 
                     if ($scope.countdown > 0) {
-                        $scope.millis = $scope.countdown * 1000
+                        $scope.millis = $scope.countdown * 1000;
                     }
 
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
