@@ -1,5 +1,5 @@
 angular.module('timer', [])
-    .directive('timer', ['$timeout', '$compile', function ($timeout, $compile) {
+    .directive('timer', function ($timeout, $compile) {
         return  {
             restrict: 'E',
             replace: false,
@@ -88,4 +88,4 @@ angular.module('timer', [])
                 $scope.start();
             }
         };
-    }]);
+    });
