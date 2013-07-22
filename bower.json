@@ -1,0 +1,22 @@
+{
+  "author": "https://github.com/cavarzan/angular-timer/graphs/contributors",
+  "name": "angular-timer",
+  "description": "Angular-Timer � A simple AngularJS directive demonstrating re-usability & interoperability",
+  "version": "0.0.1",
+  "homepage": "https://github.com/cavarzan/angular-timer",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cavarzan/angular-timer.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "main": "app/js/timer.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
