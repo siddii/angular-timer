@@ -104,8 +104,24 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+	copy_appjs: {
+        files: [
+          {
+            src : '<%= build_dir %>/app/js/timer.js',
+            dest: '<%= compile_dir %>/',
+            cwd: '.',
+			filter: 'isFile',
+			flatten: true,
+            expand: true,
+			rename: function(dest, src) {
+              return dest + '<%= pkg.name %>.js';
+            }
+          }
+        ]
       }
     },
+
 
     /**
      * `grunt concat` concatenates multiple source files into a single file.
@@ -124,7 +140,7 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/app/**/*.js',
           'module.suffix'
         ],
-        dest: '<%= compile_dir %>/<%= pkg.name %>.js'
+        dest: '<%= compile_dir %>/<%= pkg.name %>.min.js'
       }
     },
 
@@ -242,7 +258,8 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build', [
     'clean', 'jshint', 
-    'copy:build_appjs'
+    'copy:build_appjs',
+	'copy:copy_appjs'
     
   ]);
 
