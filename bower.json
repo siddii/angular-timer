@@ -11,5 +11,5 @@
   "dependencies": {
 	"angular": ">= 1.0.7"
   },
-  "main": "./release/angular-timer.min.js",
+  "main": "./release/angular-timer.min.js"
 }
