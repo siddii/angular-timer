@@ -1,0 +1,8 @@
+/**
+ * angular-timer - v1.0.0 - 2013-07-22
+ * https://github.com/siddii/angular-timer
+ *
+ * Copyright (c) 2013 Siddique Hameed
+ * Licensed MIT <https://github.com/siddii/angular-timer>
+ */
+angular.module("timer",[]).directive("timer",["$timeout","$compile",function(a,b){return{restrict:"E",replace:!1,scope:{interval:"=interval",startTimeAttr:"=startTime",countdownattr:"=countdown"},controller:["$scope","$element",function(a,c){function d(){a.timeoutId&&clearTimeout(a.timeoutId)}0===c.html().trim().length&&c.append(b("<span>{{millis}}</span>")(a)),a.startTime=null,a.timeoutId=null,a.countdown=a.countdownattr&&parseInt(a.countdownattr,10)>0?parseInt(a.countdownattr,10):void 0,a.isRunning=!1,a.$on("timer-start",function(){a.start()}),a.$on("timer-resume",function(){a.resume()}),a.$on("timer-stop",function(){a.stop()}),a.start=c[0].start=function(){a.startTime=a.startTimeAttr?new Date(a.startTimeAttr):new Date,d(),e()},a.resume=c[0].resume=function(){d(),a.startTime=new Date-(a.stoppedTime-a.startTime),e()},a.stop=c[0].stop=function(){a.stoppedTime=new Date,d(),a.timeoutId=null},c.bind("$destroy",function(){d()});var e=function(){a.countdown>0?a.countdown--:a.countdown<=0&&a.stop(),a.millis=new Date-a.startTime,a.countdown>0&&(a.millis=1e3*a.countdown),a.seconds=Math.floor(a.millis/1e3%60),a.minutes=Math.floor(a.millis/6e4%60),a.hours=Math.floor(a.millis/36e5%24),a.days=Math.floor(a.millis/36e5/24),a.timeoutId=setTimeout(function(){e(),a.$apply()},a.interval),a.$emit("timer-tick",{timeoutId:a.timeoutId,millis:a.millis})};a.start()}]}}]);
