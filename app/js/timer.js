@@ -64,6 +64,7 @@ angular.module('timer', [])
                     }
                     else if ($scope.countdown <= 0) {
                         $scope.stop();
+                        return;
                     }
 
                     $scope.millis = new Date() - $scope.startTime;
