@@ -59,13 +59,6 @@ angular.module('timer', [])
                 });
 
                 var tick = function () {
-                    if ($scope.countdown > 0) {
-                        $scope.countdown--;
-                    }
-                    else if ($scope.countdown <= 0) {
-                        $scope.stop();
-                        return;
-                    }
 
                     $scope.millis = new Date() - $scope.startTime;
 
@@ -77,6 +70,15 @@ angular.module('timer', [])
                     $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
                     $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
+
+                    if ($scope.countdown > 0) {
+                        $scope.countdown--;
+                    }
+                    else if ($scope.countdown <= 0) {
+                        $scope.stop();
+                        return;
+                    }
+
                     //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
                     $scope.timeoutId = setTimeout(function () {
                         tick();
