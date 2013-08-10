@@ -88,6 +88,9 @@
                                 <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
                             <li>
                                 <a href="index.html#countdown-timer">Countdown Timer</a></li>
+                            <li>
+                                <a href="index.html#auto-start-false-timer">Timer with <em>auto-start=false</em></a>
+                            </li>
                         </ul>
                     </li>
                     <li ng-non-bindable><a href="index.html#markup">&lt;timer/&gt;</a></li>
@@ -148,6 +151,10 @@
                 $scope.$broadcast('timer-stop');
                 $scope.timerRunning = false;
             };
+
+            $scope.$on('timer-stopped', function (event, data){
+                console.log('Timer Stopped - data = ', data);
+            });
         }
         MyAppController.$inject = ['$scope'];
     &lt;/script&gt;

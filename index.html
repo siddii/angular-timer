@@ -32,7 +32,7 @@
     <script src="jquery/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
-    <script src="release/angular-timer.min.js"></script>
+    <script src="app/js/timer.js"></script>
     <script>
         function startTimer(sectionId) {
             document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
@@ -43,7 +43,11 @@
         }
 
         function stopResumeTimer(sectionId, btn) {
-            if (btn.innerHTML === 'Stop') {
+            if (btn.innerHTML === 'Start') {
+                document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
+                btn.innerHTML = 'Stop';
+            }
+            else if (btn.innerHTML === 'Stop') {
                 document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
                 btn.innerHTML = 'Resume';
             }
@@ -78,7 +82,11 @@
                             <li>
                                 <a href="index.html#progressbar-timer">Progressbar Timer</a></li>
                             <li>
-                                <a href="index.html#countdown-timer">Countdown Timer</a></li>
+                                <a href="index.html#countdown-timer">Countdown Timer</a>
+                            </li>
+                            <li>
+                                <a href="index.html#auto-start-false-timer">Timer with <em>auto-start=false</em></a>
+                            </li>
                         </ul>
                     </li>
                     <li ng-non-bindable="">
@@ -214,6 +222,19 @@
         </h3>
     </div>
 </section>
+<section id="auto-start-false-timer">
+    <h3>
+        Timer with <em>auto-start = false</em></h3>
+
+    <div class="bs-docs-example">
+        <p>
+            Click on the start button to start the timer. <code ng-non-bindable="">&lt;timer auto-start="false" interval="1000"&gt;{{seconds}}&lt;/timer&gt;</code></p>
+        <h3>
+            <timer auto-start="false" interval="1000">{{seconds}}</timer>
+        </h3>
+        <button class="btn" onclick="stopResumeTimer('auto-start-false-timer', this)" type="button">Start</button>
+    </div>
+</section>
 <section id="markup">
     <h3>
         Markup</h3>
@@ -257,6 +278,17 @@
             </td>
             <td>
                 1 millisecond
+            </td>
+        </tr>
+        <tr>
+            <td>
+                auto-start
+            </td>
+            <td>
+                false
+            </td>
+            <td>
+                true
             </td>
         </tr>
         <tr>
@@ -346,6 +378,15 @@
             </td>
             <td>
                 Tick event that gets emitted for every timer tick for specified interval. Please refer to <a href="examples.html#angularjs-polling-timer">Polling Timer</a>
+                example for its usage.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                timer-stopped
+            </td>
+            <td>
+                Tick event that gets emitted when the timer stops. Please refer to <a href="examples.html#angularjs-single-timer">Single Timer</a>
                 example for its usage.
             </td>
         </tr>

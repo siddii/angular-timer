@@ -6,7 +6,8 @@ angular.module('timer', [])
             scope: {
                 interval: '=interval',
                 startTimeAttr: '=startTime',
-                countdownattr: '=countdown'
+                countdownattr: '=countdown',
+                autoStart: '=autoStart'
             },
             controller: function ($scope, $element) {
                 if ($element.html().trim().length === 0) {
@@ -52,6 +53,7 @@ angular.module('timer', [])
                     $scope.stoppedTime = new Date();
                     resetTimeout();
                     $scope.timeoutId = null;
+                    $scope.$emit('timer-stopped', {scope: $scope.millis});
                 };
 
                 $element.bind('$destroy', function () {
@@ -88,7 +90,9 @@ angular.module('timer', [])
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
                 };
 
-                $scope.start();
+                if ($scope.autoStart == undefined || $scope.autoStart == true) {
+                    $scope.start();
+                }
             }
         };
     }]);
