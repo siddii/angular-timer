@@ -52,13 +52,20 @@ angular.module('timer', [])
                 $scope.stop = $element[0].stop = function () {
                     $scope.stoppedTime = new Date();
                     resetTimeout();
+                    $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
                     $scope.timeoutId = null;
-                    $scope.$emit('timer-stopped', {scope: $scope.millis});
                 };
 
                 $element.bind('$destroy', function () {
                     resetTimeout();
                 });
+
+                function calculateTimeUnits() {
+                    $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+                    $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
+                    $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
+                    $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
+                }
 
                 var tick = function () {
 
@@ -68,11 +75,7 @@ angular.module('timer', [])
                         $scope.millis = $scope.countdown * 1000;
                     }
 
-                    $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-                    $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
-                    $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
-
+                    calculateTimeUnits();
                     if ($scope.countdown > 0) {
                         $scope.countdown--;
                     }
