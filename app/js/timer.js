@@ -66,6 +66,14 @@ angular.module('timer', [])
                     $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
                     $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
                 }
+				
+                //determine initial values of time units
+                if($scope.countdownattr){
+                    $scope.millis = $scope.countdownattr * 1000
+                } else {
+                    $scope.millis = 0
+                }
+                calculateTimeUnits()
 
                 var tick = function () {
 
