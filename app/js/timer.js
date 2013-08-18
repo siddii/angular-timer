@@ -46,14 +46,14 @@ angular.module('timer', [])
 
                 $scope.resume = $element[0].resume = function () {
                     resetTimeout();
-                    if($scope.countdownattr){
+                    if ($scope.countdownattr) {
                         $scope.countdown += 1;
                     }
                     $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
                     tick();
                 };
 
-                $scope.stop = $element[0].stop = function () {
+                $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
                     $scope.stoppedTime = new Date();
                     resetTimeout();
                     $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
@@ -66,24 +66,24 @@ angular.module('timer', [])
 
                 function calculateTimeUnits() {
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-                    $scope.minutes = Math.floor((($scope.millis / (1000 * 60)) % 60));
-                    $scope.hours = Math.floor((($scope.millis / (1000 * 60 * 60)) % 24));
-                    $scope.days = Math.floor((($scope.millis / (1000 * 60 * 60)) / 24));
+                    $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+                    $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+                    $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
                 }
-				
+
                 //determine initial values of time units
-                if($scope.countdownattr){
+                if ($scope.countdownattr) {
                     $scope.millis = $scope.countdownattr * 1000
                 } else {
                     $scope.millis = 0
                 }
-                calculateTimeUnits()
+                calculateTimeUnits();
 
                 var tick = function () {
 
                     $scope.millis = new Date() - $scope.startTime;
-                    adjustment = $scope.millis % 1000;
-                    
+                    var adjustment = $scope.millis % 1000;
+
                     if ($scope.countdownattr) {
                         $scope.millis = $scope.countdown * 1000;
                     }
