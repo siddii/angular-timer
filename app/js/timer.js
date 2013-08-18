@@ -46,6 +46,9 @@ angular.module('timer', [])
 
                 $scope.resume = $element[0].resume = function () {
                     resetTimeout();
+                    if($scope.countdownattr){
+                        $scope.countdown += 1;
+                    }
                     $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
                     tick();
                 };
@@ -79,8 +82,9 @@ angular.module('timer', [])
                 var tick = function () {
 
                     $scope.millis = new Date() - $scope.startTime;
-
-                    if ($scope.countdown > 0) {
+                    adjustment = $scope.millis % 1000;
+                    
+                    if ($scope.countdownattr) {
                         $scope.millis = $scope.countdown * 1000;
                     }
 
@@ -97,7 +101,7 @@ angular.module('timer', [])
                     $scope.timeoutId = setTimeout(function () {
                         tick();
                         $scope.$apply();
-                    }, $scope.interval);
+                    }, $scope.interval - adjustment);
 
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
                 };
