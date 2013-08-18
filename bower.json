@@ -9,7 +9,10 @@
     "url": "git://github.com/siddii/angular-timer.git"
   },
   "dependencies": {
-	"angular": ">= 1.0.7"
+    "angular": ">= 1.0.7"
   },
-  "main": "./release/angular-timer.min.js"
+  "main": "./release/angular-timer.min.js",
+  "devDependencies": {
+    "angular-timer": "1.0.1"
+  }
 }
