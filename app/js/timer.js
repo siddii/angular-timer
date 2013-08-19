@@ -31,6 +31,10 @@ angular.module('timer', [])
                     $scope.stop();
                 });
 
+                $scope.$on('timer-end', function () {
+                    $scope.end();
+                });
+
                 function resetTimeout() {
                     if ($scope.timeoutId) {
                         clearTimeout($scope.timeoutId);
@@ -41,6 +45,7 @@ angular.module('timer', [])
                     $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
                     $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
                     resetTimeout();
+                    $scope.$emit('timer-started');
                     tick();
                 };
 
@@ -50,6 +55,7 @@ angular.module('timer', [])
                         $scope.countdown += 1;
                     }
                     $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
+                    $scope.$emit('timer-resumed');
                     tick();
                 };
 
@@ -58,6 +64,20 @@ angular.module('timer', [])
                     resetTimeout();
                     $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
                     $scope.timeoutId = null;
+                };
+				
+                $scope.end = $element[0].end = function () {
+                    resetTimeout();
+                    $scope.startTime = null;
+                    $scope.timeoutId = null;
+                    $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+                    $scope.isRunning = false;
+                    $scope.$emit('timer-ended', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+                    if($scope.countdownattr){
+                        $scope.millis = 0;
+                        calculateTimeUnits();
+                        calculateTimeUnits();
+                    }
                 };
 
                 $element.bind('$destroy', function () {
@@ -93,7 +113,7 @@ angular.module('timer', [])
                         $scope.countdown--;
                     }
                     else if ($scope.countdown <= 0) {
-                        $scope.stop();
+                        $scope.end();
                         return;
                     }
 
