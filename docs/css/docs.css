@@ -506,7 +506,7 @@ h2 + .row {
 
 /* Example sites showcase */
 .example-sites {
-  xmargin-left: 20px;
+  margin-left: 20px;
 }
 .example-sites img {
   max-width: 100%;
