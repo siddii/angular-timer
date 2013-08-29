@@ -73,9 +73,9 @@ angular.module('timer', [])
 
                 //determine initial values of time units
                 if ($scope.countdownattr) {
-                    $scope.millis = $scope.countdownattr * 1000
+                    $scope.millis = $scope.countdownattr * 1000;
                 } else {
-                    $scope.millis = 0
+                    $scope.millis = 0;
                 }
                 calculateTimeUnits();
 
@@ -106,7 +106,7 @@ angular.module('timer', [])
                     $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
                 };
 
-                if ($scope.autoStart == undefined || $scope.autoStart == true) {
+                if ($scope.autoStart === undefined || $scope.autoStart === true) {
                     $scope.start();
                 }
             }
