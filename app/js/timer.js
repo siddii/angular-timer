@@ -69,7 +69,7 @@ angular.module('timer', [])
                     $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
                     $scope.timeoutId = null;
                 };
-				
+
                 $scope.end = $element[0].end = function () {
                     resetTimeout();
                     $scope.startTime = null;
@@ -90,9 +90,14 @@ angular.module('timer', [])
 
                 function calculateTimeUnits() {
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-                    $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-                    $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-                    $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+                    $scope.minutes = Math.floor(($scope.millis / 60000) % 60);
+                    $scope.hours = Math.floor(($scope.millis / 3600000) % 24);
+
+                    $scope.fullSeconds = Math.floor($scope.millis / 1000);
+                    $scope.fullMinutes = Math.floor($scope.millis / 60000);
+                    $scope.fullHours = Math.floor($scope.millis / 3600000);
+
+                    $scope.days = Math.floor(($scope.millis / 3600000) / 24);
                 }
 
                 //determine initial values of time units
