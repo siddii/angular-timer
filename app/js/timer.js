@@ -6,10 +6,14 @@ angular.module('timer', [])
             scope: {
                 interval: '=interval',
                 startTimeAttr: '=startTime',
-                countdownattr: '=countdown',
-                autoStart: '=autoStart'
+                countdownattr: '=countdown'
             },
-            controller: function ($scope, $element) {
+            controller: function ($scope, $element, $attrs) {
+                //angular 1.2 doesn't support attributes ending in "-start", so we're
+                //supporting both "autostart" and "auto-start" as a solution for
+                //backward and forward compatibility.
+                $scope.autoStart = $attrs.autoStart || $attrs.autostart;
+
                 if ($element.html().trim().length === 0) {
                     $element.append($compile('<span>{{millis}}</span>')($scope));
                 }
@@ -31,6 +35,10 @@ angular.module('timer', [])
                     $scope.stop();
                 });
 
+                $scope.$on('timer-end', function () {
+                    $scope.end();
+                });
+
                 function resetTimeout() {
                     if ($scope.timeoutId) {
                         clearTimeout($scope.timeoutId);
@@ -41,6 +49,7 @@ angular.module('timer', [])
                     $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
                     $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
                     resetTimeout();
+                    $scope.$emit('timer-started');
                     tick();
                 };
 
@@ -50,6 +59,7 @@ angular.module('timer', [])
                         $scope.countdown += 1;
                     }
                     $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
+                    $scope.$emit('timer-resumed');
                     tick();
                 };
 
@@ -60,15 +70,34 @@ angular.module('timer', [])
                     $scope.timeoutId = null;
                 };
 
+                $scope.end = $element[0].end = function () {
+                    resetTimeout();
+                    $scope.startTime = null;
+                    $scope.timeoutId = null;
+                    $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+                    $scope.isRunning = false;
+                    $scope.$emit('timer-ended', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+                    if($scope.countdownattr){
+                        $scope.millis = 0;
+                        calculateTimeUnits();
+                        calculateTimeUnits();
+                    }
+                };
+
                 $element.bind('$destroy', function () {
                     resetTimeout();
                 });
 
                 function calculateTimeUnits() {
                     $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-                    $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-                    $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-                    $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+                    $scope.minutes = Math.floor(($scope.millis / 60000) % 60);
+                    $scope.hours = Math.floor(($scope.millis / 3600000) % 24);
+
+                    $scope.fullSeconds = Math.floor($scope.millis / 1000);
+                    $scope.fullMinutes = Math.floor($scope.millis / 60000);
+                    $scope.fullHours = Math.floor($scope.millis / 3600000);
+
+                    $scope.days = Math.floor(($scope.millis / 3600000) / 24);
                 }
 
                 //determine initial values of time units
@@ -93,7 +122,7 @@ angular.module('timer', [])
                         $scope.countdown--;
                     }
                     else if ($scope.countdown <= 0) {
-                        $scope.stop();
+                        $scope.end();
                         return;
                     }
 
