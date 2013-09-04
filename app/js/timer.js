@@ -92,7 +92,7 @@ angular.module('timer', [])
                 });
 
                 function calculateTimeUnits() {
-                    if ($scope.fullSeconds) {
+                    if ($scope.fullSeconds === true) {
                         $scope.seconds = Math.floor($scope.millis / 1000);
                     } else {
                         $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
