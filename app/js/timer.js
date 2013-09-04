@@ -6,7 +6,10 @@ angular.module('timer', [])
             scope: {
                 interval: '=interval',
                 startTimeAttr: '=startTime',
-                countdownattr: '=countdown'
+                countdownattr: '=countdown',
+                fullSeconds: '=fullSeconds',
+                fullMinutes: '=fullMinutes',
+                fullHours: '=fullHours'
             },
             controller: function ($scope, $element, $attrs) {
                 //angular 1.2 doesn't support attributes ending in "-start", so we're
@@ -69,7 +72,7 @@ angular.module('timer', [])
                     $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
                     $scope.timeoutId = null;
                 };
-				
+
                 $scope.end = $element[0].end = function () {
                     resetTimeout();
                     $scope.startTime = null;
@@ -89,9 +92,24 @@ angular.module('timer', [])
                 });
 
                 function calculateTimeUnits() {
-                    $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-                    $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-                    $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+                    if ($scope.fullSeconds) {
+                        $scope.seconds = Math.floor($scope.millis / 1000);
+                    } else {
+                        $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+                    }
+
+                    if ($scope.fullMinutes === true) {
+                        $scope.minutes = Math.floor($scope.millis / 60000);
+                    } else {
+                        $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+                    }
+
+                    if ($scope.fullHours === true) {
+                        $scope.hours = Math.floor($scope.millis / 3600000);
+                    } else {
+                        $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+                    }
+
                     $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
                 }
 
