@@ -11,5 +11,9 @@
   "dependencies": {
     "angular": ">= 1.0.7"
   },
+  "devDependencies": {
+      "jquery": ">=1.9.1",
+      "bootstrap": ">=2.3.1"
+  },
   "main": "./release"
 }
