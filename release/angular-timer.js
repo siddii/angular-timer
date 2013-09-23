@@ -1,3 +1,10 @@
+/**
+ * angular-timer - v1.0.2 - 2013-09-23 9:04:58 AM
+ * https://github.com/siddii/angular-timer
+ *
+ * Copyright (c) 2013 Siddique Hameed
+ * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
+ */
 angular.module('timer', [])
     .directive('timer', ['$compile', function ($compile) {
         return  {

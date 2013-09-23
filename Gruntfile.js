@@ -40,7 +40,7 @@ module.exports = function ( grunt ) {
     meta: {
       banner:
         '/**\n' +
-        ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>\n' +
         ' * <%= pkg.homepage %>\n' +
         ' *\n' +
         ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
@@ -136,11 +136,22 @@ module.exports = function ( grunt ) {
           banner: '<%= meta.banner %>'
         },
         src: [
-          'module.prefix',
-          '<%= build_dir %>/app/**/*.js',
-          'module.suffix'
+          'app/**/*.js'
         ],
-        dest: '<%= compile_dir %>/<%= pkg.name %>.min.js'
+        dest: '<%= compile_dir %>/<%= pkg.name %>.js'
+      }
+    },
+
+    /**
+     * Minify the sources!
+     */
+    uglify: {
+      options: {
+        banner: '<%= meta.banner %>'
+      },
+      files: {
+        src: ['<%= concat.compile_js.dest %>'],
+        dest: 'release/<%= pkg.name %>.min.js'
       }
     },
 
@@ -158,20 +169,6 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
-      }
-    },
-
-    /**
-     * Minify the sources!
-     */
-    uglify: {
-      compile: {
-        options: {
-          banner: '<%= meta.banner %>'
-        },
-        files: {
-          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>'
-        }
       }
     },
 
