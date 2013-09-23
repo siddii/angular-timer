@@ -1,3 +1,8 @@
+v0.5.0:
+  date: 2013-07-15
+  changes:
+    - Use rimraf directly, version 2.2.1 to fix issue on Windows.
+    - Add no-write option to mimic grunt.file.delete behavior.
 v0.4.1:
   date: 2013-04-16
   changes:
