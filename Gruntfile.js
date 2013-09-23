@@ -1,9 +1,5 @@
 module.exports = function (grunt) {
 
-  /**
-   * Load required Grunt tasks. These are installed based on the versions listed
-   * in `package.json` when you do `npm install` in this directory.
-   */
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -16,9 +12,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
 
-  /**
-   * Load in our build configuration file.
-   */
   var userConfig = {
     dist_dir: 'dist',
 
