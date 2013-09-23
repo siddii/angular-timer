@@ -20,7 +20,7 @@ module.exports = function (grunt) {
    * Load in our build configuration file.
    */
   var userConfig = {
-    compile_dir: 'release',
+    dist_dir: 'dist',
 
     app_files: {
       js: [ 'app/**/*.js', '!app/**/*.spec.js' ]
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         src: [
           'app/**/*.js'
         ],
-        dest: '<%= compile_dir %>/<%= pkg.name %>.js'
+        dest: '<%= dist_dir %>/<%= pkg.name %>.js'
       }
     },
 
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
       },
       files: {
         src: ['<%= concat.compile_js.dest %>'],
-        dest: 'release/<%= pkg.name %>.min.js'
+        dest: '<%= dist_dir %>/<%= pkg.name %>.min.js'
       }
     },
 
