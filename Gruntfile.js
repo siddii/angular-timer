@@ -11,6 +11,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   var userConfig = {
     dist_dir: 'dist',
@@ -72,12 +73,22 @@ module.exports = function (grunt) {
         eqnull: true
       },
       globals: {}
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 3030,
+          base: '.',
+          keepalive: true
+        }
+      }
     }
   };
 
   grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
 
-  grunt.registerTask('default', [ 'build']);
+  grunt.registerTask('default', [ 'connect']);
 
   grunt.registerTask('build', [
     'jshint', 'concat', 'uglify'
