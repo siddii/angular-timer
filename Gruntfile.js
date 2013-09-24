@@ -80,7 +80,9 @@ module.exports = function (grunt) {
         options: {
           port: 3030,
           base: '.',
-          keepalive: true
+          keepalive: true,
+          livereload:true,
+          open: true
         }
       }
     }
