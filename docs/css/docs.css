@@ -1135,3 +1135,22 @@ form.bs-docs-example {
     padding-bottom: 20px;
   }
 }
+
+.page-content {
+    padding-top: 15px;
+}
+
+.navbar .brand {
+    padding-left: 75px;
+}
+
+#fork-me {
+    position: absolute;
+}
+
+@media (max-width: 979px) {
+    #fork-me {
+        display: none;
+    }
+}
+
