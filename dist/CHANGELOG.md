@@ -3,4 +3,4 @@
 ##Change Log
 
 ###Version 1.0.3
-* Proper bower integration
+* Successful Bower integration!
