@@ -4,7 +4,6 @@
     <meta charset="utf-8"/>
     <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
     <link href="bower_components/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet"/>
     <link href="bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet"/>
     <link href="docs/css/docs.css" rel="stylesheet"/>
@@ -13,31 +12,7 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
     <script src="dist/angular-timer.min.js"></script>
-
-    <script>
-        function startTimer(sectionId) {
-            document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
-        }
-
-        function stopTimer(sectionId) {
-            document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
-        }
-
-        function stopResumeTimer(sectionId, btn) {
-            if (btn.innerHTML === 'Start') {
-                document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
-                btn.innerHTML = 'Stop';
-            }
-            else if (btn.innerHTML === 'Stop') {
-                document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
-                btn.innerHTML = 'Resume';
-            }
-            else {
-                document.getElementById(sectionId).getElementsByTagName('timer')[0].resume();
-                btn.innerHTML = 'Stop';
-            }
-        }
-    </script>
+    <script src="docs/docs.js"></script>
 </head>
 <body ng-app="timer">
 

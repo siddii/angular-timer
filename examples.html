@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Angular Timer, a simple, inter-operable AngularJS directive</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <link href="docs/css/docs.css" rel="stylesheet">
-    <link href="docs/css/prettify.css" rel="stylesheet">
-
-    <script src="jquery/jquery-1.9.1.min.js"></script>
-    <script src="angular/angular.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="docs/css/docs.css" rel="stylesheet"/>
+    <link href="docs/css/prettify.css" rel="stylesheet"/>
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
     <script src="dist/angular-timer.min.js"></script>
-
-    <script>
-        function startTimer(sectionId) {
-            document.getElementById(sectionId).getElementsByTagName('timer')[0].start();
-        }
-
-        function stopTimer(sectionId) {
-            document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
-        }
-
-        function stopResumeTimer(sectionId, btn) {
-            if (btn.innerHTML === 'Stop') {
-                document.getElementById(sectionId).getElementsByTagName('timer')[0].stop();
-                btn.innerHTML = 'Resume';
-            }
-            else {
-                document.getElementById(sectionId).getElementsByTagName('timer')[0].resume();
-                btn.innerHTML = 'Stop';
-            }
-        }
-
-    </script>
+    <script src="docs/docs.js"></script>
 </head>
 
 <body ng-app="timer">
