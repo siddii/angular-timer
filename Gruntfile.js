@@ -80,9 +80,19 @@ module.exports = function (grunt) {
         options: {
           port: 3030,
           base: '.',
-          keepalive: true,
+          keepalive: false,
           livereload:true,
           open: true
+        }
+      }
+    },
+
+    watch: {
+      scripts: {
+        files: ['app/**/*.js','*.html'],
+        tasks: ['build'],
+        options: {
+          livereload: true
         }
       }
     }
@@ -90,7 +100,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
 
-  grunt.registerTask('default', [ 'connect']);
+  grunt.registerTask('default', [ 'connect', 'watch']);
 
   grunt.registerTask('build', [
     'jshint', 'concat', 'uglify'
