@@ -14,9 +14,9 @@
     <script src="dist/angular-timer.min.js"></script>
     <script src="docs/docs.js"></script>
 </head>
-<body ng-app="timer">
+<body ng-app="timer" ng-controller="TimerDemoController">
 
-<ng-include src="'navbar.html'"></ng-include>
+<ng-include src="'navbar.html'" onload='linkAnchors();'></ng-include>
 
 <div class="container page-content">
 <section id="introduction">
