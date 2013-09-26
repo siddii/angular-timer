@@ -120,13 +120,13 @@
 </section>
 <section id="auto-start-false-timer">
     <h3>
-        Timer with <em>auto-start = false</em></h3>
+        Timer with <em>autostart = false</em></h3>
 
     <div class="bs-docs-example">
         <p>
-            Click on the start button to start the timer. <code ng-non-bindable="">&lt;timer auto-start="false" interval="1000"&gt;{{seconds}}&lt;/timer&gt;</code></p>
+            Click on the start button to start the timer. <code ng-non-bindable="">&lt;timer autostart="false" interval="1000"&gt;{{seconds}}&lt;/timer&gt;</code></p>
         <h3>
-            <timer auto-start="false" interval="1000">{{seconds}}</timer>
+            <timer autostart="false" interval="1000">{{seconds}}</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('auto-start-false-timer', this)" type="button">Start</button>
     </div>
@@ -178,7 +178,8 @@
         </tr>
         <tr>
             <td>
-                auto-start
+                autostart<br/>
+                <em>Formerly called 'auto-start'. Please see this <a target="_new" href="https://github.com/siddii/angular-timer/issues/14">issue</a></em>
             </td>
             <td>
                 false
