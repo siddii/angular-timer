@@ -20,13 +20,13 @@ function stopResumeTimer(sectionId, btn) {
     btn.innerHTML = 'Stop';
   }
 }
-angular.module('timer',[]).controller('TimerDemoController',['$scope',  function ($scope) {
-  $scope.linkAnchors = function () {
-    $('ul.nav a').click(function (){
-      var path = $(this).attr('href');
-      if (path != '#') {
-        window.location = path;
-      }
-    });
-  };
+angular.module('timer-demo',['timer']).controller('TimerDemoController',['$scope',  function ($scope) {
+    $scope.linkAnchors = function () {
+        $('ul.nav a').click(function (){
+            var path = $(this).attr('href');
+            if (path != '#') {
+                window.location = path;
+            }
+        });
+    };
 }]);
