@@ -3,7 +3,7 @@
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 describe('Angular Timer E2E Tests', function () {
 
-  angular.scenario.dsl('value', function() {
+  angular.scenario.dsl('futureValue', function() {
     return function(value) {
       return this.addFuture('value to future', function(done) {
         done(null, value);
@@ -25,7 +25,7 @@ describe('Angular Timer E2E Tests', function () {
     });
     sleep(1);
     element('#basic-timer timer span').query(function (span, done) {
-      expect(value(oldValue)).toBe(span.html());
+      expect(futureValue(oldValue)).toBe(span.html());
       done();
     });
   });
@@ -51,6 +51,7 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#auto-start-false-timer timer').html()).toBe('0');
     element('#auto-start-false-timer button:nth-child(3)').click();
     sleep(2);
+    expect(element('#auto-start-false-timer timer').html()).toBeGreaterThan(0);
     expect(element('#auto-start-false-timer timer').html()).toBeLessThan(100);
   });
 });
