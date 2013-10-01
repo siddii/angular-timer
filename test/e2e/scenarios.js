@@ -18,23 +18,39 @@ describe('Angular Timer E2E Tests', function () {
   it("Simple Timer - Should stop ticking when user clicks 'Stop' button", function () {
     sleep(1);
     element('#basic-timer button:last-child').click();
-    var originalValue = null;
-    element('#basic-timer span').query(function (span, done) {
-      originalValue = span.html();
+    var oldValue = null;
+    element('#basic-timer timer span').query(function (span, done) {
+      oldValue = span.html();
       done();
     });
     sleep(1);
-    element('#basic-timer span').query(function (span, done) {
-      expect(value(originalValue)).toBe(span.html());
+    element('#basic-timer timer span').query(function (span, done) {
+      expect(value(oldValue)).toBe(span.html());
       done();
     });
   });
 
   it('Simple Timer - Should reset timer value when user click on start button again', function () {
-    sleep(1);
-    var oldValue = element('#basic-timer span').text();
+    sleep(2);
+    var oldValue = element('#basic-timer timer span').text();
     element('#basic-timer button:nth-child(3)').click();
-    element('#basic-timer button:last-child').click();
     expect(element('#basic-timer span').text()).toBeLessThan(oldValue);
+  });
+
+  it('Clock Timer - with hours, minutes & seconds', function () {
+    expect(element('#clock-timer timer').html()).toMatch(/0 hours,/);
+    expect(element('#clock-timer timer').html()).toMatch(/0 minutes,/);
+    expect(element('#clock-timer timer').html()).toMatch(/seconds./);
+  });
+
+  it('Countdown Timer - Starts from 100', function () {
+    expect(element('#countdown-timer timer').html()).toBeLessThan(100);
+  });
+
+  it('Autostart False Timer - Init from 0', function () {
+    expect(element('#auto-start-false-timer timer').html()).toBe('0');
+    element('#auto-start-false-timer button:nth-child(3)').click();
+    sleep(2);
+    expect(element('#auto-start-false-timer timer').html()).toBeLessThan(100);
   });
 });
