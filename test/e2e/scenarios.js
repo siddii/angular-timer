@@ -3,6 +3,14 @@
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 describe('Angular Timer E2E Tests', function () {
 
+  angular.scenario.dsl('value', function() {
+    return function(value) {
+      return this.addFuture('value to future', function(done) {
+        done(null, value);
+      });
+    };
+  });
+
   beforeEach(function () {
     browser().navigateTo('/index.html');
   });
@@ -10,16 +18,14 @@ describe('Angular Timer E2E Tests', function () {
   it("Simple Timer - Should stop ticking when user clicks 'Stop' button", function () {
     sleep(1);
     element('#basic-timer button:last-child').click();
-    var originalValue = null, currentValue = null;
+    var originalValue = null;
     element('#basic-timer span').query(function (span, done) {
       originalValue = span.html();
-      console.log('##### originalValue', originalValue);
       done();
     });
     sleep(1);
     element('#basic-timer span').query(function (span, done) {
-      currentValue = span.html();
-      console.log('##### currentValue', currentValue);
+      expect(value(originalValue)).toBe(span.html());
       done();
     });
   });
