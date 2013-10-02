@@ -38,9 +38,10 @@ describe('Angular Timer E2E Tests', function () {
   });
 
   it('Clock Timer - with hours, minutes & seconds', function () {
+    sleep(3);
     expect(element('#clock-timer timer').html()).toMatch(/0 hours,/);
     expect(element('#clock-timer timer').html()).toMatch(/0 minutes,/);
-    expect(element('#clock-timer timer').html()).toMatch(/seconds./);
+    expect(element('#clock-timer timer').html()).not().toMatch(/0 seconds./);
   });
 
   it('Countdown Timer - Starts from 100', function () {
