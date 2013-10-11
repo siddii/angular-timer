@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.4 - 2013-09-26 8:53 AM
+ * angular-timer - v1.0.5 - 2013-10-11 2:24 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2013 Siddique Hameed
@@ -112,7 +112,7 @@ angular.module('timer', [])
           //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
           $scope.timeoutId = setTimeout(function () {
             tick();
-            $scope.$apply();
+            $scope.$digest();
           }, $scope.interval - adjustment);
 
           $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
