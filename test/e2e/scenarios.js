@@ -12,7 +12,12 @@ describe('Angular Timer E2E Tests', function () {
   });
 
   beforeEach(function () {
-    browser().navigateTo('/index.html');
+    if (window.location.host.indexOf("github.io") > -1) {
+      browser().navigateTo('/angular-timer/index.html');
+    }
+    else {
+      browser().navigateTo('/index.html');
+    }
   });
 
   it("Simple Timer - Should stop ticking when user clicks 'Stop' button", function () {
