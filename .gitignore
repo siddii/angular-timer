@@ -4,3 +4,4 @@ logs/*
 *.iml
 build/
 .DS_Store
+/node_modules/
