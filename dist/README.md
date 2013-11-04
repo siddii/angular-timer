@@ -1,6 +1,6 @@
 ##Change Log
 
-###Version 1.0.5
+###Version 1.0.6
 * Removing `node_modules` folder. Fix for - https://github.com/siddii/angular-timer/issues/26
 
 ###Version 1.0.5
