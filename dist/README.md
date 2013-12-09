@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.0.8
+* Fixing the broken stuff in the last version
+
 ###Version 1.0.7
 * Ignore `bower_components` folder - https://github.com/siddii/angular-timer/issues/30
 * Templates doesn't work with angular 1.2.0 - https://github.com/siddii/angular-timer/issues/29

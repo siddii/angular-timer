@@ -10,18 +10,18 @@ angular.module('timer', [])
         autoStart: '&autoStart'
       },
       controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
-        var elHtml;
 
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
 
-        elHtml = $element.html();
-        if (elHtml.trim().length === 0) {
-          elHtml = '{{millis}}';
+        if ($element.html().trim().length === 0) {
+          $element.append($compile('<span>{{millis}}</span>')($scope));
         }
-        $element.replaceWith($compile('<span>' + elHtml + '</span>')($scope));
+        else {
+          $element.append($compile($element.contents())($scope));
+        }
 
         $scope.startTime = null;
         $scope.timeoutId = null;
