@@ -1,4 +1,4 @@
-## angular-timer — A simple AngularJS timer directive demonstrating re-usability & interoperability
+## angular-timer — A simple reusable/inter-operable timer directive
 
 [![Build Status](https://travis-ci.org/siddii/angular-timer.png)](https://travis-ci.org/siddii/angular-timer)
 
