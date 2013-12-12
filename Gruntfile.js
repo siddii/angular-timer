@@ -84,6 +84,13 @@ module.exports = function (grunt) {
           livereload:true,
           open: true
         }
+      },
+      testserver: {
+        options: {
+          port: 3030,
+          base: '.',
+          keepalive: true
+        }
       }
     },
 
@@ -113,7 +120,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
 
-  grunt.registerTask('default', [ 'connect', 'watch']);
+  grunt.registerTask('default', [ 'connect:server', 'watch']);
 
   grunt.registerTask('build', [
     'jshint', 'concat', 'uglify'
