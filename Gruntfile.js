@@ -88,11 +88,11 @@ module.exports = function (grunt) {
     },
 
     karma: {
-//      unit: {
-//        configFile: 'config/karma.conf.js',
-//        singleRun: true,
-//        browsers: ['PhantomJS']
-//      },
+      unit: {
+        configFile: 'config/karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      },
       e2e: {
         configFile: 'config/karma-e2e.conf.js',
         singleRun: true,

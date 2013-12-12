@@ -5,14 +5,21 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'app/js/timer.js',
       'test/unit/**/*.js'
+    ],
+
+    exclude : [
+      'bower_components/angular-scenario/angular-scenario.js'
     ],
 
     autoWatch : false,
 
     browsers : ['Chrome'],
 
-    frameworks: ['ng-scenario'],
+    frameworks: ['jasmine'],
 
     singleRun : true,
 
