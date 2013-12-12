@@ -5,7 +5,11 @@ node_js:
 before_script:
   - npm install -g grunt-cli
   - npm install
-  - grunt &
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - grunt   # start a Web server
+  - sleep 3 # give Web server some time to bind to sockets, etc
 
 script:
   - grunt karma:unit
