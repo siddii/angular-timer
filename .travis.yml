@@ -13,4 +13,4 @@ before_script:
 
 script:
   - grunt karma:unit
-  - grunt karama:e2e
+  - grunt karma:e2e
