@@ -1,20 +1,38 @@
-basePath = '../';
+module.exports = function(config){
+  config.set({
 
-files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'angular/angular.js',
-  'test/lib/angular/angular-mocks.js',
-  'app/js/**/*.js',
-  'release/*.js',
-  'test/unit/**/*.js'
-];
 
-autoWatch = true;
+    basePath : '../',
 
-browsers = ['Chrome'];
+    files : [
+      'test/unit/**/*.js'
+    ],
 
-junitReporter = {
-  outputFile: 'test_out/unit.xml',
-  suite: 'unit'
+    autoWatch : false,
+
+    browsers : ['Chrome'],
+
+    frameworks: ['ng-scenario'],
+
+    singleRun : true,
+
+    proxies : {
+      '/': 'http://localhost:3030/'
+    },
+
+    plugins : [
+      'karma-junit-reporter',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-jasmine',
+      'karma-phantomjs-launcher',
+      'karma-ng-scenario'
+    ],
+
+    junitReporter : {
+      outputFile: 'test_out/e2e.xml',
+      suite: 'e2e'
+    }
+
+  })
 };

@@ -87,6 +87,19 @@ module.exports = function (grunt) {
       }
     },
 
+    karma: {
+//      unit: {
+//        configFile: 'config/karma.conf.js',
+//        singleRun: true,
+//        browsers: ['PhantomJS']
+//      },
+      e2e: {
+        configFile: 'config/karma-e2e.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      }
+    },
+
     watch: {
       scripts: {
         files: ['Gruntfile.js', '*.json', 'app/**/*.js','*.html'],
