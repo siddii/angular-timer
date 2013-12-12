@@ -10,7 +10,7 @@ Do any of the following options
     `bower install angular-timer`
 
 ### Running locally
-* Using [Grunt](http://gruntjs.com/) type `grunt` from command line, the default task will open index.html page in your
+Using [Grunt](http://gruntjs.com/) type `grunt` from command line, the default task will open index.html page in your
 default browser
 
 ### Running tests
