@@ -3,11 +3,13 @@
 [![Build Status](https://travis-ci.org/siddii/angular-timer.png)](https://travis-ci.org/siddii/angular-timer)
 
 ### Getting started
-Do any of the following options
+Do any of the following options...
 * Download the latest script file - https://raw.github.com/siddii/angular-timer/master/dist/angular-timer.min.js
 * Clone the repo - `git@github.com:siddii/angular-timer.git`
 * Install angular-timer using [Bower](http://bower.io)
-    `bower install angular-timer`
+```bash
+bower install angular-timer
+```
 
 ### Running locally
 Using [Grunt](http://gruntjs.com/) type `grunt` from command line, the default task will open index.html page in your
