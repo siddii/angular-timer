@@ -6,11 +6,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
-  grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-ngmin');
-  grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   var userConfig = {
@@ -88,8 +84,7 @@ module.exports = function (grunt) {
       testserver: {
         options: {
           port: 3030,
-          base: '.',
-          keepalive: true
+          base: '.'
         }
       }
     },
@@ -121,6 +116,8 @@ module.exports = function (grunt) {
   grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
 
   grunt.registerTask('default', [ 'connect:server', 'watch']);
+
+  grunt.registerTask('tests', [ 'connect:testserver', 'karma:unit', 'karma:e2e']);
 
   grunt.registerTask('build', [
     'jshint', 'concat', 'uglify'
