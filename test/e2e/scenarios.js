@@ -11,6 +11,18 @@ describe('Angular Timer E2E Tests', function () {
     };
   });
 
+  angular.scenario.matcher('toHaveMoreSecondsThan', function(future) {
+    function extractTime(value){
+      return value.match(/\b\d+\b/g);
+    }
+    function totalSeconds(value) {
+      return value[0]*3600*24 + value[1]*3600 + value[2]*60 + value[3];
+    }
+    var actualValue = extractTime(this.actual)
+    var futureValue = extractTime(future.value);
+    return totalSeconds(actualValue) > totalSeconds(futureValue);
+  });
+
   beforeEach(function () {
     if (window.location.host.indexOf("github.io") > -1) {
       browser().navigateTo('/angular-timer/index.html');
@@ -59,5 +71,12 @@ describe('Angular Timer E2E Tests', function () {
     sleep(2);
     expect(element('#auto-start-false-timer timer span').html()).toBeGreaterThan(0);
     expect(element('#auto-start-false-timer timer span').html()).toBeLessThan(100);
+  });
+
+  it('End Time Timer - Ends at beginning of 2014', function () {
+    var beforeTime = element('#timer-with-end-time timer span').html();
+    sleep(3);
+    var afterTime = element('#timer-with-end-time timer span').html();
+    expect(beforeTime).toHaveMoreSecondsThan(afterTime);
   });
 });
