@@ -51,16 +51,7 @@ angular.module('timer', [])
         $scope.start = $element[0].start = function () {
           $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
           $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
-          if ($scope.endTime) {
-            var difference = $scope.endTime - new Date();
-            if (difference > 0) {
-              $scope.countdown = difference/1000|0;
-            } else {
-              $scope.countdown = 0;
-            }
-          } else {
-            $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
-          }
+          $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           resetTimeout();
           tick();
         };
@@ -105,10 +96,20 @@ angular.module('timer', [])
           $scope.millis = new Date() - $scope.startTime;
           var adjustment = $scope.millis % 1000;
 
-          if ($scope.countdownattr || $scope.endTimeAttr) {
+          if ($scope.endTimeAttr) {
+            $scope.millis = $scope.endTime - new Date();
+            adjustment = $scope.interval - $scope.millis % 1000;
+          }
+
+
+          if ($scope.countdownattr) {
             $scope.millis = $scope.countdown * 1000;
           }
 
+          if ($scope.millis < 0) {
+            $scope.stop();
+            $scope.millis = 0;
+          }
           calculateTimeUnits();
           if ($scope.countdown > 0) {
             $scope.countdown--;
