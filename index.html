@@ -79,6 +79,20 @@
         <button class="btn" onclick="stopResumeTimer('timer-with-start-time', this)" type="button">Stop</button>
     </div>
 </section>
+<section id="timer-with-end-time">
+    <h3>
+        Timer initialised with some predefined end time.</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            Following is the countdown timer setting for the days, hours, minutes & seconds to <b>January 1, 2014 (GMT-6) </b>
+            <p class="muted">(01 Jan 2014 06:00:00 GMT = 1388556000000 milliseconds)</p>
+            <code ng-non-bindable="">&lt;timer end-time=&quot;1388556000000&quot;&gt;{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;</code>
+        <h3>
+            <timer end-time="1388556000000">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+        </h3>
+    </div>
+</section>
 <section id="progressbar-timer">
     <h3>
         Progressbar Timer</h3>
