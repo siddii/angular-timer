@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.0.9
+* `end-time` attribute
+
 ###Version 1.0.8
 * Fixing the broken stuff in the last version
 

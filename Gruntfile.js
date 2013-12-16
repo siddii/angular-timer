@@ -68,7 +68,6 @@ module.exports = function (grunt) {
         boss: true,
         eqnull: true
       },
-      globals: {}
     },
 
     connect: {
@@ -117,7 +116,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [ 'connect:server', 'watch']);
 
-  grunt.registerTask('tests', [ 'connect:testserver', 'karma:unit', 'karma:e2e']);
+  grunt.registerTask('tests', [ 'connect:testserver', 'build', 'karma:unit', 'karma:e2e']);
 
   grunt.registerTask('build', [
     'jshint', 'concat', 'uglify'
