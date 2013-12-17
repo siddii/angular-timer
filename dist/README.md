@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.0.10
+* Minor bug fixes - https://github.com/siddii/angular-timer/issues/33
+
 ###Version 1.0.9
 * `end-time` attribute
 
