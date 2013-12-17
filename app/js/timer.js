@@ -109,6 +109,8 @@ angular.module('timer', [])
           if ($scope.millis < 0) {
             $scope.stop();
             $scope.millis = 0;
+            calculateTimeUnits();
+            return;
           }
           calculateTimeUnits();
           if ($scope.countdown > 0) {
