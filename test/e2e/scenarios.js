@@ -65,6 +65,12 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#countdown-timer timer span').html()).toBeLessThan(100);
   });
 
+  it('Countdown Timer - Can have time added to it', function () {
+    element('#countdown-timer button').click();
+    expect(element('#countdown-timer timer span').html()).toBeLessThan(110);
+    expect(element('#countdown-timer timer span').html()).toBeGreaterThan(100);
+  });
+
   it('Autostart False Timer - Init from 0', function () {
     expect(element('#auto-start-false-timer timer span').html()).toBe('0');
     element('#auto-start-false-timer button:nth-child(3)').click();

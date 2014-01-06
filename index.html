@@ -85,11 +85,11 @@
 
     <div class="bs-docs-example">
         <p>
-            Following is the countdown timer setting for the days, hours, minutes & seconds to <b>January 1, 2014 (GMT-6) </b>
-            <p class="muted">(01 Jan 2014 06:00:00 GMT = 1388556000000 milliseconds)</p>
-            <code ng-non-bindable="">&lt;timer end-time=&quot;1388556000000&quot;&gt;{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;</code>
+            Following is the countdown timer setting for the days, hours, minutes & seconds to <b>January 1, 2015 (GMT-6) </b>
+            <p class="muted">(01 Jan 2015 06:00:00 GMT = 1420070400000 milliseconds)</p>
+            <code ng-non-bindable="">&lt;timer end-time=&quot;1420070400000&quot;&gt;{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.&lt;/timer&gt;</code>
         <h3>
-            <timer end-time="1388556000000">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+            <timer end-time="1420070400000">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
         </h3>
     </div>
 </section>
@@ -130,6 +130,7 @@
         <h3>
             <timer countdown="100" interval="1000">{{countdown}}</timer>
         </h3>
+        <button class="btn" onclick="addSeconds('countdown-timer', 10)" type="button">Add 10 Seconds</button>
     </div>
 </section>
 <section id="auto-start-false-timer">

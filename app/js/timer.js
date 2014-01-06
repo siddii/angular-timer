@@ -19,8 +19,7 @@ angular.module('timer', [])
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
-        }
-        else {
+        } else {
           $element.append($compile($element.contents())($scope));
         }
 
@@ -83,9 +82,19 @@ angular.module('timer', [])
           $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
         }
 
-        //determine initial values of time units
+        //determine initial values of time units and add AddSeconds functionality
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
+
+          $scope.addSeconds = $element[0].addSeconds = function( extraSeconds ){
+            $scope.countdown += extraSeconds;
+            $scope.$digest();
+          };
+          $scope.$on('timer-add-time', function ( extraSeconds  ) {
+            $scope.addSeconds( extraSeconds );
+          });
+
+
         } else {
           $scope.millis = 0;
         }
