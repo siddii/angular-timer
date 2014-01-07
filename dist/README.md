@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.0.11
+* `addCDSeconds` method for running countdown timer
+
 ###Version 1.0.10
 * Minor bug fixes - https://github.com/siddii/angular-timer/issues/33
 
