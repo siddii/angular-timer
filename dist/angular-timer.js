@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.10 - 2014-01-04 8:31 PM
+ * angular-timer - v1.0.10 - 2014-01-07 1:27 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -93,7 +93,7 @@ angular.module('timer', [])
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
 
-          $scope.addSeconds = $element[0].addSeconds = function( extraSeconds ){
+          $scope.addCDSeconds = $element[0].addCDSeconds = function( extraSeconds ){
             $scope.countdown += extraSeconds;
             $scope.$digest();
           };

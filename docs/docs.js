@@ -7,8 +7,8 @@ function stopTimer(sectionId) {
 }
 
 
-function addSeconds(sectionId, extraTime) {
-  document.getElementById(sectionId).getElementsByTagName('timer')[0].addSeconds( extraTime );
+function addCDSeconds(sectionId, extraTime) {
+  document.getElementById(sectionId).getElementsByTagName('timer')[0].addCDSeconds( extraTime );
 }
 
 function stopResumeTimer(sectionId, btn) {

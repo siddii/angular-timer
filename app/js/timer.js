@@ -86,7 +86,7 @@ angular.module('timer', [])
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
 
-          $scope.addSeconds = $element[0].addSeconds = function( extraSeconds ){
+          $scope.addCDSeconds = $element[0].addCDSeconds = function( extraSeconds ){
             $scope.countdown += extraSeconds;
             $scope.$digest();
           };
