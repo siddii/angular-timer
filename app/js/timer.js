@@ -10,7 +10,7 @@ angular.module('timer', [])
         countdownattr: '=countdown',
         autoStart: '&autoStart'
       },
-      controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
@@ -86,15 +86,16 @@ angular.module('timer', [])
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
 
-          $scope.addCDSeconds = $element[0].addCDSeconds = function( extraSeconds ){
+          $scope.addCDSeconds = $element[0].addCDSeconds = function(extraSeconds){
             $scope.countdown += extraSeconds;
             $scope.$digest();
           };
-          $scope.$on('timer-add-time', function ( extraSeconds  ) {
-            $scope.addSeconds( extraSeconds );
+
+          $scope.$on('timer-add-cd-seconds', function (e, extraSeconds) {
+            $timeout(function (){
+              $scope.addCDSeconds(extraSeconds);
+            });
           });
-
-
         } else {
           $scope.millis = 0;
         }

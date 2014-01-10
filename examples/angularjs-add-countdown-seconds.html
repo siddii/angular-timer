@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Example - Single Timer Example</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../app/js/timer.js"></script>
+    <script>
+        angular.module('MyApp', ['timer']);
+        function MyAppController($scope) {
+            $scope.add5Seconds = function () {
+                $scope.$broadcast('timer-add-cd-seconds', 5);
+            }
+        }
+        MyAppController.$inject = ['$scope'];
+    </script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyAppController">
+        <h1>AngularJS - Add Countdown Seconds Example</h1>
+        <h3><timer countdown="100" interval="1000">{{countdown}}</timer></h3>
+        <button ng-click="add5Seconds()">Add 5 Seconds</button>
+    </div>
+    <br/>
+</body>
+</html>
