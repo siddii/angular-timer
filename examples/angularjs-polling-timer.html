@@ -6,7 +6,7 @@
     <script src="../app/js/timer.js"></script>
     <script>
         angular.module('MyApp', ['timer']);
-        function PollingController($scope) {
+        function PollingController($scope, $timeout) {
             $scope.timerRunning = true;
             $scope.timerConsole = '';
 
@@ -23,11 +23,13 @@
             };
 
             $scope.$on('timer-tick', function (event, args) {
-                $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis +'\n';
+                $timeout(function (){
+                    $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis +'\n';
+                });
             });
         }
 
-        PollingController.$inject = ['$scope'];
+        PollingController.$inject = ['$scope', '$timeout'];
     </script>
 </head>
 <body ng-app="MyApp">
