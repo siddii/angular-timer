@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.0.12
+* `clear` method. Please see this PR - https://github.com/siddii/angular-timer/pull/43
+
 ###Version 1.0.11
 * `addCDSeconds` method for running countdown timer
 

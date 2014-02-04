@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.11 - 2014-01-10 2:05 PM
+ * angular-timer - v1.0.12 - 2014-02-03 9:30 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -48,6 +48,10 @@ angular.module('timer', [])
           $scope.stop();
         });
 
+        $scope.$on('timer-clear', function () {
+          $scope.clear();
+        });
+
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
@@ -60,6 +64,7 @@ angular.module('timer', [])
           $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           resetTimeout();
           tick();
+          $scope.isRunning = true;
         };
 
         $scope.resume = $element[0].resume = function () {
@@ -69,17 +74,25 @@ angular.module('timer', [])
           }
           $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
           tick();
+          $scope.isRunning = true;
         };
 
         $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
+          $scope.clear();
+          $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+        };
+
+        $scope.clear = $element[0].clear = function () {
+          // same as stop but without the event being triggered
           $scope.stoppedTime = new Date();
           resetTimeout();
-          $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
           $scope.timeoutId = null;
+          $scope.isRunning = false;
         };
 
         $element.bind('$destroy', function () {
           resetTimeout();
+          $scope.isRunning = false;
         });
 
         function calculateTimeUnits() {
