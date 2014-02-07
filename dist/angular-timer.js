@@ -147,14 +147,6 @@ angular.module('timer', [])
             return;
           }
           calculateTimeUnits();
-          //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
-          $scope.timeoutId = setTimeout(function () {
-            tick();
-            $scope.$digest();
-          }, $scope.interval - adjustment);
-
-          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
-          
           if ($scope.countdown > 0) {
             $scope.countdown--;
           }
@@ -162,6 +154,14 @@ angular.module('timer', [])
             $scope.stop();
             return;
           }
+
+          //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
+          $scope.timeoutId = setTimeout(function () {
+            tick();
+            $scope.$digest();
+          }, $scope.interval - adjustment);
+
+          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
         };
 
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
