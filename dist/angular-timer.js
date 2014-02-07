@@ -52,10 +52,6 @@ angular.module('timer', [])
           $scope.clear();
         });
 
-        $scope.$on('countdown-set', function (e, countdown) {
-          $scope.countdown = countdown;
-        });
-        
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
