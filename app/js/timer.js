@@ -101,7 +101,7 @@ angular.module('timer', [])
           tick();
           $scope.isRunning = false;
           $scope.clear();
-        }
+        };
         
         $element.bind('$destroy', function () {
           resetTimeout();
