@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.12 - 2014-02-03 9:30 PM
+ * angular-timer - v1.0.12 - 2014-02-10 9:05 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -52,6 +52,10 @@ angular.module('timer', [])
           $scope.clear();
         });
 
+        $scope.$on('timer-set-countdown', function (e, countdown) {
+          $scope.countdown = countdown;
+        });
+
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
@@ -61,7 +65,9 @@ angular.module('timer', [])
         $scope.start = $element[0].start = function () {
           $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
           $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
-          $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          if (!$scope.countdown) {
+            $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          }
           resetTimeout();
           tick();
           $scope.isRunning = true;
@@ -109,6 +115,9 @@ angular.module('timer', [])
           $scope.addCDSeconds = $element[0].addCDSeconds = function(extraSeconds){
             $scope.countdown += extraSeconds;
             $scope.$digest();
+            if (!$scope.isRunning) {
+              $scope.start();
+            }
           };
 
           $scope.$on('timer-add-cd-seconds', function (e, extraSeconds) {
@@ -143,13 +152,6 @@ angular.module('timer', [])
             return;
           }
           calculateTimeUnits();
-          if ($scope.countdown > 0) {
-            $scope.countdown--;
-          }
-          else if ($scope.countdown <= 0) {
-            $scope.stop();
-            return;
-          }
 
           //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
           $scope.timeoutId = setTimeout(function () {
@@ -158,6 +160,13 @@ angular.module('timer', [])
           }, $scope.interval - adjustment);
 
           $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
+
+          if ($scope.countdown > 0) {
+            $scope.countdown--;
+          }
+          else if ($scope.countdown <= 0) {
+            $scope.stop();
+          }
         };
 
         if ($scope.autoStart === undefined || $scope.autoStart === true) {

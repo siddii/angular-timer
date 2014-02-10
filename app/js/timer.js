@@ -58,7 +58,9 @@ angular.module('timer', [])
         $scope.start = $element[0].start = function () {
           $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
           $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
-          $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          if (!$scope.countdown) {
+            $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          }
           resetTimeout();
           tick();
           $scope.isRunning = true;
@@ -106,6 +108,9 @@ angular.module('timer', [])
           $scope.addCDSeconds = $element[0].addCDSeconds = function(extraSeconds){
             $scope.countdown += extraSeconds;
             $scope.$digest();
+            if (!$scope.isRunning) {
+              $scope.start();
+            }
           };
 
           $scope.$on('timer-add-cd-seconds', function (e, extraSeconds) {
@@ -154,9 +159,7 @@ angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
-            return;
           }
-
         };
 
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
