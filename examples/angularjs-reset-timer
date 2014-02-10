@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="doUI">
+
+<head>
+    <title>AngularJS Example - Reset Countdown</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../app/js/timer.js"></script>
+
+    <style>
+    #ui ul {
+        margin: 0;
+        display: inline-block;
+        list-style-type: none;
+        width: 33%;
+        float: left;
+        font-family: myriad pro;
+    }
+    li {
+        margin: 10px 0;
+        padding: 5px;
+        color: #333;
+    }
+    li.control {
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+    </style>
+    <script>
+    angular.module('doUI', ['timer']);
+
+    function doController($scope) {
+
+        $scope.timerRunning = true;
+        var timeStarted = false;
+        $scope.countdownVal = 900;
+
+        $scope.startClock = function() {
+            if (!timeStarted) {
+                $scope.$broadcast('timer-start');
+                $scope.timerRunning = true;
+                timeStarted = true
+            } else if ((timeStarted) && (!$scope.timerRunning)) {
+                $scope.$broadcast('timer-resume');
+                $scope.timerRunning = true;
+            }
+
+        };
+
+        $scope.stopClock = function() {
+            if ((timeStarted) && ($scope.timerRunning)) {
+                $scope.$broadcast('timer-stop');
+                $scope.timerRunning = false;
+            }
+
+        };
+
+        $scope.resetClock = function() {
+            if ((!$scope.timerRunning))
+                $scope.$broadcast('timer-reset');
+        }
+
+        $scope.$on('timer-stopped', function(event, data) {
+            timeStarted = true;
+        });
+    }
+
+    doController.$inject = ['$scope'];
+    </script>
+</head>
+
+<body ng-controller="doController">
+    <div id="ui">
+        <ul class="timerNew">
+            <li>
+                <timer interval="1000" countdown="countdownVal" autostart="false">{{millis | date:'mm:ss'}}</timer>
+            </li>
+
+            <li ng-click="startClock()" ng-disabled="timerRunning" class="control">Start/Resume</li>
+            <li ng-click="stopClock()" ng-disabled="!timerRunning" class="control">Stop</li>
+            <li ng-click="resetClock()" class="control">Reset</li>
+
+        </ul>
+
+
+    </div>
+</body>
+
+</html>
