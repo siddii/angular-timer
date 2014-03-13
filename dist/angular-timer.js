@@ -23,6 +23,8 @@ angular.module('timer', [])
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
+        //trigger event
+        $scope.eventstop = $attrs.eventstop;
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -73,6 +75,17 @@ angular.module('timer', [])
           $scope.isRunning = true;
         };
 
+        $scope.getCurrentTime = $element[0].getCurrentTime = function () {
+          return { 
+            millis: $scope.millis, 
+            seconds: $scope.seconds, 
+            minutes: $scope.minutes, 
+            hours: $scope.hours, 
+            days: $scope.days
+
+          }
+        };
+
         $scope.resume = $element[0].resume = function () {
           resetTimeout();
           if ($scope.countdownattr) {
@@ -85,7 +98,12 @@ angular.module('timer', [])
 
         $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
           $scope.clear();
-          $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+          
+          if ($scope.eventstop != 'false') {
+            $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+
+          } 
+
         };
 
         $scope.clear = $element[0].clear = function () {
