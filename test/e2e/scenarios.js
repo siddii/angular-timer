@@ -85,4 +85,17 @@ describe('Angular Timer E2E Tests', function () {
     var afterTime = element('#timer-with-end-time timer span').html();
     expect(beforeTime).toHaveMoreSecondsThan(afterTime);
   });
+  
+  it('Plural / Singular Units - Should properly pluralize units', function () {
+    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 day,/);
+    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 hour,/);
+    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 minute,/);
+    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 second/);  
+    
+    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/days,/);
+    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/hours,/);
+    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/minutes,/);
+    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/seconds/);      
+  });  
+
 });
