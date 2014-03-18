@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.12 - 2014-02-10 9:05 AM
+ * angular-timer - v1.0.12 - 2014-03-18 4:02 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -8,7 +8,7 @@
 angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
-      restrict: 'E',
+      restrict: 'EAC',
       replace: false,
       scope: {
         interval: '=interval',
@@ -102,12 +102,18 @@ angular.module('timer', [])
         });
 
         function calculateTimeUnits() {
-          $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-          $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-          $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-          $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
-        }
+            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+            $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+            $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+            $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
 
+            //add leading zero if number is smaller than 10
+            $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
+            $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
+            $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
+            $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
+
+        }
         //determine initial values of time units and add AddSeconds functionality
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
