@@ -8,7 +8,6 @@ angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
-
         autoStart: '&autoStart'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
@@ -17,8 +16,6 @@ angular.module('timer', [])
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
-
-        $scope.addLeadingZero = ($attrs.$attr.addLeadingZero || $attrs.$attr.addleadingzero ) ? true : false;
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -103,13 +100,12 @@ angular.module('timer', [])
             $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
             $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
 
+            //add leading zero if number is smaller than 10
+            $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
+            $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
+            $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
+            $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
 
-            if($scope.addLeadingZero){
-                $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
-                $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
-                $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
-                $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
-            }
         }
         //determine initial values of time units and add AddSeconds functionality
         if ($scope.countdownattr) {

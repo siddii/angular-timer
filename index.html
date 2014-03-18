@@ -70,11 +70,11 @@
 
     <div class="bs-docs-example">
         <p>
-            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; add-leading-zero&gt;{{hours}} hours, {{minutes}}
-            minutes, {{seconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second with an additional zero at the beginning if unit is smaller than 10</p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hhours}} hours, {{mminutes}}
+            minutes, {{sseconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second with an additional zero at the beginning if unit is smaller than 10</p>
 
         <h3>
-            <timer interval="1000" add-leading-zero>{{hhours}} hours, {{mminutes}} minutes, {{sseconds}} seconds.</timer>
+            <timer interval="1000">{{hhours}} hours, {{mminutes}} minutes, {{sseconds}} seconds.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
     </div>
