@@ -32,6 +32,7 @@ describe('Angular Timer E2E Tests', function () {
     }
   });
 
+
   it("Simple Timer - Should stop ticking when user clicks 'Stop' button", function () {
     sleep(1);
     element('#basic-timer button:last-child').click();
@@ -85,4 +86,16 @@ describe('Angular Timer E2E Tests', function () {
     var afterTime = element('#timer-with-end-time timer span').html();
     expect(beforeTime).toHaveMoreSecondsThan(afterTime);
   });
+    
+    it('Leading zero timer - should add a leading zero if number is smaller than 10', function() {
+        sleep(1);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 hours,/);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/01 seconds./);
+        sleep(10);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 hours,/);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
+        expect(element('#clock-timer-leading-zero timer').html()).toMatch(/11 seconds./);
+    });
+
 });

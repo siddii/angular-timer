@@ -11,7 +11,7 @@
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
-    <script src="dist/angular-timer.min.js"></script>
+    <script src="app/js/timer.js"></script>
     <script src="docs/docs.js"></script>
 </head>
 <body ng-app="timer-demo" ng-controller="TimerDemoController">
@@ -60,6 +60,21 @@
 
         <h3>
             <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+        </h3>
+        <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
+    </div>
+</section>
+<section id="clock-timer-leading-zero">
+    <h3>
+        Timer with leading zero</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hhours}} hours, {{mminutes}}
+            minutes, {{sseconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second with an additional zero at the beginning if unit is smaller than 10</p>
+
+        <h3>
+            <timer interval="1000">{{hhours}} hours, {{mminutes}} minutes, {{sseconds}} seconds.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
     </div>
