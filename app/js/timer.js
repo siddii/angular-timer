@@ -103,11 +103,12 @@ angular.module('timer', [])
             $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
             $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
 
+
             if($scope.addLeadingZero){
-                $scope.seconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
-                $scope.minutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
-                $scope.hours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
-                $scope.days =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
+                $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
+                $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
+                $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
+                $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
             }
         }
         //determine initial values of time units and add AddSeconds functionality
