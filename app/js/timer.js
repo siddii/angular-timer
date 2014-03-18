@@ -95,10 +95,15 @@ angular.module('timer', [])
         });
 
         function calculateTimeUnits() {
+
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+            $scope.secondsS = $scope.seconds==1 ? '' : 's';
             $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+            $scope.minutesS = $scope.minutes==1 ? '' : 's';
             $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+            $scope.hoursS = $scope.hours==1 ? '' : 's';
             $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+            $scope.daysS = $scope.days==1 ? '' : 's';
 
             //add leading zero if number is smaller than 10
             $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
