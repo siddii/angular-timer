@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.12 - 2014-03-18 4:02 PM
+ * angular-timer - v1.0.12 - 2014-04-13 4:22 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -18,6 +18,14 @@ angular.module('timer', [])
         autoStart: '&autoStart'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
+
+        // Checking for trim function since IE8 doesn't have it
+        // If not a function, create tirm with RegEx to mimic native trim
+        if(typeof String.prototype.trim !== 'function') {
+          String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+          };
+        }
 
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
@@ -112,13 +120,11 @@ angular.module('timer', [])
             $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
             $scope.daysS = $scope.days==1 ? '' : 's';
 
-
             //add leading zero if number is smaller than 10
             $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
             $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
             $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
             $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
-
 
         }
         //determine initial values of time units and add AddSeconds functionality

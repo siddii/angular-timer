@@ -17,7 +17,7 @@ angular.module('timer', [])
         if(typeof String.prototype.trim !== 'function') {
           String.prototype.trim = function() {
             return this.replace(/^\s+|\s+$/g, '');
-          }
+          };
         }
 
         //angular 1.2 doesn't support attributes ending in "-start", so we're
