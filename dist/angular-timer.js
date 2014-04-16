@@ -1,10 +1,3 @@
-/**
- * angular-timer - v1.0.12 - 2014-03-18 4:02 PM
- * https://github.com/siddii/angular-timer
- *
- * Copyright (c) 2014 Siddique Hameed
- * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
- */
 angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
@@ -15,7 +8,8 @@ angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
-        autoStart: '&autoStart'
+        autoStart: '&autoStart',
+        finishCallback: '&finishCallback'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
@@ -112,13 +106,11 @@ angular.module('timer', [])
             $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
             $scope.daysS = $scope.days==1 ? '' : 's';
 
-
             //add leading zero if number is smaller than 10
             $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
             $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
             $scope.hhours =  $scope.hours < 10 ? '0' + $scope.hours : $scope.hours;
             $scope.ddays =  $scope.days < 10 ? '0' + $scope.days : $scope.days;
-
 
         }
         //determine initial values of time units and add AddSeconds functionality
@@ -162,6 +154,7 @@ angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
             return;
           }
           calculateTimeUnits();
@@ -179,6 +172,7 @@ angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
           }
         };
 

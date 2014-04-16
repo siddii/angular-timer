@@ -8,7 +8,8 @@ angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
-        autoStart: '&autoStart'
+        autoStart: '&autoStart',
+        finishCallback: '&finishCallback'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
@@ -153,6 +154,7 @@ angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
             return;
           }
           calculateTimeUnits();
@@ -170,6 +172,7 @@ angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
           }
         };
 

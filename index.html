@@ -181,6 +181,26 @@
     </div>
 </section>
 
+
+<section id="finish-callback-timer">
+    <h3>Countdown Finished Callback</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            A countdown timer that updates a value once the callback is reached
+            <code ng-non-bindable="">
+            &lt;timer countdown="3" interval="1000" finish-callback="callbackTimer.finished()"&gt;{{seconds}} second{{secondsS}}&lt;/timer&gt;
+            </code>
+
+        <h3 class="counter">
+            <timer countdown="3" interval="1000" finish-callback="callbackTimer.finished()">{{seconds}} second{{secondsS}} </timer>
+        </h3>
+        Timer: <span class="timer-status">{{callbackTimer.status}}</span>
+        Callbacks: <span class="timer-callbacks">{{callbackTimer.callbackCount}}</span>
+
+    </div>
+</section>
+
 <section id="markup">
     <h3>
         Markup</h3>

@@ -109,5 +109,17 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
     expect(element('#clock-timer-leading-zero timer').html()).toMatch(/11 seconds./);
   });
+  
+  it('Countdown finish - Should fire callback on completion', function () {
+  
+    
+    expect(element('#finish-callback-timer .timer-status').html()).toBe('Running');
+    expect(element('#finish-callback-timer .timer-callbacks').html()).toBe('0');
+    
+    sleep(5);
+    expect(element('#finish-callback-timer .timer-status').html()).toBe('COMPLETE!!');    
+    expect(element('#finish-callback-timer .timer-callbacks').html()).toBe('1');    
+    
+  });  
 
 });
