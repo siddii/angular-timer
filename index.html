@@ -181,6 +181,34 @@
     </div>
 </section>
 
+<section id="max-time-unit-countdown-timer">
+    <h3>countdown Time Display according to specified max Time Unit</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            This markup will display countdown time in minute and seconds only.  This attribute can be applied to regular clock timer as well.
+            <code ng-non-bindable="">
+            &lt;timer countdown="10041" max-time-unit="'minute'" interval="1000"&gt;{{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}&lt;/timer&gt;            
+            </code>
+        </p>
+
+        <p class="muted">countdown Time with max time unit option - minute</p>
+        <h3 class="WithMaxTimeUnitAsMinute">
+            <timer countdown="10041" max-time-unit="'minute'" interval="1000"> {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
+        </h3>
+
+        <p class="muted">countdown Time with max time unit option - second</p>
+        <h3 class="WithMaxTimeUnitAsSecond">
+            <timer countdown="10041" max-time-unit="'second'" interval="1000"> {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
+        </h3>
+        
+        <p class="muted">countdown Time without max time unit option - minute</p>
+        <h3 class="WithoutMaxTimeUnit">
+            <timer countdown="10041" interval="1000"> {{ddays}} day{{daysS}}, {{hhours}} hour{{hoursS}}, {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
+        </h3>
+    </div>
+</section>
+
 <section id="markup">
     <h3>
         Markup</h3>
@@ -266,6 +294,16 @@
                 false
             </td>
             <td>Sets the countdown based on predefined end time (in milliseconds).
+            </td>
+        </tr>
+        <tr>
+            <td>
+                max-time-unit
+            </td>
+            <td>
+                false
+            </td>
+            <td> no default value.   But you can give value,  'minute', 'second', or 'hour'. 
             </td>
         </tr>
         </tbody>
