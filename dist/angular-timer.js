@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.0.12 - 2014-04-20 7:17 PM
+ * angular-timer - v1.1.0 - 2014-04-20 7:46 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -19,6 +19,14 @@ angular.module('timer', [])
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
+
+        // Checking for trim function since IE8 doesn't have it
+        // If not a function, create tirm with RegEx to mimic native trim
+        if(typeof String.prototype.trim !== 'function') {
+          String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+          };
+        }
 
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
