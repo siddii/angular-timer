@@ -13,14 +13,6 @@ angular.module('timer', [])
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
-        // Checking for trim function since IE8 doesn't have it
-        // If not a function, create tirm with RegEx to mimic native trim
-        if(typeof String.prototype.trim !== 'function') {
-          String.prototype.trim = function() {
-            return this.replace(/^\s+|\s+$/g, '');
-          };
-        }
-
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.

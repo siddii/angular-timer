@@ -168,15 +168,13 @@
     <div class="bs-docs-example">
         <p>
             Two stopped countdown timers to illustrate how to handle pluralization of time units.
-        <code ng-non-bindable="">
+            <code ng-non-bindable="">
             &lt;timer autostart="false" countdown="90061"&gt;{{days}} day{{daysS}}, {{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.&lt;/timer&gt;
-        </code>
+            </code>
+
         <h3 class="singular-counter">
             <timer autostart="false" countdown="90061">{{days}} day{{daysS}}, {{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
         </h3>
-        <code ng-non-bindable="">
-        &lt;timer autostart="false" countdown="190061"&gt;{{days}} day{{daysS}}, {{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.&lt;/timer&gt;
-        </code>
         <h3 class="plural-counter">
             <timer autostart="false" countdown="190061">{{days}} day{{daysS}}, {{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
         </h3>
