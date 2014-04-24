@@ -23,6 +23,39 @@ describe('Angular Timer E2E Tests', function () {
     return totalSeconds(actualValue) > totalSeconds(futureValue);
   });
 
+  angular.scenario.matcher('toCompareWith', function(future) {
+    function getUnitValue (text, unitName) {
+      var arr = text.toLowerCase().match(/\w+/g), 
+          returnVal,
+          numInd= -1;
+      arr.every(function (item,index,list) {        
+          if(isNaN(item)) {
+            if(index===0) {
+              numInd=1;
+            }
+            if(item === unitName) {              
+              returnVal = list[index+numInd];
+              return false;
+            }
+          }
+          return true;        
+      });      
+      return returnVal;
+    }
+
+    var unitVal = getUnitValue(this.future.timerText.value,this.future.unit),  
+        compareResultFlag=false;        
+    if(this.future.compareTo === 'GreaterThan') {
+      compareResultFlag = Number(unitVal) > Number(future);
+    } else if(this.future.compareTo === 'LessThan') {
+      compareResultFlag = Number(unitVal) < Number(future);
+    } else if(this.future.compareTo === 'EqualTo') {
+      compareResultFlag = Number(unitVal) == Number(future);
+    }
+
+    return compareResultFlag;
+  });
+
   beforeEach(function () {
     if (window.location.host.indexOf("github.io") > -1) {
       browser().navigateTo('/angular-timer/index.html');
@@ -108,6 +141,18 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 hours,/);
     expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
     expect(element('#clock-timer-leading-zero timer').html()).toMatch(/11 seconds./);
+  });
+
+  it('Countdown timer with maxTimeUnit- should display time value from lower to specified maxTimeUnit', function() {
+    var timer1Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsMinute timer').text();
+
+    expect({'timerText': timer1Val, 'unit': 'minutes', 'compareTo': 'GreaterThan'}).toCompareWith(59);
+    expect({'timerText': timer1Val, 'unit': 'seconds', 'compareTo': 'LessThan'}).toCompareWith(60);
+
+    var timer2Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsSecond timer').text();
+    expect({'timerText': timer2Val, 'unit': 'minutes', 'compareTo': 'EqualTo'}).toCompareWith(0);
+    expect({'timerText': timer2Val, 'unit': 'seconds', 'compareTo': 'GreaterThan'}).toCompareWith(59);
+
   });
 
 });
