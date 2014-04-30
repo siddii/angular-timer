@@ -157,6 +157,16 @@ angular.module('timer', [])
               $scope.addCDSeconds(extraSeconds);
             });
           });
+
+          $scope.$on('timer-set-countdown-seconds', function(e, countdownSeconds) {
+            if (!$scope.isRunning) {
+              $scope.clear();
+            }
+
+            $scope.countdown = countdownSeconds;
+            $scope.millis = countdownSeconds * 1000;
+            calculateTimeUnits();
+          });
         } else {
           $scope.millis = 0;
         }
