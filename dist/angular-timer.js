@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.1 - 2014-05-17 3:24 AM
+ * angular-timer - v1.1.1 - 2014-05-17 3:54 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -154,8 +154,8 @@ angular.module('timer', [])
               $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
               $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
               $scope.days = Math.floor((($scope.millis / (3600000)) / 24) % 30); 
-              $scope.months = Math.floor(($scope.millis / (3600000)) / 24 / 30);
-              $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 30 / 12);
+              $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
+              $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
             }
             
             // plural - singular unit decision

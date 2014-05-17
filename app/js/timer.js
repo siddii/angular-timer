@@ -147,8 +147,8 @@ angular.module('timer', [])
               $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
               $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
               $scope.days = Math.floor((($scope.millis / (3600000)) / 24) % 30); 
-              $scope.months = Math.floor(($scope.millis / (3600000)) / 24 / 30);
-              $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 30 / 12);
+              $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
+              $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
             }
             
             // plural - singular unit decision
