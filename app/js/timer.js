@@ -86,8 +86,9 @@ angular.module('timer', [])
         };
 
         $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
+          var timeoutId = $scope.timeoutId;
           $scope.clear();
-          $scope.$emit('timer-stopped', {millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+          $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
         };
 
         $scope.clear = $element[0].clear = function () {
