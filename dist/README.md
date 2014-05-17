@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.1.1
+* Fix for #73
+
 ###Version 1.1.0
 * Plural/singular units. PR - https://github.com/siddii/angular-timer/pull/54
 * IE8 support. PR - https://github.com/siddii/angular-timer/pull/62
