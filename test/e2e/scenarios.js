@@ -153,6 +153,13 @@ describe('Angular Timer E2E Tests', function () {
     expect({'timerText': timer2Val, 'unit': 'minutes', 'compareTo': 'EqualTo'}).toCompareWith(0);
     expect({'timerText': timer2Val, 'unit': 'seconds', 'compareTo': 'GreaterThan'}).toCompareWith(59);
 
+    var timer3Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsYear timer').text();
+    expect({'timerText': timer3Val, 'unit': 'seconds', 'compareTo': 'LessThan'}).toCompareWith(60);
+    expect({'timerText': timer3Val, 'unit': 'minutes', 'compareTo': 'LessThan'}).toCompareWith(60);
+    expect({'timerText': timer3Val, 'unit': 'hours', 'compareTo': 'LessThan'}).toCompareWith(24);
+    expect({'timerText': timer3Val, 'unit': 'days', 'compareTo': 'LessThan'}).toCompareWith(30);
+    expect({'timerText': timer3Val, 'unit': 'months', 'compareTo': 'LessThan'}).toCompareWith(12);
+
   });
 
 });
