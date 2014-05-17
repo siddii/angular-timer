@@ -18,6 +18,10 @@
                 $scope.$broadcast('timer-stop');
                 $scope.timerRunning = false;
             };
+
+            $scope.$on('timer-stopped', function (event, args) {
+                console.log('timer-stopped args = ', args);
+            });
         }
         MyAppController.$inject = ['$scope'];
     </script>
