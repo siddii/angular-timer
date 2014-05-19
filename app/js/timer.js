@@ -40,9 +40,9 @@ angular.module('timer', [])
         $scope.isRunning = false;
 
         function executeOnTimerName (args, fn) {
-            if ($scope.timerName && args.timerName == $scope.timerName) {
-                fn();
-            }
+          if (!args || !args.timerName || ($scope.timerName && args.timerName == $scope.timerName)) {
+            fn();
+          }
         }
 
         $scope.$on('timer-start', function (evt, args) {
@@ -103,7 +103,7 @@ angular.module('timer', [])
         $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
           var timeoutId = $scope.timeoutId;
           $scope.clear();
-          $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+          $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days, timerName: $scope.timerName});
         };
 
         $scope.clear = $element[0].clear = function () {
@@ -243,7 +243,7 @@ angular.module('timer', [])
             $scope.$digest();
           }, $scope.interval - adjustment);
 
-          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
+          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis, timerName: $scope.timerName});
 
           if ($scope.countdown > 0) {
             $scope.countdown--;
