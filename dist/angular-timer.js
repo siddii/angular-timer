@@ -239,6 +239,7 @@ angular.module('timer', [])
 
           if ($scope.countdown > 0) {
             $scope.countdown--;
+                      $scope.countdownattr = String($scope.countdown);
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
