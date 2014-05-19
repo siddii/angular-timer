@@ -9,7 +9,8 @@ angular.module('timer', [])
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
         autoStart: '&autoStart',
-        maxTimeUnit: '='
+        maxTimeUnit: '=',
+        timerName: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
@@ -38,20 +39,34 @@ angular.module('timer', [])
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) >= 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
 
-        $scope.$on('timer-start', function () {
-          $scope.start();
+        function executeOnTimerName (args, fn) {
+            if ($scope.timerName && args.timerName == $scope.timerName) {
+                fn();
+            }
+        }
+
+        $scope.$on('timer-start', function (evt, args) {
+          executeOnTimerName(args, function() {
+              $scope.start();
+          });
         });
 
-        $scope.$on('timer-resume', function () {
-          $scope.resume();
+        $scope.$on('timer-resume', function (evt, args) {
+            executeOnTimerName(args, function() {
+                $scope.resume();
+            });
         });
 
-        $scope.$on('timer-stop', function () {
-          $scope.stop();
+        $scope.$on('timer-stop', function (evt, args) {
+            executeOnTimerName(args, function() {
+                $scope.stop();
+            });
         });
 
-        $scope.$on('timer-clear', function () {
-          $scope.clear();
+        $scope.$on('timer-clear', function (evt, args) {
+            executeOnTimerName(args, function() {
+                $scope.clear();
+            });
         });
 
         $scope.$on('timer-set-countdown', function (e, countdown) {
