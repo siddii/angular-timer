@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.1.3
+* Setting `countdownattr` value on `tick` - https://github.com/siddii/angular-timer/pull/78
+
 ###Version 1.1.2
 * Countdown time max-time-unit for month & year - https://github.com/siddii/angular-timer/pull/74
 
