@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.1.4
+* CommonJS Compliance - https://github.com/siddii/angular-timer/pull/80
+
 ###Version 1.1.3
 * Setting `countdownattr` value on `tick` - https://github.com/siddii/angular-timer/pull/78
 
