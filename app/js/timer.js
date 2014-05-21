@@ -1,4 +1,4 @@
-angular.module('timer', [])
+var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
       restrict: 'EAC',
@@ -246,3 +246,8 @@ angular.module('timer', [])
       }]
     };
   }]);
+
+/* commonjs package manager support (eg componentjs) */
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
+  module.exports = timerModule;
+}
