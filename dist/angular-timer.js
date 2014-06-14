@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.4 - 2014-05-21 6:24 PM
+ * angular-timer - v1.1.5 - 2014-06-14 7:52 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -240,7 +240,6 @@ var timerModule = angular.module('timer', [])
 
           if ($scope.countdown > 0) {
             $scope.countdown--;
-            $scope.countdownattr = $scope.countdown.toString();
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
