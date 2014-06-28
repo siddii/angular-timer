@@ -1,4 +1,4 @@
-var timerModule = angular.module('timer', [])
+angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
       restrict: 'EAC',
@@ -8,6 +8,7 @@ var timerModule = angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
+        finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         maxTimeUnit: '='
       },
@@ -219,6 +220,7 @@ var timerModule = angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
             return;
           }
           calculateTimeUnits();
@@ -236,6 +238,7 @@ var timerModule = angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
+            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
           }
         };
 
