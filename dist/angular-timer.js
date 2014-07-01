@@ -1,11 +1,11 @@
 /**
- * angular-timer - v1.1.6 - 2014-06-30 10:39 PM
+ * angular-timer - v1.1.6 - 2014-07-01 7:37 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
  * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
  */
-angular.module('timer', [])
+var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
       restrict: 'EAC',

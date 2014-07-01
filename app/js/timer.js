@@ -1,4 +1,4 @@
-angular.module('timer', [])
+var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
       restrict: 'EAC',
