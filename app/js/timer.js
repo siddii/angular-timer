@@ -220,7 +220,9 @@ angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
-            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
+            if($scope.finishCallback) {
+              $scope.$eval($scope.finishCallback);
+            }
             return;
           }
           calculateTimeUnits();
@@ -238,7 +240,9 @@ angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
-            if($scope.finishCallback) $scope.$eval($scope.finishCallback);
+            if($scope.finishCallback) {
+              $scope.$eval($scope.finishCallback);
+            }
           }
         };
 
