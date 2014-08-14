@@ -253,6 +253,7 @@ var timerModule = angular.module('timer', [])
           }
         };
 
+        $scope.autoStart = $scope.$eval($scope.autoStart);
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
           $scope.start();
         }
