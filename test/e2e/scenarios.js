@@ -155,6 +155,10 @@ describe('Angular Timer E2E Tests', function () {
     
   });  
 
+  it('Start time with auto start', function() {
+    expect(element('#start-time-and-auto-start-set timer span').html()).toBeGreaterThan(1000);
+  });
+
   it('Countdown timer with maxTimeUnit- should display time value from lower to specified maxTimeUnit', function() {
     var timer1Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsMinute timer').text();
 
