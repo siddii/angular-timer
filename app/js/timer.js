@@ -39,7 +39,7 @@ var timerModule = angular.module('timer', [])
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) >= 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
 
-        $scope.$on('timer-start', function (startTime) {
+        $scope.$on('timer-start', function (e, startTime) {
           $scope.start(startTime);
         });
 
