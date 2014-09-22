@@ -9,7 +9,7 @@ var timerModule = angular.module('timer', [])
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
-        autoStart: '&autoStart',
+        autoStart: '=autostart',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
@@ -25,7 +25,7 @@ var timerModule = angular.module('timer', [])
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
-        $scope.autoStart = $attrs.autoStart || $attrs.autostart;
+        //$scope.autoStart = $attrs.autoStart || $attrs.autostart; 
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
