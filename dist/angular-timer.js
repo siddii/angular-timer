@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.6 - 2014-07-01 7:37 AM
+ * angular-timer - v1.1.6 - 2014-09-23 9:11 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -46,8 +46,8 @@ var timerModule = angular.module('timer', [])
         $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) >= 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
 
-        $scope.$on('timer-start', function () {
-          $scope.start();
+        $scope.$on('timer-start', function (e, startTime) {
+          $scope.start(startTime);
         });
 
         $scope.$on('timer-resume', function () {
@@ -66,14 +66,22 @@ var timerModule = angular.module('timer', [])
           $scope.countdown = countdown;
         });
 
+        $scope.$on('timer-set-startTime', function (e, startTime) {
+          $scope.startTimeAttr = startTime;
+        });
+
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
           }
         }
 
-        $scope.start = $element[0].start = function () {
-          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
+        $scope.start = $element[0].start = function (startTime) {
+          if (startTime) {
+            $scope.startTime = new Date(startTime);
+          } else {
+            $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
+          }
           $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
           if (!$scope.countdown) {
             $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
@@ -113,7 +121,9 @@ var timerModule = angular.module('timer', [])
         });
 
         function calculateTimeUnits() {
-
+          if ($attrs.startTime !== undefined){
+            $scope.millis = new Date() - new Date($scope.startTimeAttr);
+          }
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
@@ -158,7 +168,6 @@ var timerModule = angular.module('timer', [])
             $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
             $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
           }
-
           // plural - singular unit decision
           $scope.secondsS = $scope.seconds == 1 ? '' : 's';
           $scope.minutesS = $scope.minutes == 1 ? '' : 's';
