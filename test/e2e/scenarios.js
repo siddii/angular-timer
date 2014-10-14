@@ -25,26 +25,26 @@ describe('Angular Timer E2E Tests', function () {
 
   angular.scenario.matcher('toCompareWith', function(future) {
     function getUnitValue (text, unitName) {
-      var arr = text.toLowerCase().match(/\w+/g), 
+      var arr = text.toLowerCase().match(/\w+/g),
           returnVal,
           numInd= -1;
-      arr.every(function (item,index,list) {        
+      arr.every(function (item,index,list) {
           if(isNaN(item)) {
             if(index===0) {
               numInd=1;
             }
-            if(item === unitName) {              
+            if(item === unitName) {
               returnVal = list[index+numInd];
               return false;
             }
           }
-          return true;        
-      });      
+          return true;
+      });
       return returnVal;
     }
 
-    var unitVal = getUnitValue(this.future.timerText.value,this.future.unit),  
-        compareResultFlag=false;        
+    var unitVal = getUnitValue(this.future.timerText.value,this.future.unit),
+        compareResultFlag=false;
     if(this.future.compareTo === 'GreaterThan') {
       compareResultFlag = Number(unitVal) > Number(future);
     } else if(this.future.compareTo === 'LessThan') {
@@ -90,9 +90,9 @@ describe('Angular Timer E2E Tests', function () {
 
   it('Clock Timer - with hours, minutes & seconds', function () {
     sleep(3);
-    expect(element('#clock-timer timer').html()).toMatch(/0 hours,/);
-    expect(element('#clock-timer timer').html()).toMatch(/0 minutes,/);
-    expect(element('#clock-timer timer').html()).not().toMatch(/0 seconds./);
+    expect(element('#clock-timer timer').text()).toMatch(/0 hour/);
+    expect(element('#clock-timer timer').text()).toMatch(/0 minute/);
+    expect(element('#clock-timer timer').text()).toMatch(/3 seconds./); //because of sleep(3);
   });
 
   it('Countdown Timer - Starts from 100', function () {
@@ -124,37 +124,34 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 day,/);
     expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 hour,/);
     expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 minute,/);
-    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 second/);  
-    
+    expect(element('#plural-unit-timer .singular-counter timer').html()).toMatch(/1 second/);
+
     expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/days,/);
     expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/hours,/);
     expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/minutes,/);
-    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/seconds/);      
-  });  
+    expect(element('#plural-unit-timer .plural-counter timer').html()).toMatch(/seconds/);
+  });
 
-// Commenting to see if build pass
-//  it('Leading zero timer - should add a leading zero if number is smaller than 10', function() {
-//    sleep(1);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 hours,/);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/01 seconds./);
-//    sleep(10);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 hours,/);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/00 minutes,/);
-//    expect(element('#clock-timer-leading-zero timer').html()).toMatch(/11 seconds./);
-//  });
-  
+  it('Leading zero timer - should add a leading zero if number is smaller than 10', function() {
+    sleep(1);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hour,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minute,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/01 second/);
+    sleep(10);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hour,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minute,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/11 seconds/);
+  });
+
   it('Countdown finish - Should fire callback on completion', function () {
-  
-    
     expect(element('#finish-callback-timer .timer-status').html()).toBe('Running');
     expect(element('#finish-callback-timer .timer-callbacks').html()).toBe('0');
-    
+
     sleep(5);
-    expect(element('#finish-callback-timer .timer-status').html()).toBe('COMPLETE!!');    
-    expect(element('#finish-callback-timer .timer-callbacks').html()).toBe('1');    
-    
-  });  
+    expect(element('#finish-callback-timer .timer-status').html()).toBe('COMPLETE!!');
+    expect(element('#finish-callback-timer .timer-callbacks').html()).toBe('1');
+
+  });
 
   it('Start time with auto start', function() {
     expect(element('#start-time-and-auto-start-set timer span').html()).toBeGreaterThan(1000);
@@ -162,21 +159,30 @@ describe('Angular Timer E2E Tests', function () {
 
   it('Countdown timer with maxTimeUnit- should display time value from lower to specified maxTimeUnit', function() {
     var timer1Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsMinute timer').text();
-
-    expect({'timerText': timer1Val, 'unit': 'minutes', 'compareTo': 'GreaterThan'}).toCompareWith(59);
-    expect({'timerText': timer1Val, 'unit': 'seconds', 'compareTo': 'LessThan'}).toCompareWith(60);
+    expect(timer1Val).toMatch(/minutes/);
+    expect(timer1Val).toMatch(/167/);
+    expect(timer1Val).toMatch(/seconds/);
+    expect(timer1Val).toMatch(/21/);
 
     var timer2Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsSecond timer').text();
-    expect({'timerText': timer2Val, 'unit': 'minutes', 'compareTo': 'EqualTo'}).toCompareWith(0);
-    expect({'timerText': timer2Val, 'unit': 'seconds', 'compareTo': 'GreaterThan'}).toCompareWith(59);
+    expect(timer2Val).toMatch(/minute/);
+    expect(timer2Val).toMatch(/0/);
+    expect(timer2Val).toMatch(/seconds/);
+    expect(timer2Val).toMatch(/10041/);
 
     var timer3Val = element('#max-time-unit-countdown-timer .WithMaxTimeUnitAsYear timer').text();
-    expect({'timerText': timer3Val, 'unit': 'seconds', 'compareTo': 'LessThan'}).toCompareWith(60);
-    expect({'timerText': timer3Val, 'unit': 'minutes', 'compareTo': 'LessThan'}).toCompareWith(60);
-    expect({'timerText': timer3Val, 'unit': 'hours', 'compareTo': 'LessThan'}).toCompareWith(24);
-    expect({'timerText': timer3Val, 'unit': 'days', 'compareTo': 'LessThan'}).toCompareWith(30);
-    expect({'timerText': timer3Val, 'unit': 'months', 'compareTo': 'LessThan'}).toCompareWith(12);
-
+    expect(timer3Val).toMatch(/years/);
+    expect(timer3Val).toMatch(/03/);
+    expect(timer3Val).toMatch(/months/);
+    expect(timer3Val).toMatch(/02/);
+    expect(timer3Val).toMatch(/days/);
+    expect(timer3Val).toMatch(/22/);
+    expect(timer3Val).toMatch(/hours/);
+    expect(timer3Val).toMatch(/03/);
+    expect(timer3Val).toMatch(/minute/);
+    expect(timer3Val).toMatch(/40/);
+    expect(timer3Val).toMatch(/second/);
+    expect(timer3Val).toMatch(/00/);
   });
 
 });
