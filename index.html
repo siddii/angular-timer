@@ -54,7 +54,7 @@
 
     <div class="bs-docs-example">
         <p>This will start a timer with 1410914940000 milliseconds and stopped</p>
-        
+
         <h3>
             <timer start-time="1410914940000" autostart="false"></timer>
         </h3>
@@ -66,11 +66,11 @@
 
     <div class="bs-docs-example">
         <p>
-            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hours, {{minutes}}
-            minutes, {{seconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second</p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hours}} hour{{hoursS}}, {{minutes}}
+            minute{{minutesS}}, {{seconds}} second{{secondsS}}.&lt;/timer&gt;</code> will run the clock timer ticking every second</p>
 
         <h3>
-            <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+            <timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
     </div>
@@ -81,11 +81,11 @@
 
     <div class="bs-docs-example">
         <p>
-            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hhours}} hours, {{mminutes}}
-            minutes, {{sseconds}} seconds.&lt;/timer&gt;</code> will run the clock timer ticking every second with an additional zero at the beginning if unit is smaller than 10</p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot;&gt;{{hhours}} hour{{hhoursS}}, {{mminutes}}
+            minute{{minutesS}}, {{sseconds}} second{{secondsS}}.&lt;/timer&gt;</code> will run the clock timer ticking every second with an additional zero at the beginning if unit is smaller than 10</p>
 
         <h3>
-            <timer interval="1000">{{hhours}} hours, {{mminutes}} minutes, {{sseconds}} seconds.</timer>
+            <timer interval="1000">{{hhours}} hour{{hoursS}}, {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer-leading-zero', this)" type="button">Stop</button>
     </div>
@@ -201,7 +201,7 @@
         <p>
             This markup will display countdown time in minute and seconds only.  This attribute can be applied to regular clock timer as well.
             <code ng-non-bindable="">
-            &lt;timer countdown="10041" max-time-unit="'minute'" interval="1000"&gt;{{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}&lt;/timer&gt;            
+            &lt;timer countdown="10041" max-time-unit="'minute'" interval="1000"&gt;{{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}&lt;/timer&gt;
             </code>
         </p>
         <p class="muted">countdown Time with max time unit option - year</p>
@@ -217,7 +217,7 @@
         <h3 class="WithMaxTimeUnitAsSecond">
             <timer countdown="10041" max-time-unit="'second'" interval="1000"> {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
         </h3>
-        
+
         <p class="muted">countdown Time without max time unit option - minute</p>
         <h3 class="WithoutMaxTimeUnit">
             <timer countdown="10041" interval="1000"> {{ddays}} day{{daysS}}, {{hhours}} hour{{hoursS}}, {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
@@ -339,7 +339,7 @@
             <td>
                 false
             </td>
-            <td> no default value.   But you can give value,  'minute', 'second', or 'hour'. 
+            <td> no default value.   But you can give value,  'minute', 'second', or 'hour'.
             </td>
         </tr>
         </tbody>
