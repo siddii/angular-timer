@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.1.8
+* Fix for issue https://github.com/siddii/angular-timer/issues/117 (0 minute display 0 minutes)
+
 ###Version 1.1.7
 * Fix for https://github.com/siddii/angular-timer/issues/101 (start-time doesn't work in combination with autostart)
 
