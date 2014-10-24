@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.6 - 2014-07-01 7:37 AM
+ * angular-timer - v1.1.8 - 2014-10-24 3:55 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -113,7 +113,9 @@ var timerModule = angular.module('timer', [])
         });
 
         function calculateTimeUnits() {
-
+          if ($attrs.startTime !== undefined){
+            $scope.millis = new Date() - new Date($scope.startTimeAttr);
+          }
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
@@ -158,14 +160,13 @@ var timerModule = angular.module('timer', [])
             $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
             $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
           }
-
           // plural - singular unit decision
-          $scope.secondsS = $scope.seconds == 1 ? '' : 's';
-          $scope.minutesS = $scope.minutes == 1 ? '' : 's';
-          $scope.hoursS = $scope.hours == 1 ? '' : 's';
-          $scope.daysS = $scope.days == 1 ? '' : 's';
-          $scope.monthsS = $scope.months == 1 ? '' : 's';
-          $scope.yearsS = $scope.years == 1 ? '' : 's';
+          $scope.secondsS = ($scope.seconds === 1 || $scope.seconds === 0) ? '' : 's';
+          $scope.minutesS = ($scope.minutes === 1 || $scope.minutes === 0) ? '' : 's';
+          $scope.hoursS = ($scope.hours === 1 || $scope.hours === 0) ? '' : 's';
+          $scope.daysS = ($scope.days === 1 || $scope.days === 0)? '' : 's';
+          $scope.monthsS = ($scope.months === 1 || $scope.months === 0)? '' : 's';
+          $scope.yearsS = ($scope.years === 1 || $scope.years === 0)? '' : 's';
           //add leading zero if number is smaller than 10
           $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
           $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
