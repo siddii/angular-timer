@@ -58,11 +58,11 @@ var timerModule = angular.module('timer', [])
           $scope.countdown = countdown;
         });
         
-        $scope.$on('timer-set-value', function (e, millis) {
+        $scope.$on('timer-set-value', function (e, seconds) {
           if ($scope.countdownattr) {
-            $scope.countdown = millis;
+            $scope.countdown = seconds;
           } else {
-            $scope.startTime = new Date() - (millis * 1000);
+            $scope.startTime = new Date() - (seconds * 1000);
           }
         });
 
