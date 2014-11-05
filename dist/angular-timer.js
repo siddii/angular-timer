@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.5 - 2014-06-14 7:52 AM
+ * angular-timer - v1.1.6 - 2014-07-01 7:37 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -15,11 +15,12 @@ var timerModule = angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
+        finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
-
+        console.log($scope.interval);
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
         if (typeof String.prototype.trim !== 'function') {
@@ -72,7 +73,7 @@ var timerModule = angular.module('timer', [])
             $scope.startTime = new Date() - (seconds * 1000);
           }
         });
-        
+
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
@@ -227,13 +228,16 @@ var timerModule = angular.module('timer', [])
 
 
           if ($scope.countdownattr) {
-            $scope.millis = $scope.countdown * 1000;
+            $scope.millis = Math.round(($scope.countdown * 1000 - $scope.millis) / 1000) * 1000;
           }
 
           if ($scope.millis < 0) {
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            if($scope.finishCallback) {
+              $scope.$eval($scope.finishCallback);
+            }
             return;
           }
           calculateTimeUnits();
@@ -245,13 +249,6 @@ var timerModule = angular.module('timer', [])
           }, $scope.interval - adjustment);
 
           $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
-
-          if ($scope.countdown > 0) {
-            $scope.countdown--;
-          }
-          else if ($scope.countdown <= 0) {
-            $scope.stop();
-          }
         };
 
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
