@@ -17,5 +17,8 @@
       "angular-mocks": ">= 1.0.7"
   },
   "main": "./dist/angular-timer.js",
-  "ignore": ["./node_modules/", "./bower_components/"]
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ]
 }
