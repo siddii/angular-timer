@@ -68,7 +68,7 @@ var timerModule = angular.module('timer', [])
 
         $scope.$on('timer-set-value', function (e, seconds) {
           if ($scope.countdownattr) {
-            $scope.countdown = seconds;
+            $scope.countdown = $scope.countdown - ($scope.millis / 1000 - seconds);
           } else {
             $scope.startTime = new Date() - (seconds * 1000);
           }
