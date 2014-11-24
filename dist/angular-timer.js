@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.8 - 2014-10-24 3:55 PM
+ * angular-timer - v1.1.9 - 2014-11-23 7:22 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -8,7 +8,7 @@
 var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
-      restrict: 'EAC',
+      restrict: 'EA',
       replace: false,
       scope: {
         interval: '=interval',

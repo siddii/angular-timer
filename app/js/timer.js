@@ -1,7 +1,7 @@
 var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
-      restrict: 'EAC',
+      restrict: 'EA',
       replace: false,
       scope: {
         interval: '=interval',
