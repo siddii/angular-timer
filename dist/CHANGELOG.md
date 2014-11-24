@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.1.9
+* Fix for issue https://github.com/siddii/angular-timer/issues/128 (Remove class scoping on `timer` directive)
+
 ###Version 1.1.8
 * Fix for issue https://github.com/siddii/angular-timer/issues/117 (0 minute display 0 minutes)
 
