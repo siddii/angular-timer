@@ -90,8 +90,8 @@ describe('Angular Timer E2E Tests', function () {
 
   it('Clock Timer - with hours, minutes & seconds', function () {
     sleep(3);
-    expect(element('#clock-timer timer').text()).toMatch(/0 hour/);
-    expect(element('#clock-timer timer').text()).toMatch(/0 minute/);
+    expect(element('#clock-timer timer').text()).toMatch(/0 hours/);
+    expect(element('#clock-timer timer').text()).toMatch(/0 minutes/);
     expect(element('#clock-timer timer').text()).toMatch(/3 seconds./); //because of sleep(3);
   });
 
@@ -134,12 +134,12 @@ describe('Angular Timer E2E Tests', function () {
 
   it('Leading zero timer - should add a leading zero if number is smaller than 10', function() {
     sleep(1);
-    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hour,/);
-    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minute,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hours,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minutes,/);
     expect(element('#clock-timer-leading-zero timer').text()).toMatch(/01 second/);
     sleep(10);
-    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hour,/);
-    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minute,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 hours,/);
+    expect(element('#clock-timer-leading-zero timer').text()).toMatch(/00 minutes,/);
     expect(element('#clock-timer-leading-zero timer').text()).toMatch(/11 seconds/);
   });
 

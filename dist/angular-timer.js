@@ -160,13 +160,20 @@ var timerModule = angular.module('timer', [])
             $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
             $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
           }
-          // plural - singular unit decision
-          $scope.secondsS = ($scope.seconds === 1 || $scope.seconds === 0) ? '' : 's';
-          $scope.minutesS = ($scope.minutes === 1 || $scope.minutes === 0) ? '' : 's';
-          $scope.hoursS = ($scope.hours === 1 || $scope.hours === 0) ? '' : 's';
-          $scope.daysS = ($scope.days === 1 || $scope.days === 0)? '' : 's';
-          $scope.monthsS = ($scope.months === 1 || $scope.months === 0)? '' : 's';
-          $scope.yearsS = ($scope.years === 1 || $scope.years === 0)? '' : 's';
+          // plural - singular unit decision (old syntax, for backwards compatibility and English only, could be deprecated!)
+          $scope.secondsS = ($scope.seconds === 1) ? '' : 's';
+          $scope.minutesS = ($scope.minutes === 1) ? '' : 's';
+          $scope.hoursS = ($scope.hours === 1) ? '' : 's';
+          $scope.daysS = ($scope.days === 1)? '' : 's';
+          $scope.monthsS = ($scope.months === 1)? '' : 's';
+          $scope.yearsS = ($scope.years === 1)? '' : 's';
+          // new plural-singular unit decision functions (for custom units and multilingual support)
+          $scope.secondUnit = function(singleSecond, pluralSecond){if($scope.seconds === 1){if(singleSecond){return singleSecond;} return 'second';} if(pluralSecond){return pluralSecond;} return 'seconds';};
+          $scope.minuteUnit = function(singleMinute, pluralMinute){if($scope.minutes === 1){if(singleMinute){return singleMinute;} return 'minute';} if(pluralMinute){return pluralMinute;} return 'minutes';};
+          $scope.hourUnit = function(singleHour, pluralHour){if($scope.hours === 1){if(singleHour){return singleHour;} return 'hour';} if(pluralHour){return pluralHour;} return 'hours';};
+          $scope.dayUnit = function(singleDay, pluralDay){if($scope.days === 1){if(singleDay){return singleDay;} return 'day';} if(pluralDay){return pluralDay;} return 'days';};
+          $scope.monthUnit = function(singleMonth, pluralMonth){if($scope.months === 1){if(singleMonth){return singleMonth;} return 'month';} if(pluralMonth){return pluralMonth;} return 'months';};
+          $scope.yearUnit = function(singleYear, pluralYear){if($scope.years === 1){if(singleYear){return singleYear;} return 'year';} if(pluralYear){return pluralYear;} return 'years';};
           //add leading zero if number is smaller than 10
           $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
           $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
