@@ -160,7 +160,7 @@ var timerModule = angular.module('timer', [])
             $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
             $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
           }
-          // plural - singular unit decision (old syntax, for backwards compatibility and English only)
+          // plural - singular unit decision (old syntax, for backwards compatibility and English only, could be deprecated!)
           $scope.secondsS = ($scope.seconds === 1) ? '' : 's';
           $scope.minutesS = ($scope.minutes === 1) ? '' : 's';
           $scope.hoursS = ($scope.hours === 1) ? '' : 's';
