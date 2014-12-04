@@ -11,7 +11,8 @@ var timerModule = angular.module('timer', [])
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         maxTimeUnit: '=',
-        countdown: '='
+        countdown: '=',
+        endTime: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 

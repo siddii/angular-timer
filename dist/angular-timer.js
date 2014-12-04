@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.1.9 - 2014-12-04 1:00 PM
+ * angular-timer - v1.1.9 - 2014-12-04 2:58 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -18,7 +18,8 @@ var timerModule = angular.module('timer', [])
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         maxTimeUnit: '=',
-        countdown: '='
+        countdown: '=',
+        endTime: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
