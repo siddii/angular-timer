@@ -16,13 +16,5 @@ Following command will run both unit & End-to-End (e2e) tests
 grunt tests
 ```
 
-## Examples
+### Examples
 There are some examples on the index page http://siddii.github.io/angular-timer/index.html. Please go over them to get an understanding on how this module works.
-
-
-
-
-
-
-
-
