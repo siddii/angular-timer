@@ -10,7 +10,9 @@ var timerModule = angular.module('timer', [])
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
-        maxTimeUnit: '='
+        maxTimeUnit: '=',
+        countdown: '=',
+        endTime: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
 
