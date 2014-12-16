@@ -1,5 +1,8 @@
 ##Change Log
 
+###Version 1.2.0
+* Reset method https://github.com/siddii/angular-timer/pull/46
+
 ###Version 1.1.9
 * Fix for issue https://github.com/siddii/angular-timer/issues/128 (Remove class scoping on `timer` directive)
 
