@@ -69,6 +69,18 @@ var timerModule = angular.module('timer', [])
           }
         }
 
+        $scope.$watch('startTimeAttr', function(newValue, oldValue) {
+          if (newValue !== oldValue && $scope.isRunning) {
+            $scope.start();
+          }
+        });
+
+        $scope.$watch('endTimeAttr', function(newValue, oldValue) {
+          if (newValue !== oldValue && $scope.isRunning) {
+            $scope.start();
+          }
+        });
+
         $scope.start = $element[0].start = function () {
           $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
           $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
