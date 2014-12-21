@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.2.0 - 2014-12-15 6:34 PM
+ * angular-timer - v1.2.0 - 2014-12-21 10:49 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2014 Siddique Hameed
@@ -15,11 +15,73 @@ var timerModule = angular.module('timer', [])
         startTimeAttr: '=startTime',
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
-        finishCallback: '&finishCallback',
+        finishCallback: '=finishCallback',
         autoStart: '&autoStart',
         maxTimeUnit: '='
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {    
+
+        var start = function () {
+          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
+          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
+          if (!$scope.countdown) {
+            $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          }
+          resetTimeout();
+          tick();
+          $scope.isRunning = true;
+        };   
+
+        var resume = function () {
+          resetTimeout();
+          if ($scope.countdownattr) {
+            $scope.countdown += 1;
+          }
+          $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
+          tick();
+          $scope.isRunning = true;
+        };
+
+        var pause = function () {
+          var timeoutId = $scope.timeoutId;
+          $scope.clear();
+          $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
+        };
+
+        var clear = function () {
+          // same as stop but without the event being triggered
+          $scope.stoppedTime = new Date();
+          resetTimeout();
+          $scope.timeoutId = null;
+          $scope.isRunning = false;
+        };
+
+        var reset = function () {
+          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
+          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
+          $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
+          resetTimeout();
+          tick();
+          $scope.isRunning = false;
+          $scope.clear();
+        };
+
+        var addCDSeconds = function (extraSeconds) {
+          $scope.countdown += extraSeconds;
+          $scope.$digest();
+          if (!$scope.isRunning) {
+            $scope.start();
+          }
+        };
+
+        function TimerHelper() {}
+        TimerHelper.prototype.start = start;
+        TimerHelper.prototype.resume = resume;
+        TimerHelper.prototype.pause = pause;
+        TimerHelper.prototype.clear = clear;
+        TimerHelper.prototype.reset = reset;
+        TimerHelper.prototype.addCDSeconds = addCDSeconds;
+
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -76,50 +138,11 @@ var timerModule = angular.module('timer', [])
           }
         }
 
-        $scope.start = $element[0].start = function () {
-          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
-          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
-          if (!$scope.countdown) {
-            $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
-          }
-          resetTimeout();
-          tick();
-          $scope.isRunning = true;
-        };
-
-        $scope.resume = $element[0].resume = function () {
-          resetTimeout();
-          if ($scope.countdownattr) {
-            $scope.countdown += 1;
-          }
-          $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
-          tick();
-          $scope.isRunning = true;
-        };
-
-        $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
-          var timeoutId = $scope.timeoutId;
-          $scope.clear();
-          $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
-        };
-
-        $scope.clear = $element[0].clear = function () {
-          // same as stop but without the event being triggered
-          $scope.stoppedTime = new Date();
-          resetTimeout();
-          $scope.timeoutId = null;
-          $scope.isRunning = false;
-        };
-
-        $scope.reset = $element[0].reset = function () {
-          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
-          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
-          $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
-          resetTimeout();
-          tick();
-          $scope.isRunning = false;
-          $scope.clear();
-        };
+        $scope.start = $element[0].start = start;
+        $scope.resume = $element[0].resume = resume;
+        $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = pause;
+        $scope.clear = $element[0].clear = clear;
+        $scope.reset = $element[0].reset = reset;
         
         $element.bind('$destroy', function () {
           resetTimeout();
@@ -202,13 +225,7 @@ var timerModule = angular.module('timer', [])
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
 
-          $scope.addCDSeconds = $element[0].addCDSeconds = function (extraSeconds) {
-            $scope.countdown += extraSeconds;
-            $scope.$digest();
-            if (!$scope.isRunning) {
-              $scope.start();
-            }
-          };
+          $scope.addCDSeconds = $element[0].addCDSeconds = addCDSeconds;
 
           $scope.$on('timer-add-cd-seconds', function (e, extraSeconds) {
             $timeout(function () {
@@ -250,7 +267,7 @@ var timerModule = angular.module('timer', [])
             $scope.millis = 0;
             calculateTimeUnits();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              $scope.finishCallback(new TimerHelper());
             }
             return;
           }
@@ -270,7 +287,7 @@ var timerModule = angular.module('timer', [])
           else if ($scope.countdown <= 0) {
             $scope.stop();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              $scope.finishCallback(new TimerHelper());
             }
           }
         };
