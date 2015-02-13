@@ -9,12 +9,13 @@
     "url": "git://github.com/siddii/angular-timer.git"
   },
   "dependencies": {
-    "angular": ">= 1.0.7"
+    "angular": ">= 1.0.7",
+    "momentjs": "~2.9.0"
   },
   "devDependencies": {
-      "bootstrap": "2.3.2",
-      "angular-scenario": ">= 1.0.7",
-      "angular-mocks": ">= 1.0.7"
+    "bootstrap": "2.3.2",
+    "angular-scenario": ">= 1.0.7",
+    "angular-mocks": ">= 1.0.7"
   },
   "main": "./dist/angular-timer.js",
   "ignore": [
