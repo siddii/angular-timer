@@ -10,6 +10,7 @@ var timerModule = angular.module('timer', [])
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
+        language: '=?language',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
@@ -26,6 +27,13 @@ var timerModule = angular.module('timer', [])
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
+
+
+        //init momentJS i18n, default english
+        $scope.language = $attrs.language || 'en';
+        console.log("$scope.language", $scope.language);
+
+        moment.locale($scope.language);
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -54,11 +62,11 @@ var timerModule = angular.module('timer', [])
         $scope.$on('timer-clear', function () {
           $scope.clear();
         });
-        
+
         $scope.$on('timer-reset', function () {
           $scope.reset();
         });
-        
+
         $scope.$on('timer-set-countdown', function (e, countdown) {
           $scope.countdown = countdown;
         });
@@ -76,8 +84,8 @@ var timerModule = angular.module('timer', [])
         });
 
         $scope.start = $element[0].start = function () {
-          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
-          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
+          $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
+          $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
           if (!$scope.countdown) {
             $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           }
@@ -91,7 +99,7 @@ var timerModule = angular.module('timer', [])
           if ($scope.countdownattr) {
             $scope.countdown += 1;
           }
-          $scope.startTime = new Date() - ($scope.stoppedTime - $scope.startTime);
+          $scope.startTime = moment().diff((moment($scope.stoppedTime).diff(moment($scope.startTime))));
           tick();
           $scope.isRunning = true;
         };
@@ -104,22 +112,22 @@ var timerModule = angular.module('timer', [])
 
         $scope.clear = $element[0].clear = function () {
           // same as stop but without the event being triggered
-          $scope.stoppedTime = new Date();
+          $scope.stoppedTime = moment();
           resetTimeout();
           $scope.timeoutId = null;
           $scope.isRunning = false;
         };
 
         $scope.reset = $element[0].reset = function () {
-          $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
-          $scope.endTime = $scope.endTimeAttr ? new Date($scope.endTimeAttr) : null;
+          $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
+          $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
           $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           resetTimeout();
           tick();
           $scope.isRunning = false;
           $scope.clear();
         };
-        
+
         $element.bind('$destroy', function () {
           resetTimeout();
           $scope.isRunning = false;
@@ -127,7 +135,7 @@ var timerModule = angular.module('timer', [])
 
         function calculateTimeUnits() {
           if ($attrs.startTime !== undefined){
-            $scope.millis = new Date() - new Date($scope.startTimeAttr);
+            $scope.millis = moment().diff(moment($scope.startTimeAttr));
           }
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
@@ -229,13 +237,13 @@ var timerModule = angular.module('timer', [])
         }
         calculateTimeUnits();
 
-        var tick = function () {
+        var tick = function tick() {
 
-          $scope.millis = new Date() - $scope.startTime;
+          $scope.millis = moment().diff($scope.startTime);
           var adjustment = $scope.millis % 1000;
 
           if ($scope.endTimeAttr) {
-            $scope.millis = $scope.endTime - new Date();
+            $scope.millis = moment($scope.endTime).diff(moment());
             adjustment = $scope.interval - $scope.millis % 1000;
           }
 
@@ -277,9 +285,9 @@ var timerModule = angular.module('timer', [])
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
           $scope.start();
         }
-      }]
+      }],
     };
-  }]);
+    }]);
 
 /* commonjs package manager support (eg componentjs) */
 if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
