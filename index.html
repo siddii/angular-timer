@@ -13,6 +13,7 @@
     <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
     <script src="bower_components/momentjs/min/moment.min.js"></script>
     <script src="bower_components/momentjs/min/locales.min.js"></script>
+    <script src="bower_components/humanize-duration/humanize-duration.js"></script>
     <script src="app/js/timer.js"></script>
     <script src="docs/docs.js"></script>
 </head>
@@ -75,6 +76,29 @@
             <timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
+    </div>
+</section>
+<section id="clock-timer-i18n">
+    <h3>
+        Timer with hours, minutes &amp; seconds i18n</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; language=&quot;fr&quot; &gt;{{fullUnit}}</code> will run the clock timer ticking every second
+        </p>
+        <p>
+            Based on <a href="https://github.com/EvanHahn/HumanizeDuration.js">HumanizeDuration</a> with 17 languages available.
+        </p>
+
+        <h3>Spanish</h3>
+        <h4>Year max unit time : <timer interval="1000" language="es">{{fullUnit}}</timer></h4>
+        <h4>Hour max unit time: <timer interval="1000" language="es">{{hourUnit}}</timer></h4>
+        <h4>Second max unit time: <timer interval="1000" language="es">{{secondUnit}}</timer></h4>
+        
+        <h3>French</h3>
+        <h4>Year max unit time : <timer interval="1000" language="fr">{{fullUnit}}</timer></h4>
+        <h4>Hour max unit time: <timer interval="1000" language="fr">{{hourUnit}}</timer></h4>
+        <h4>Second max unit time: <timer interval="1000" language="fr">{{secondUnit}}</timer></h4>
     </div>
 </section>
 <section id="clock-timer-leading-zero">

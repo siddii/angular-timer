@@ -28,12 +28,14 @@ var timerModule = angular.module('timer', [])
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
 
-
         //init momentJS i18n, default english
         $scope.language = $attrs.language || 'en';
         console.log("$scope.language", $scope.language);
 
         moment.locale($scope.language);
+        var timeHumanizer = humanizeDuration.humanizer({
+          language: $scope.language
+        });
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -133,10 +135,38 @@ var timerModule = angular.module('timer', [])
           $scope.isRunning = false;
         });
 
+        /**
+         * get time with units from momentJS i18n
+         * @param {int} millis
+         * @returns {{millis: string, seconds: string, minutes: string, hours: string, days: string, months: string, years: string}}
+         */
+        function getTimeUnits(millis) {
+          var diffFromAlarm = Math.round(millis/1000) * 1000; //time in milliseconds, get rid of the last 3 ms value to avoid 2.12 seconds display
+
+          var time = {
+            'millis' : timeHumanizer(diffFromAlarm, { units: ["milliseconds"] }),
+            'seconds' : timeHumanizer(diffFromAlarm, { units: ["seconds"] }),
+            'minutes' : timeHumanizer(diffFromAlarm, { units: ["minutes", "seconds"] }) ,
+            'hours' : timeHumanizer(diffFromAlarm, { units: ["hours", "minutes", "seconds"] }) ,
+            'days' : timeHumanizer(diffFromAlarm, { units: ["days", "hours", "minutes", "seconds"] }) ,
+            'months' : timeHumanizer(diffFromAlarm, { units: ["months", "days", "hours", "minutes", "seconds"] }) ,
+            'years' : timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] }) ,
+            'full' : timeHumanizer(diffFromAlarm)  // "2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds"
+          };
+
+          return time;
+        }
+
+
         function calculateTimeUnits() {
+          var timeUnits = {}; //will contains time with units
+
           if ($attrs.startTime !== undefined){
             $scope.millis = moment().diff(moment($scope.startTimeAttr));
           }
+
+          timeUnits = getTimeUnits( $scope.millis );
+
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
@@ -188,13 +218,17 @@ var timerModule = angular.module('timer', [])
           $scope.daysS = ($scope.days === 1)? '' : 's';
           $scope.monthsS = ($scope.months === 1)? '' : 's';
           $scope.yearsS = ($scope.years === 1)? '' : 's';
+
+
           // new plural-singular unit decision functions (for custom units and multilingual support)
-          $scope.secondUnit = function(singleSecond, pluralSecond){if($scope.seconds === 1){if(singleSecond){return singleSecond;} return 'second';} if(pluralSecond){return pluralSecond;} return 'seconds';};
-          $scope.minuteUnit = function(singleMinute, pluralMinute){if($scope.minutes === 1){if(singleMinute){return singleMinute;} return 'minute';} if(pluralMinute){return pluralMinute;} return 'minutes';};
-          $scope.hourUnit = function(singleHour, pluralHour){if($scope.hours === 1){if(singleHour){return singleHour;} return 'hour';} if(pluralHour){return pluralHour;} return 'hours';};
-          $scope.dayUnit = function(singleDay, pluralDay){if($scope.days === 1){if(singleDay){return singleDay;} return 'day';} if(pluralDay){return pluralDay;} return 'days';};
-          $scope.monthUnit = function(singleMonth, pluralMonth){if($scope.months === 1){if(singleMonth){return singleMonth;} return 'month';} if(pluralMonth){return pluralMonth;} return 'months';};
-          $scope.yearUnit = function(singleYear, pluralYear){if($scope.years === 1){if(singleYear){return singleYear;} return 'year';} if(pluralYear){return pluralYear;} return 'years';};
+          $scope.secondUnit = timeUnits.seconds;
+          $scope.minuteUnit = timeUnits.minutes;
+          $scope.hourUnit = timeUnits.hours;
+          $scope.dayUnit = timeUnits.days;
+          $scope.monthUnit = timeUnits.months;
+          $scope.yearUnit = timeUnits.years;
+          $scope.fullUnit = timeUnits.full;
+
           //add leading zero if number is smaller than 10
           $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
           $scope.mminutes = $scope.minutes < 10 ? '0' + $scope.minutes : $scope.minutes;
@@ -285,7 +319,7 @@ var timerModule = angular.module('timer', [])
         if ($scope.autoStart === undefined || $scope.autoStart === true) {
           $scope.start();
         }
-      }],
+      }]
     };
     }]);
 
