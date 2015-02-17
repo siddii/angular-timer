@@ -13,7 +13,7 @@ var timerModule = angular.module('timer', [])
         language: '=?language',
         maxTimeUnit: '='
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', function ($scope, $element, $attrs, $timeout, I18nService) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -28,14 +28,13 @@ var timerModule = angular.module('timer', [])
         //backward and forward compatibility.
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
 
-        //init momentJS i18n, default english
-        $scope.language = $attrs.language || 'en';
-        console.log("$scope.language", $scope.language);
 
-        moment.locale($scope.language);
-        var timeHumanizer = humanizeDuration.humanizer({
-          language: $scope.language
-        });
+        $scope.language = $attrs.language || 'en';
+        //init momentJS i18n, default english
+
+        var i18nService = new I18nService();
+
+        i18nService.init($scope.language);
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>{{millis}}</span>')($scope));
@@ -135,28 +134,6 @@ var timerModule = angular.module('timer', [])
           $scope.isRunning = false;
         });
 
-        /**
-         * get time with units from momentJS i18n
-         * @param {int} millis
-         * @returns {{millis: string, seconds: string, minutes: string, hours: string, days: string, months: string, years: string}}
-         */
-        function getTimeUnits(millis) {
-          var diffFromAlarm = Math.round(millis/1000) * 1000; //time in milliseconds, get rid of the last 3 ms value to avoid 2.12 seconds display
-
-          var time = {
-            'millis' : timeHumanizer(diffFromAlarm, { units: ["milliseconds"] }),
-            'seconds' : timeHumanizer(diffFromAlarm, { units: ["seconds"] }),
-            'minutes' : timeHumanizer(diffFromAlarm, { units: ["minutes", "seconds"] }) ,
-            'hours' : timeHumanizer(diffFromAlarm, { units: ["hours", "minutes", "seconds"] }) ,
-            'days' : timeHumanizer(diffFromAlarm, { units: ["days", "hours", "minutes", "seconds"] }) ,
-            'months' : timeHumanizer(diffFromAlarm, { units: ["months", "days", "hours", "minutes", "seconds"] }) ,
-            'years' : timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] }) ,
-            'full' : timeHumanizer(diffFromAlarm)  // "2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds"
-          };
-
-          return time;
-        }
-
 
         function calculateTimeUnits() {
           var timeUnits = {}; //will contains time with units
@@ -165,7 +142,7 @@ var timerModule = angular.module('timer', [])
             $scope.millis = moment().diff(moment($scope.startTimeAttr));
           }
 
-          timeUnits = getTimeUnits( $scope.millis );
+          timeUnits = i18nService.getTimeUnits($scope.millis);
 
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
@@ -280,7 +257,6 @@ var timerModule = angular.module('timer', [])
             $scope.millis = moment($scope.endTime).diff(moment());
             adjustment = $scope.interval - $scope.millis % 1000;
           }
-
 
           if ($scope.countdownattr) {
             $scope.millis = $scope.countdown * 1000;
