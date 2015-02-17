@@ -38,8 +38,7 @@ app.factory('I18nService', function() {
                 'hours' : this.timeHumanizer(diffFromAlarm, { units: ["hours", "minutes", "seconds"] }) ,
                 'days' : this.timeHumanizer(diffFromAlarm, { units: ["days", "hours", "minutes", "seconds"] }) ,
                 'months' : this.timeHumanizer(diffFromAlarm, { units: ["months", "days", "hours", "minutes", "seconds"] }) ,
-                'years' : this.timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] }) ,
-                'full' : this.timeHumanizer(diffFromAlarm)  // "2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds"
+                'years' : this.timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] })
             };
         }
         else {

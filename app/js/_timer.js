@@ -204,7 +204,6 @@ var timerModule = angular.module('timer', [])
           $scope.dayUnit = timeUnits.days;
           $scope.monthUnit = timeUnits.months;
           $scope.yearUnit = timeUnits.years;
-          $scope.fullUnit = timeUnits.full;
 
           //add leading zero if number is smaller than 10
           $scope.sseconds = $scope.seconds < 10 ? '0' + $scope.seconds : $scope.seconds;
