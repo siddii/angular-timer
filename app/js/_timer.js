@@ -13,7 +13,7 @@ var timerModule = angular.module('timer', [])
         language: '=?language',
         maxTimeUnit: '='
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', '$interpolate', function ($scope, $element, $attrs, $timeout, $interpolate) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
