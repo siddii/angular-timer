@@ -36,7 +36,13 @@ module.exports = function (grunt) {
           banner: '<%= meta.banner %>'
         },
         src: [
-          'app/**/*.js'
+           'bower_components/jquery/jquery.min.js',
+           'bower_components/angular/angular.min.js',
+           'bower_components/bootstrap/docs/assets/js/bootstrap.min.js',
+           'bower_components/momentjs/min/moment.min.js',
+           'bower_components/momentjs/min/locales.min.js',
+           'bower_components/humanize-duration/humanize-duration.js',
+           'app/**/*.js'
         ],
         dest: '<%= dist_dir %>/<%= pkg.name %>.js'
       }
