@@ -10,7 +10,8 @@ var timerModule = angular.module('timer', [])
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
-        maxTimeUnit: '='
+        maxTimeUnit: '=',
+        countdown: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', '$interpolate', function ($scope, $element, $attrs, $timeout, $interpolate) {
 
@@ -36,7 +37,6 @@ var timerModule = angular.module('timer', [])
         $scope.startTime = null;
         $scope.endTime = null;
         $scope.timeoutId = null;
-        $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) >= 0 ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
 
         $scope.$on('timer-start', function () {
