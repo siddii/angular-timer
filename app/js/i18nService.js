@@ -16,7 +16,7 @@ app.factory('I18nService', function() {
         // momentJS: a few moment ago, human duration : 4 seconds ago
         this.timeHumanizer = humanizeDuration.humanizer({
             language: this.language,
-            halfUnit:false //@TODO wait PR#40 on Github https://github.com/EvanHahn/HumanizeDuration.js/pull/40
+            halfUnit:false
         });
     };
 
