@@ -10,7 +10,7 @@ var timerModule = angular.module('timer', [])
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
-        language: '=?language',
+        language: '@?',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate) {
@@ -30,8 +30,13 @@ var timerModule = angular.module('timer', [])
 
 
         $scope.language = $scope.language || 'en';
-        //init momentJS i18n, default english
 
+        //allow to change the language of the directive while already launched
+        $scope.$watch('language', function() {
+            i18nService.init($scope.language);
+        });
+
+        //init momentJS i18n, default english
         var i18nService = new I18nService();
         i18nService.init($scope.language);
 
