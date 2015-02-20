@@ -85,7 +85,10 @@
 
     <div class="bs-docs-example">
         <p>
-            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; language=&quot;fr&quot; &gt;{{fullUnit}}</code> will run the clock timer ticking every second
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; language=&quot;fr&quot; &gt;{{yearUnit}}</code> will run the clock timer ticking every second.
+        </p>
+        <p>
+            You can use a controller variable as the language attribut or a string. If a scope variable is used, the value will be watched, <strong>that is to say if your app language changes, the change will also affects the timer.</strong>
         </p>
         <p>
             Based on <a href="https://github.com/EvanHahn/HumanizeDuration.js">HumanizeDuration</a> with more than 16 languages available.
@@ -108,12 +111,12 @@
 
         <h3>Available units</h3>
         <ul>
-            <li>secondUnit: 8 164 816 seconds</li>
-            <li>minuteUnit: 136 089 minutes, 16 seconds</li>
-            <li>hourUnit: 18 126 hours,9 minutes, 16 seconds</li>
-            <li>dayUnit:  755 days, 6 hours, 9 minutes, 16 seconds</li>
-            <li>monthUnit: 25 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
-            <li>yearUnit : 2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
+            <li><strong>secondUnit</strong>: 8 164 816 seconds</li>
+            <li><strong>minuteUnit</strong>: 136 089 minutes, 16 seconds</li>
+            <li><strong>hourUnit</strong>: 18 126 hours,9 minutes, 16 seconds</li>
+            <li><strong>dayUnit</strong>:  755 days, 6 hours, 9 minutes, 16 seconds</li>
+            <li><strong>monthUnit</strong>: 25 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
+            <li><strong>yearUnit </strong>: 2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
         </ul>
     </div>
 </section>

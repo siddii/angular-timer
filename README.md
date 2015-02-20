@@ -12,14 +12,14 @@ With Bower install :
 * Install humanize-duration using [Bower](http://bower.io) - `bower install humanize-duration`
 * Install momentjs using [Bower](http://bower.io) - `bower install momentjs`
 
-And include these scripts :
+And include these scripts in your webpage :
 * bower_components/momentjs/min/moment.min.js
 * bower_components/momentjs/min/locales.min.js
 * bower_components/humanize-duration/humanize-duration.js
 
 
 ### Running locally
-Install all bower components - `bower install
+Install all bower components - `bower install`
 Using [Grunt](http://gruntjs.com/) type `grunt` from command line, the default task will open index.html page in your
 default browser
 
