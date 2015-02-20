@@ -29,11 +29,10 @@ var timerModule = angular.module('timer', [])
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
 
 
-        $scope.language = $attrs.language || 'en';
+        $scope.language = $scope.language || 'en';
         //init momentJS i18n, default english
 
         var i18nService = new I18nService();
-
         i18nService.init($scope.language);
 
         if ($element.html().trim().length === 0) {
