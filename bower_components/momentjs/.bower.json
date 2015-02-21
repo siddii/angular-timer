@@ -26,6 +26,10 @@
   },
   "_source": "git://github.com/moment/moment.git",
   "_target": "~2.9.0",
+<<<<<<< HEAD
   "_originalSource": "momentjs",
   "_direct": true
+=======
+  "_originalSource": "momentjs"
+>>>>>>> 028b63d4f34e5841c6f9ae31d4063c850ae19c90
 }

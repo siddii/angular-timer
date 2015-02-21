@@ -3,33 +3,36 @@
 <head>
     <title>AngularJS Example - Polling Timer Example</title>
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../app/js/timer.js"></script>
+    <script src="../bower_components/jquery/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
+    <script src="../bower_components/momentjs/min/moment.min.js"></script>
+    <script src="../bower_components/momentjs/min/locales.min.js"></script>
+    <script src="../bower_components/humanize-duration/humanize-duration.js"></script>
+    <script src="../dist/angular-timer.js"></script>
     <script>
-        angular.module('MyApp', ['timer']);
-        function PollingController($scope, $timeout) {
-            $scope.timerRunning = true;
-            $scope.timerConsole = '';
+        angular.module('MyApp', ['timer'])
+                .controller('PollingController', ['$scope', '$timeout', function ($scope, $timeout) {
+                    $scope.timerRunning = true;
+                    $scope.timerConsole = '';
 
-            $scope.timerType = '';
+                    $scope.timerType = '';
 
-            $scope.startTimer = function (){
-                $scope.$broadcast('timer-start');
-                $scope.timerRunning = true;
-            };
+                    $scope.startTimer = function (){
+                        $scope.$broadcast('timer-start');
+                        $scope.timerRunning = true;
+                    };
 
-            $scope.stopTimer = function (){
-                $scope.$broadcast('timer-stop');
-                $scope.timerRunning = false;
-            };
+                    $scope.stopTimer = function (){
+                        $scope.$broadcast('timer-stop');
+                        $scope.timerRunning = false;
+                    };
 
-            $scope.$on('timer-tick', function (event, args) {
-                $timeout(function (){
-                    $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis +'\n';
-                });
-            });
-        }
-
-        PollingController.$inject = ['$scope', '$timeout'];
+                    $scope.$on('timer-tick', function (event, args) {
+                        $timeout(function (){
+                            $scope.timerConsole += $scope.timerType  + ' - event.name = '+ event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis +'\n';
+                        });
+                    });
+                }]);
     </script>
 </head>
 <body ng-app="MyApp">

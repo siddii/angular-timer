@@ -13,12 +13,12 @@ describe('timer directive', function() {
         var element = $compile('<timer/>')($scope);
         $scope.$digest();
         $timeout(function() {
-          expect(element.html()).toMatch(/^<span class="ng-scope ng-binding">/);
+          expect(element.html()).toMatch(/^<span class="ng-binding ng-scope">/);
           expect(element.html().indexOf('</span>')).toBeGreaterThan(-1);
           $rootScope.$broadcast('timer-stop');
         }, 300);
         $timeout.flush();
-        expect($exceptionHandler.errors).toEqual(undefined);
+        expect($exceptionHandler.errors).toEqual([]);
       });
     });
   });

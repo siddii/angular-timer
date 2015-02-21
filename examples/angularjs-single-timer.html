@@ -3,10 +3,15 @@
 <head>
     <title>AngularJS Example - Single Timer Example</title>
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../app/js/timer.js"></script>
+    <script src="../bower_components/jquery/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
+    <script src="../bower_components/momentjs/min/moment.min.js"></script>
+    <script src="../bower_components/momentjs/min/locales.min.js"></script>
+    <script src="../bower_components/humanize-duration/humanize-duration.js"></script>
+    <script src="../dist/angular-timer.js"></script>
     <script>
-        angular.module('MyApp', ['timer']);
-        function MyAppController($scope) {
+        angular.module('MyApp', ['timer'])
+        .controller('MyAppController', ['$scope', function ($scope) {
             $scope.timerRunning = true;
 
             $scope.startTimer = function (){
@@ -22,8 +27,7 @@
             $scope.$on('timer-stopped', function (event, data){
                 console.log('Timer Stopped - data = ', data);
             });
-        }
-        MyAppController.$inject = ['$scope'];
+        }]);
     </script>
 </head>
 <body ng-app="MyApp">

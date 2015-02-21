@@ -11,7 +11,11 @@
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
-    <script src="app/js/timer.js"></script>
+    <script src="bower_components/momentjs/min/moment.min.js"></script>
+    <script src="bower_components/momentjs/min/locales.min.js"></script>
+    <script src="bower_components/humanize-duration/humanize-duration.js"></script>
+    <script src="app/js/_timer.js"></script>
+    <script src="app/js/i18nService.js"></script>
     <script src="docs/docs.js"></script>
 </head>
 <body ng-app="timer-demo" ng-controller="TimerDemoController">
@@ -73,6 +77,47 @@
             <timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
         </h3>
         <button class="btn" onclick="stopResumeTimer('clock-timer', this)" type="button">Stop</button>
+    </div>
+</section>
+<section id="clock-timer-i18n">
+    <h3>
+        Timer i18n</h3>
+
+    <div class="bs-docs-example">
+        <p>
+            This markup <code ng-non-bindable="">&lt;timer interval=&quot;1000&quot; language=&quot;fr&quot; &gt;{{yearUnit}}</code> will run the clock timer ticking every second.
+        </p>
+        <p>
+            You can use a controller variable as the language attribut or a string. If a scope variable is used, the value will be watched, <strong>that is to say if your app language changes, the change will also affects the timer.</strong>
+        </p>
+        <p>
+            Based on <a href="https://github.com/EvanHahn/HumanizeDuration.js">HumanizeDuration</a> with more than 16 languages available.
+        </p>
+
+        <h3>Spanish</h3>
+        <div id="spanish">
+            <h4>Year max unit time : <timer interval="1000" language="es">{{yearUnit}}</timer></h4>
+            <h4>Hour max unit time: <timer interval="1000" language="es">{{hourUnit}}</timer></h4>
+            <h4>Second max unit time: <timer interval="1000" language="es">{{secondUnit}}</timer></h4>
+        </div>
+
+
+        <h3>French</h3>
+        <div id="french">
+            <h4>Year max unit time : <timer interval="1000" language="fr">{{yearUnit}}</timer></h4>
+            <h4>Hour max unit time: <timer interval="1000" language="fr">{{hourUnit}}</timer></h4>
+            <h4>Second max unit time: <timer interval="1000" language="fr">{{secondUnit}}</timer></h4>
+        </div>
+
+        <h3>Available units</h3>
+        <ul>
+            <li><strong>secondUnit</strong>: 8 164 816 seconds</li>
+            <li><strong>minuteUnit</strong>: 136 089 minutes, 16 seconds</li>
+            <li><strong>hourUnit</strong>: 18 126 hours,9 minutes, 16 seconds</li>
+            <li><strong>dayUnit</strong>:  755 days, 6 hours, 9 minutes, 16 seconds</li>
+            <li><strong>monthUnit</strong>: 25 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
+            <li><strong>yearUnit </strong>: 2 years, 1 month, 5 days, 6 hours, 9 minutes, 16 seconds</li>
+        </ul>
     </div>
 </section>
 <section id="clock-timer-leading-zero">
@@ -340,6 +385,16 @@
                 false
             </td>
             <td> no default value.   But you can give value,  'minute', 'second', or 'hour'.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                language
+            </td>
+            <td>
+                false
+            </td>
+            <td> 'en' for English. Please see <a target='_blank' href="https://github.com/EvanHahn/HumanizeDuration.js#supported-languages">supported languages</a>.
             </td>
         </tr>
         </tbody>
