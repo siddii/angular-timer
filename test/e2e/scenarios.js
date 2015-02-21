@@ -185,4 +185,10 @@ describe('Angular Timer E2E Tests', function () {
     expect(timer3Val).toMatch(/00/);
   });
 
+  it('i18n Countdown Timer - Spanish and French', function () {
+      sleep(1);
+      expect(element('#clock-timer-i18n #spanish timer').html()).toMatch(/segundo/);
+      expect(element('#clock-timer-i18n #french timer').html()).toMatch(/seconde/);
+  });
+
 });
