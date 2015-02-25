@@ -1,8 +1,8 @@
 /**
- * angular-timer - v1.2.0 - 2014-12-15 6:34 PM
+ * angular-timer - v1.2.1 - 2015-02-25 4:19 PM
  * https://github.com/siddii/angular-timer
  *
- * Copyright (c) 2014 Siddique Hameed
+ * Copyright (c) 2015 Siddique Hameed
  * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
  */
 var timerModule = angular.module('timer', [])
@@ -19,7 +19,7 @@ var timerModule = angular.module('timer', [])
         autoStart: '&autoStart',
         maxTimeUnit: '='
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', function ($scope, $element, $attrs, $timeout) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', '$interpolate', function ($scope, $element, $attrs, $timeout, $interpolate) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -35,7 +35,7 @@ var timerModule = angular.module('timer', [])
         $scope.autoStart = $attrs.autoStart || $attrs.autostart;
 
         if ($element.html().trim().length === 0) {
-          $element.append($compile('<span>{{millis}}</span>')($scope));
+          $element.append($compile('<span>' + $interpolate.startSymbol() + 'millis' + $interpolate.endSymbol() + '</span>')($scope));
         } else {
           $element.append($compile($element.contents())($scope));
         }
@@ -75,6 +75,12 @@ var timerModule = angular.module('timer', [])
             clearTimeout($scope.timeoutId);
           }
         }
+
+        $scope.$watch('startTimeAttr', function(newValue, oldValue) {
+          if (newValue !== oldValue && $scope.isRunning) {
+            $scope.start();
+          }
+        });
 
         $scope.start = $element[0].start = function () {
           $scope.startTime = $scope.startTimeAttr ? new Date($scope.startTimeAttr) : new Date();
