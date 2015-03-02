@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.2.0 - 2015-03-02 1:28 PM
+ * angular-timer - v1.2.1 - 2015-03-02 1:54 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2015 Siddique Hameed
@@ -326,7 +326,7 @@ app.factory('I18nService', function() {
     I18nService.prototype.init = function init(lang){
         this.language = lang;
         //moment init
-        moment.locale(this.language);
+        moment.locale(this.language); //@TODO maybe to remove, it should be handle by the user's application itself, and not inside the directive
 
         //human duration init, using it because momentjs does not allow accurate time (
         // momentJS: a few moment ago, human duration : 4 seconds ago
