@@ -7,6 +7,8 @@ notifications:
 
 before_script:
   - npm install -g grunt-cli
+  - npm install bower
+  - bower install
 
 script:
   - grunt tests

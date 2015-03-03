@@ -1,4 +1,4 @@
-##Change Log
+-##Change Log
 
 ###Version 1.2.0
 * Reset method https://github.com/siddii/angular-timer/pull/46

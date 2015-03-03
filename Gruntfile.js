@@ -36,7 +36,7 @@ module.exports = function (grunt) {
           banner: '<%= meta.banner %>'
         },
         src: [
-          'app/**/*.js'
+           'app/**/*.js'
         ],
         dest: '<%= dist_dir %>/<%= pkg.name %>.js'
       }
