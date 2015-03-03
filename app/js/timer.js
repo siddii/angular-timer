@@ -10,7 +10,8 @@ var timerModule = angular.module('timer', [])
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
-        maxTimeUnit: '='
+        maxTimeUnit: '=',
+        allowNegative: '=allowNegative'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', '$interpolate', function ($scope, $element, $attrs, $timeout, $interpolate) {
 
@@ -21,7 +22,7 @@ var timerModule = angular.module('timer', [])
             return this.replace(/^\s+|\s+$/g, '');
           };
         }
-
+        
         //angular 1.2 doesn't support attributes ending in "-start", so we're
         //supporting both "autostart" and "auto-start" as a solution for
         //backward and forward compatibility.
@@ -36,7 +37,7 @@ var timerModule = angular.module('timer', [])
         $scope.startTime = null;
         $scope.endTime = null;
         $scope.timeoutId = null;
-        $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) >= 0 ? parseInt($scope.countdownattr, 10) : undefined;
+        $scope.countdown = $scope.countdownattr ? parseInt($scope.countdownattr, 10) : undefined;
         $scope.isRunning = false;
 
         $scope.$on('timer-start', function () {
@@ -129,6 +130,11 @@ var timerModule = angular.module('timer', [])
           if ($attrs.startTime !== undefined){
             $scope.millis = new Date() - new Date($scope.startTimeAttr);
           }
+
+          if ($scope.allowNegative && $scope.millis < 0) {
+            $scope.millis = -$scope.millis;
+          }
+
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
             $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
@@ -194,7 +200,6 @@ var timerModule = angular.module('timer', [])
           $scope.ddays = $scope.days < 10 ? '0' + $scope.days : $scope.days;
           $scope.mmonths = $scope.months < 10 ? '0' + $scope.months : $scope.months;
           $scope.yyears = $scope.years < 10 ? '0' + $scope.years : $scope.years;
-
         }
 
         //determine initial values of time units and add AddSeconds functionality
@@ -230,7 +235,6 @@ var timerModule = angular.module('timer', [])
         calculateTimeUnits();
 
         var tick = function () {
-
           $scope.millis = new Date() - $scope.startTime;
           var adjustment = $scope.millis % 1000;
 
@@ -239,12 +243,11 @@ var timerModule = angular.module('timer', [])
             adjustment = $scope.interval - $scope.millis % 1000;
           }
 
-
           if ($scope.countdownattr) {
             $scope.millis = $scope.countdown * 1000;
           }
 
-          if ($scope.millis < 0) {
+          if (!$scope.allowNegative && $scope.millis < 0) {
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
@@ -263,14 +266,28 @@ var timerModule = angular.module('timer', [])
 
           $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
 
-          if ($scope.countdown > 0) {
+          if ($scope.allowNegative || $scope.countdown > 0) {
             $scope.countdown--;
           }
           else if ($scope.countdown <= 0) {
-            $scope.stop();
+            if (!$scope.allowNegative) {
+              $scope.stop();
+            }
+
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
             }
+          }
+
+          if ($scope.allowNegative && $scope.countdown < 0) {
+            if ($element.text().trim()[0] != "{" && $element.text().trim()[0] != "-") {
+              $element.prepend('-');
+            }
+          }
+
+          // Callback when set 0
+          if ($scope.allowNegative && $scope.millis == 0 && $scope.finishCallback) {
+            $scope.$eval($scope.finishCallback);
           }
         };
 
