@@ -1,5 +1,11 @@
 -##Change Log
 
+###Version 1.2.2
+* MomentJS integration - https://github.com/siddii/angular-timer/pull/159
+
+###Version 1.2.1
+* Add adaptive interpolation symbol - https://github.com/siddii/angular-timer/pull/153
+
 ###Version 1.2.0
 * Reset method https://github.com/siddii/angular-timer/pull/46
 
