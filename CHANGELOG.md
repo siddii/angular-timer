@@ -1,6 +1,6 @@
 -##Change Log
 
-###Version 1.2.2
+###Version 1.3.0
 * MomentJS integration - https://github.com/siddii/angular-timer/pull/159
 
 ###Version 1.2.1
