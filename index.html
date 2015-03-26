@@ -177,13 +177,15 @@
                 on Progressbar control.</p>
             <code ng-non-bindable="">
                 &lt;timer countdown=&quot;100&quot; interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress
-                progress-striped active {{displayProgressActive}}&quot;style="height: 30px;"&gt; &lt;div class=&quot;bar&quot; style=&quot;min-width: 2em;width: {{progressBar}}%;&quot;&gt;&lt;/div&gt;
+                progress-striped active {{displayProgressActive}}&quot;style="height: 30px;"&gt;
+                Remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}%). Activity? {{displayProgressActive}}
+                &lt;div class=&quot;bar&quot; style=&quot;min-width: 2em;width: {{progressBar}}%;&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;&lt;/timer&gt;
             </code>
 
             <h3>
-                <timer interval="1000" countdown="30">
-                    Remaining time : {{countdown}}
+                <timer id="countdown" interval="1000" countdown="30">
+                    Remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}%). Activity? {{displayProgressActive}}
                     <div class="progress progress-striped {{displayProgressActive}}" style="height: 30px;">
                         <div class="bar" style="min-width: 2em; height: 30px; width: {{progressBar}}%;">
                             {{ progressBar }}%
@@ -199,6 +201,7 @@
             </code>
             <h3>
                 <timer interval="1000" end-time="1451628000000">
+                    ({{progressBar}}%). Progress bar activity : {{displayProgressActive}}
                     <div class="progress progress-striped {{displayProgressActive}}" style="height: 30px;">
                         <div class="bar" style="min-width: 2em; width: {{progressBar}}%;">
                             {{ progressBar }}%</div>

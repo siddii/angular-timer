@@ -32,11 +32,6 @@ app.factory('progressBarService', function() {
       displayProgressBar = remainingTime * 100 / coutdown;
     }
 
-    if(typeof coutdown !== 'undefined') {
-      console.log("$scope.countdownattr", coutdown);
-      console.log("$scope.progressBar", displayProgressBar);
-      console.log("$scope.remainingTime", remainingTime);
-    }
     displayProgressBar = 100 - displayProgressBar; //To have 0 to 100 and not 100 to 0
     displayProgressBar = Math.round(displayProgressBar * 10) / 10; //learn more why : http://stackoverflow.com/questions/588004/is-floating-point-math-broken
 
