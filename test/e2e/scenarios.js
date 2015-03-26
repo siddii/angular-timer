@@ -191,4 +191,9 @@ describe('Angular Timer E2E Tests', function () {
       expect(element('#clock-timer-i18n #french timer').html()).toMatch(/seconde/);
   });
 
+  it('Progress bar display', function () {
+    sleep(1);
+    expect(element('#progressbar-timer timer#countdown').html()).toMatch(/3.3%/);
+  });
+
 });
