@@ -176,10 +176,16 @@
                                               target="_new">Twitter Bootstrap&#39;s Progressbar</a> will set the timer
                 on Progressbar control.</p>
             <code ng-non-bindable="">
-                &lt;timer countdown=&quot;100&quot; interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress
+                &lt;timer countdown=&quot;30&quot; interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress
                 progress-striped active {{displayProgressActive}}&quot;style="height: 30px;"&gt;
+            </code>
+            <code ng-non-bindable="">
                 Remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}%). Activity? {{displayProgressActive}}
+            </code>
+            <code ng-non-bindable="">
                 &lt;div class=&quot;bar&quot; style=&quot;min-width: 2em;width: {{progressBar}}%;&quot;&gt;&lt;/div&gt;
+            </code>
+            <code ng-non-bindable="">
                 &lt;/div&gt;&lt;/timer&gt;
             </code>
 
@@ -196,7 +202,12 @@
 
             <code ng-non-bindable="">
                 &lt;timer end-time=&quot;1451628000000&quot; interval=&quot;1000&quot;&gt;&lt;div class=&quot;progress
-                progress-striped active {{displayProgressActive}}&quot;style="height: 30px;"&gt; &lt;div class=&quot;bar&quot; style=&quot;min-width: 2em;width: {{progressBar}}%;&quot;&gt;&lt;/div&gt;
+                progress-striped active {{displayProgressActive}}&quot;style="height: 30px;"&gt;
+            </code>
+            <code ng-non-bindable="">
+                &lt;div class=&quot;bar&quot; style=&quot;min-width: 2em;width: {{progressBar}}%;&quot;&gt;&lt;/div&gt;
+            </code>
+            <code ng-non-bindable="">
                 &lt;/div&gt;&lt;/timer&gt;
             </code>
             <h3>
