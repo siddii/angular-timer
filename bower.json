@@ -1,7 +1,7 @@
 {
   "author": "Siddique Hameed",
   "name": "angular-timer",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "homepage": "https://github.com/siddii/angular-timer",
   "description": "Angular-Timer : A simple AngularJS directive demonstrating re-usability & interoperability",
   "repository": {
@@ -11,8 +11,7 @@
   "dependencies": {
     "angular": ">= 1.0.7",
     "momentjs": "~2.9.0",
-    "humanize-duration": "~2.4.0",
-    "angular-mocks": "~1.3.13"
+    "humanize-duration": "~2.4.0"
   },
   "devDependencies": {
     "bootstrap": "2.3.2",
@@ -25,7 +24,6 @@
     "bower_components"
   ],
   "resolutions": {
-    "angular": "~1.3.13",
     "humanize-duration": "~2.4.0"
   }
 }
