@@ -13,7 +13,7 @@ var timerModule = angular.module('timer', [])
         language: '@?',
         maxTimeUnit: '='
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -39,6 +39,10 @@ var timerModule = angular.module('timer', [])
         //init momentJS i18n, default english
         var i18nService = new I18nService();
         i18nService.init($scope.language);
+
+        //progress bar
+        $scope.displayProgressBar = 0;
+        $scope.displayProgressActive = 'active'; //Bootstrap active effect for progress bar
 
         if ($element.html().trim().length === 0) {
           $element.append($compile('<span>' + $interpolate.startSymbol() + 'millis' + $interpolate.endSymbol() + '</span>')($scope));
@@ -252,16 +256,18 @@ var timerModule = angular.module('timer', [])
         calculateTimeUnits();
 
         var tick = function tick() {
-
+          var typeTimer = null; // countdown or endTimeAttr
           $scope.millis = moment().diff($scope.startTime);
           var adjustment = $scope.millis % 1000;
 
           if ($scope.endTimeAttr) {
+            typeTimer = $scope.endTimeAttr;
             $scope.millis = moment($scope.endTime).diff(moment());
             adjustment = $scope.interval - $scope.millis % 1000;
           }
 
           if ($scope.countdownattr) {
+            typeTimer = $scope.countdownattr;
             $scope.millis = $scope.countdown * 1000;
           }
 
@@ -291,6 +297,15 @@ var timerModule = angular.module('timer', [])
             $scope.stop();
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
+            }
+          }
+
+          if(typeTimer !== null){
+            //calculate progress bar
+            $scope.progressBar = progressBarService.calculateProgressBar($scope.startTime, $scope.millis, $scope.endTime, $scope.countdownattr);
+
+            if($scope.progressBar === 100){
+              $scope.displayProgressActive = ''; //No more Bootstrap active effect
             }
           }
         };

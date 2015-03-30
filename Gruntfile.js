@@ -30,6 +30,29 @@ module.exports = function (grunt) {
         ' */\n'
     },
 
+    /**
+     * The directories to delete when `grunt clean` is executed.
+     */
+    clean: [
+      '<%= dist_dir %>'
+    ],
+
+    /* Copy all example into dist/examples */
+    copy: {
+      examples: {
+        src: 'examples/*',
+        dest: 'dist/'
+      },
+      nav: {
+        src: 'navbar.html',
+        dest: 'dist/'
+      },
+      example: {
+        src: 'examples.html',
+        dest: 'dist/'
+      }
+    },
+
     concat: {
       compile_js: {
         options: {
@@ -39,6 +62,34 @@ module.exports = function (grunt) {
            'app/**/*.js'
         ],
         dest: '<%= dist_dir %>/<%= pkg.name %>.js'
+      },
+      compile_all_js: {
+        src: [
+          '<%= dist_dir %>/<%= pkg.name %>.min.js',
+           'bower_components/momentjs/min/moment-with-locales.min.js',
+           'bower_components/humanize-duration/humanize-duration.js'
+      ],
+        dest: '<%= dist_dir %>/assets/js/<%= pkg.name %>-all.min.js'
+      },
+      compile_bower_js: {
+        src: [
+          'bower_components/angular/angular.min.js',
+          'bower_components/jquery/jquery.min.js',
+          'bower_components/bootstrap/docs/assets/js/bootstrap.min.js',
+          'docs/docs.js',
+          'docs/prettify.js',
+          'docs/application.js'
+      ],
+        dest: '<%= dist_dir %>/assets/js/<%= pkg.name %>-bower.js'
+      },
+      compile_bower_css: {
+        src: [
+          'bower_components/bootstrap/docs/assets/css/bootstrap.css',
+          'bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css',
+          'docs/css/docs.css',
+          'docs/css/prettify.css'
+      ],
+        dest: '<%= dist_dir %>/assets/css/<%= pkg.name %>-bower.css'
       }
     },
 
@@ -70,6 +121,59 @@ module.exports = function (grunt) {
       }
     },
 
+    /**
+     * The `index` task compiles the `index.html` file as a Grunt template. CSS
+     * and JS files co-exist here but they get split apart later.
+     */
+    index: {
+      /**
+       * During development, we don't want to have wait for compilation,
+       * concatenation, minification, etc. So to avoid these steps, we simply
+       * add all script files directly to the `<head>` of `index.html`. The
+       * `src` property contains the list of included files.
+       */
+      build: {
+        dir: '',
+        src: [
+          'bower_components/angular/angular.min.js',
+          'app/**/*.js',
+          'bower_components/momentjs/min/moment-with-locales.min.js',
+          'bower_components/humanize-duration/humanize-duration.js',
+          'docs/docs.js',
+          'bower_components/jquery/jquery.min.js',
+          'bower_components/bootstrap/docs/assets/js/bootstrap.min.js',
+          'docs/prettify.js',
+          'docs/application.js',
+          'bower_components/bootstrap/docs/assets/css/bootstrap.css',
+          'bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css',
+          'docs/css/docs.css',
+          'docs/css/prettify.css'
+        ]
+      },
+
+      /**
+       * When it is time to have a completely compiled application, we can
+       * alter the above to include only a single JavaScript and a single CSS
+       * file. Now we're back!
+       */
+      compile: {
+        dir: '<%= dist_dir %>/',
+        src: [
+          '<%= dist_dir %>/assets/js/<%= pkg.name %>-bower.js',
+          '<%= dist_dir %>/assets/js/<%= pkg.name %>-all.min.js',
+          '<%= dist_dir %>/assets/css/<%= pkg.name %>-bower.css'
+        ]
+      }
+    },
+
+    'gh-pages': {
+      options: {
+        base: 'dist',
+        message: 'Update gh-pages'
+      },
+      src: ['**']
+    },
+
     connect: {
       server: {
         options: {
@@ -83,7 +187,7 @@ module.exports = function (grunt) {
       testserver: {
         options: {
           port: 3030,
-          base: '.'
+          base: 'dist'
         }
       }
     },
@@ -119,7 +223,52 @@ module.exports = function (grunt) {
   grunt.registerTask('tests', [ 'connect:testserver', 'build', 'karma:unit', 'karma:e2e']);
 
   grunt.registerTask('build', [
-    'jshint', 'concat', 'uglify'
+    'clean', 'jshint', 'concat:compile_js', 'uglify', 'concat:compile_all_js', 'concat:compile_bower_js', 'concat:compile_bower_css','copy:examples','copy:nav','copy:example', 'index:compile', 'index:build'
   ]);
 
+  /**
+   * A utility function to get all app JavaScript sources.
+   */
+  function filterForJS ( files ) {
+    return files.filter( function ( file ) {
+      return file.match( /\.js$/ );
+    });
+  }
+
+  /**
+   * A utility function to get all app CSS sources.
+   */
+  function filterForCSS ( files ) {
+    return files.filter( function ( file ) {
+      return file.match( /\.css$/ );
+    });
+  }
+
+  /**
+   * The index.html template includes the stylesheet and javascript sources
+   * based on dynamic names calculated in this Gruntfile. This task assembles
+   * the list into variables for the template to use and then runs the
+   * compilation.
+   */
+  grunt.registerMultiTask( 'index', 'Process index.html template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('dist_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('index.tpl.html', this.data.dir + 'index.html', {
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' )
+          }
+        });
+      }
+    });
+  });
 };
