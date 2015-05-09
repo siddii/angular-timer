@@ -5,10 +5,22 @@ app.factory('I18nService', function() {
     var I18nService = function() {};
 
     I18nService.prototype.language = 'en';
+    I18nService.prototype.fallback = 'en';
     I18nService.prototype.timeHumanizer = {};
 
-    I18nService.prototype.init = function init(lang){
+    I18nService.prototype.init = function init(lang, fallback) {
+        var supported_languages = humanizeDuration.getSupportedLanguages();
+
+        this.fallback = (fallback !== undefined) ? fallback : 'en';
+        if (supported_languages.indexOf(fallback) === -1) {
+            this.fallback = 'en';
+        }
+
         this.language = lang;
+        if (supported_languages.indexOf(lang) === -1) {
+            this.language = this.fallback;
+        }
+
         //moment init
         moment.locale(this.language); //@TODO maybe to remove, it should be handle by the user's application itself, and not inside the directive
 
