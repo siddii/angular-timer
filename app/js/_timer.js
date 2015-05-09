@@ -32,8 +32,10 @@ var timerModule = angular.module('timer', [])
         $scope.language = $scope.language || 'en';
 
         //allow to change the language of the directive while already launched
-        $scope.$watch('language', function() {
-            i18nService.init($scope.language);
+        $scope.$watch('language', function(newVal, oldVal) {
+          if(newVal !== undefined) {
+            i18nService.init(newVal);
+          }
         });
 
         //init momentJS i18n, default english
