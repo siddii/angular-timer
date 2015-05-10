@@ -11,6 +11,7 @@ var timerModule = angular.module('timer', [])
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         language: '@?',
+        fallback: '@?',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
@@ -30,15 +31,18 @@ var timerModule = angular.module('timer', [])
 
 
         $scope.language = $scope.language || 'en';
+        $scope.fallback = $scope.fallback || 'en';
 
         //allow to change the language of the directive while already launched
-        $scope.$watch('language', function() {
-            i18nService.init($scope.language);
+        $scope.$watch('language', function(newVal, oldVal) {
+          if(newVal !== undefined) {
+            i18nService.init(newVal, $scope.fallback);
+          }
         });
 
         //init momentJS i18n, default english
         var i18nService = new I18nService();
-        i18nService.init($scope.language);
+        i18nService.init($scope.language, $scope.fallback);
 
         //progress bar
         $scope.displayProgressBar = 0;
