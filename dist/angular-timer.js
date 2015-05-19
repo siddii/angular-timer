@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.1 - 2015-03-30 1:00 PM
+ * angular-timer - v1.3.1 - 2015-05-19 12:41 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2015 Siddique Hameed
@@ -18,6 +18,7 @@ var timerModule = angular.module('timer', [])
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         language: '@?',
+        fallback: '@?',
         maxTimeUnit: '='
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
@@ -37,15 +38,18 @@ var timerModule = angular.module('timer', [])
 
 
         $scope.language = $scope.language || 'en';
+        $scope.fallback = $scope.fallback || 'en';
 
         //allow to change the language of the directive while already launched
-        $scope.$watch('language', function() {
-            i18nService.init($scope.language);
+        $scope.$watch('language', function(newVal, oldVal) {
+          if(newVal !== undefined) {
+            i18nService.init(newVal, $scope.fallback);
+          }
         });
 
         //init momentJS i18n, default english
         var i18nService = new I18nService();
-        i18nService.init($scope.language);
+        i18nService.init($scope.language, $scope.fallback);
 
         //progress bar
         $scope.displayProgressBar = 0;
@@ -94,6 +98,12 @@ var timerModule = angular.module('timer', [])
         }
 
         $scope.$watch('startTimeAttr', function(newValue, oldValue) {
+          if (newValue !== oldValue && $scope.isRunning) {
+            $scope.start();
+          }
+        });
+
+        $scope.$watch('endTimeAttr', function(newValue, oldValue) {
           if (newValue !== oldValue && $scope.isRunning) {
             $scope.start();
           }
@@ -336,10 +346,22 @@ app.factory('I18nService', function() {
     var I18nService = function() {};
 
     I18nService.prototype.language = 'en';
+    I18nService.prototype.fallback = 'en';
     I18nService.prototype.timeHumanizer = {};
 
-    I18nService.prototype.init = function init(lang){
+    I18nService.prototype.init = function init(lang, fallback) {
+        var supported_languages = humanizeDuration.getSupportedLanguages();
+
+        this.fallback = (fallback !== undefined) ? fallback : 'en';
+        if (supported_languages.indexOf(fallback) === -1) {
+            this.fallback = 'en';
+        }
+
         this.language = lang;
+        if (supported_languages.indexOf(lang) === -1) {
+            this.language = this.fallback;
+        }
+
         //moment init
         moment.locale(this.language); //@TODO maybe to remove, it should be handle by the user's application itself, and not inside the directive
 
