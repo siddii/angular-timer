@@ -14,12 +14,22 @@
   };
 
   var languages = {
+    ar: {
+      year: function(c) { return ((c === 1) ? "سنة" : "سنوات"); },
+      month: function(c) { return ((c === 1) ? "شهر" : "أشهر"); },
+      week: function(c) { return ((c === 1) ? "أسبوع" : "أسابيع"); },
+      day: function(c) { return ((c === 1) ? "يوم" : "أيام"); },
+      hour: function(c) { return ((c === 1) ? "ساعة" : "ساعات"); },
+      minute: function(c) { return ((c === 1) ? "دقيقة" : "دقائق"); },
+      second: function(c) { return ((c === 1) ? "ثانية" : "ثواني"); },
+      millisecond: function(c) { return ((c === 1) ? "جزء من الثانية" : "أجزاء من الثانية"); }
+    },
     ca: {
       year: function(c) { return "any" + ((c !== 1) ? "s" : ""); },
       month: function(c) { return "mes" + ((c !== 1) ? "os" : ""); },
-      week: function(c) { return "setman" + ((c !== 1) ? "es" :"a"); },
-      day: function(c) { return "di" + ((c !== 1) ? "es" :"a"); },
-      hour: function(c) { return "hor" + ((c !== 1) ? "es" :"a"); },
+      week: function(c) { return "setman" + ((c !== 1) ? "es" : "a"); },
+      day: function(c) { return "di" + ((c !== 1) ? "es" : "a"); },
+      hour: function(c) { return "hor" + ((c !== 1) ? "es" : "a"); },
       minute: function(c) { return "minut" + ((c !== 1) ? "s" : ""); },
       second: function(c) { return "segon" + ((c !== 1) ? "s" : ""); },
       millisecond: function(c) { return "milisegon" + ((c !== 1) ? "s" : "" ); }
@@ -35,14 +45,14 @@
       millisecond: function(c) { return "millisekund" + ((c !== 1) ? "er" : ""); }
     },
     de: {
-      year: function(c) { return "jahr" + ((c !== 1) ? "e" : ""); },
-      month: function(c) { return "monat" + ((c !== 1) ? "e" : ""); },
-      week: function(c) { return "woche" + ((c !== 1) ? "n" : ""); },
-      day: function(c) { return "tag" + ((c !== 1) ? "e" : ""); },
-      hour: function(c) { return "stunde" + ((c !== 1) ? "n" : ""); },
-      minute: function(c) { return "minute" + ((c !== 1) ? "n" : ""); },
-      second: function(c) { return "sekunde" + ((c !== 1) ? "n" : ""); },
-      millisecond: function(c) { return "millisekunde" + ((c !== 1) ? "n" : ""); }
+      year: function(c) { return "Jahr" + ((c !== 1) ? "e" : ""); },
+      month: function(c) { return "Monat" + ((c !== 1) ? "e" : ""); },
+      week: function(c) { return "Woche" + ((c !== 1) ? "n" : ""); },
+      day: function(c) { return "Tag" + ((c !== 1) ? "e" : ""); },
+      hour: function(c) { return "Stunde" + ((c !== 1) ? "n" : ""); },
+      minute: function(c) { return "Minute" + ((c !== 1) ? "n" : ""); },
+      second: function(c) { return "Sekunde" + ((c !== 1) ? "n" : ""); },
+      millisecond: function(c) { return "Millisekunde" + ((c !== 1) ? "n" : ""); }
     },
     en: {
       year: function(c) { return "year" + ((c !== 1) ? "s" : ""); },
@@ -53,16 +63,6 @@
       minute: function(c) { return "minute" + ((c !== 1) ? "s" : ""); },
       second: function(c) { return "second" + ((c !== 1) ? "s" : ""); },
       millisecond: function(c) { return "millisecond" + ((c !== 1) ? "s" : ""); }
-    },
-    nl: {
-      year: "jaar",
-      month: function(c) { return (c === 1) ? "maand" : "maanden"; },
-      week: function(c) { return (c === 1) ? "week" : "weken"; },
-      day: function(c) { return (c === 1) ? "dag" : "dagen"; },
-      hour: "uur",
-      minute: function(c) { return (c === 1) ? "minuut" : "minuten"; },
-      second: function(c) { return (c === 1) ? "seconde" : "seconden"; },
-      millisecond: function(c) { return (c === 1) ? "milliseconde" : "milliseconden"; }
     },
     es: {
       year: function(c) { return "año" + ((c !== 1) ? "s" : ""); },
@@ -84,6 +84,26 @@
       second: function(c) { return "seconde" + ((c !== 1) ? "s" : ""); },
       millisecond: function(c) { return "milliseconde" + ((c !== 1) ? "s" : ""); }
     },
+    hu: {
+      year: "év",
+      month: "hónap",
+      week: "hét",
+      day: "nap",
+      hour: "óra",
+      minute: "perc",
+      second: "másodperc",
+      millisecond: "ezredmásodperc"
+    },
+    it: {
+      year: function(c) { return "ann" + ((c !== 1) ? "i" : "o"); },
+      month: function(c) { return "mes" + ((c !== 1) ? "i" : "e"); },
+      week: function(c) { return "settiman" + ((c !== 1) ? "e" : "a"); },
+      day: function(c) { return "giorn" + ((c !== 1) ? "i" : "o"); },
+      hour: function(c) { return "or" + ((c !== 1) ? "e" : "a"); },
+      minute: function(c) { return "minut" + ((c !== 1) ? "i" : "o"); },
+      second: function(c) { return "second" + ((c !== 1) ? "i" : "o"); },
+      millisecond: function(c) { return "millisecond" + ((c !== 1) ? "i" : "o" ); }
+    },
     ja: {
       year: "年",
       month: "月",
@@ -103,6 +123,16 @@
       minute: "분",
       second: "초",
       millisecond: "밀리 초"
+    },
+    nl: {
+      year: "jaar",
+      month: function(c) { return (c === 1) ? "maand" : "maanden"; },
+      week: function(c) { return (c === 1) ? "week" : "weken"; },
+      day: function(c) { return (c === 1) ? "dag" : "dagen"; },
+      hour: "uur",
+      minute: function(c) { return (c === 1) ? "minuut" : "minuten"; },
+      second: function(c) { return (c === 1) ? "seconde" : "seconden"; },
+      millisecond: function(c) { return (c === 1) ? "milliseconde" : "milliseconden"; }
     },
     nob: {
       year: "år",
@@ -190,8 +220,8 @@
   // parameters.
   function humanizer(passedOptions) {
 
-    var result = function humanizer(ms, passedOptions) {
-      var options = extend({}, result, passedOptions || {});
+    var result = function humanizer(ms, humanizerOptions) {
+      var options = extend({}, result, humanizerOptions || {});
       return doHumanization(ms, options);
     };
 
@@ -201,15 +231,16 @@
       spacer: " ",
       units: ["year", "month", "week", "day", "hour", "minute", "second"],
       languages: {},
-      halfUnit: true
+      halfUnit: true,
+      round: false
     }, passedOptions);
 
   }
 
   // The main function is just a wrapper around a default humanizer.
   var defaultHumanizer = humanizer({});
-  function humanizeDuration(ms, passedOptions) {
-    return defaultHumanizer(ms, passedOptions);
+  function humanizeDuration() {
+    return defaultHumanizer.apply(defaultHumanizer, arguments);
   }
 
   // doHumanization does the bulk of the work.
@@ -251,6 +282,9 @@
       // What's the number of full units we can fit?
       if ((i + 1) === len) {
         unitCount = ms / unitMS;
+        if (options.round) {
+          unitCount = Math.round(unitCount);
+        }
       } else {
         unitCount = Math.floor(ms / unitMS);
       }
@@ -269,13 +303,6 @@
 
   }
 
-  humanizeDuration.humanizer = humanizer;
-  if (typeof module !== "undefined") {
-    module.exports = humanizeDuration;
-  } else {
-    this.humanizeDuration = humanizeDuration;
-  }
-
   function render(count, type, dictionary, spacer) {
     var dictionaryValue = dictionary[type];
     var word;
@@ -292,7 +319,9 @@
     for (var i = 1; i < arguments.length; i ++) {
       source = arguments[i];
       for (var prop in source) {
-        destination[prop] = source[prop];
+        if (source.hasOwnProperty(prop)) {
+          destination[prop] = source[prop];
+        }
       }
     }
     return destination;
@@ -324,6 +353,29 @@
     } else {
       return 0;
     }
+  }
+
+  function getSupportedLanguages() {
+    var result = [];
+    for (var language in languages) {
+      if (languages.hasOwnProperty(language)) {
+        result.push(language);
+      }
+    }
+    return result;
+  }
+
+  humanizeDuration.humanizer = humanizer;
+  humanizeDuration.getSupportedLanguages = getSupportedLanguages;
+
+  if (typeof define === "function" && define.amd) {
+    define(function() {
+      return humanizeDuration;
+    });
+  } else if (typeof module !== "undefined" && module.exports) {
+    module.exports = humanizeDuration;
+  } else {
+    this.humanizeDuration = humanizeDuration;
   }
 
 })();

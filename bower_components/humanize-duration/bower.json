@@ -6,9 +6,12 @@
     "Filipi Siqueira (https://github.com/filipi777)",
     "Peter Rekdal Sunde (https://github.com/peters)",
     "Michał Janiec (https://github.com/mjjaniec)",
-    "Eileen Li (https://github.com/eileen3)"
+    "Eileen Li (https://github.com/eileen3)",
+    "Tommy Brunn (https://github.com/Nevon)",
+    "Giovanni Pellerano (https://github.com/evilaliv3)",
+    "Rahma Sghaier (https://twitter.com/sghaierrahma)"
   ],
-  "version": "2.3.1",
+  "version": "2.8.0",
   "description": "Convert millisecond durations to English and many other languages.",
   "main": "humanize-duration.js",
   "homepage": "https://github.com/EvanHahn/HumanizeDuration.js",
@@ -21,18 +24,7 @@
     "seconds",
     "days",
     "years",
-    "months",
-    "english",
-    "spanish",
-    "french",
-    "catalan",
-    "portuguese",
-    "korean",
-    "norwegian",
-    "german",
-    "danish",
-    "russian",
-    "turkish"
+    "months"
   ],
   "license": "WTFPL",
   "ignore": [

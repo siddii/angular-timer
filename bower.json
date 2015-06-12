@@ -22,8 +22,5 @@
   "ignore": [
     "node_modules",
     "bower_components"
-  ],
-  "resolutions": {
-    "humanize-duration": "~2.4.0"
-  }
+  ]
 }

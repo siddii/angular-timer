@@ -9,7 +9,7 @@ I have the time in milliseconds and I want it to become "30 minutes" or "3 days,
 Basic usage
 -----------
 
-This package is available as *humanize-duration* in Node and Bower. You can also include the JavaScript in the browser.
+This package is available as *humanize-duration* in npm and Bower. You can also include the JavaScript in the browser.
 
 In the browser:
 
@@ -50,19 +50,22 @@ humanizeDuration(22140000, { delimiter: "--" })     // "6 hours--9 minutes"
 humanizeDuration(260040000, { spacer: " whole " })  // "3 whole days, 14 whole minutes"
 humanizeDuration(260040000, { spacer: "" })         // "3days, 14minutes"
 
-humanizeDuration(3600000, { units: ["hours"] })          // 1 hour
-humanizeDuration(3600000, { units: ["days", "hours"] })  // 1 hour
-humanizeDuration(3600000, { units: ["minutes"] })        // 60 minutes
+humanizeDuration(3600000, { units: ["hours"] })          // "1 hour"
+humanizeDuration(3600000, { units: ["days", "hours"] })  // "1 hour"
+humanizeDuration(3600000, { units: ["minutes"] })        // "60 minutes"
 
-humanizeDuration(150000)                       // 2.5 minutes
-humanizeDuration(150000, { halfUnit: false })  // 2 minutes, 30 seconds
-```
+humanizeDuration(1200)                   // "1.2 seconds"
+humanizeDuration(1200, { round: true })  // "1 second"
+humanizeDuration(1600, { round: true })  // "2 seconds"
+
+humanizeDuration(150000)                       // "2.5 minutes"
+humanizeDuration(150000, { halfUnit: false })  // "2 minutes, 30 seconds"
 
 humanizeDuration(3600000, {
   language: "es",
   units: ["minutes"]
 })
-// 60 minutos
+// "60 minutos"
 ```
 
 ### Humanizers
@@ -96,7 +99,7 @@ var shortEnglishHumanizer = humanizeDuration.humanizer({
       millisecond: function() { return "ms"; },
     }
   }
-});
+})
 
 shortEnglishHumanizer(15600000)  // "4 h, 20 m"
 ```
@@ -104,7 +107,8 @@ shortEnglishHumanizer(15600000)  // "4 h, 20 m"
 You can also add languages after initializing:
 
 ```js
-var humanizer = humanizeDuration.humanizer();
+var humanizer = humanizeDuration.humanizer()
+
 humanizer.languages.shortEn = {
   year: function(c) { return c + "y"; },
   // ...
@@ -117,6 +121,7 @@ Supported languages
 
 Humanize Duration supports the following languages:
 
+* Arabic (ar)
 * Catalan (ca)
 * Chinese, simplified (zh-CN)
 * Chinese, traditional (zh-TW)
@@ -125,6 +130,8 @@ Humanize Duration supports the following languages:
 * English (en)
 * French (fr)
 * German (de)
+* Hungarian (hu)
+* Italian (it)
 * Japanese (ja)
 * Korean (ko)
 * Norwegian (nob)
@@ -135,9 +142,25 @@ Humanize Duration supports the following languages:
 * Swedish (sv)
 * Turkish (tr)
 
+For a list of supported languages, you can use the `getSupportedLanguages` function.
+
+```js
+humanizeDuration.getSupportedLanguages()
+// ["ar", "ca", "da", "de" ...]
+```
+
 Credits
 -------
 
-Lovingly made by [Evan Hahn](http://evanhahn.com/) with language support by [Martin Prins](https://github.com/magarcia). Thanks to [Filipi Siqueira](https://github.com/filipi777) for Portuguese support, [Peter Rekdal Sunde](https://github.com/peters) for Norwegian support, [Michał Janiec](https://github.com/mjjaniec) for Polish support, [Eileen Li](https://github.com/eileen3) for Chinese support, and [Tommy Brunn](https://github.com/Nevon) for Swedish support.
+Lovingly made by [Evan Hahn](http://evanhahn.com/) with help from:
+
+* [Martin Prins](https://github.com/magarcia) for language support
+* [Filipi Siqueira](https://github.com/filipi777) for Portuguese support
+* [Peter Rekdal Sunde](https://github.com/peters) for Norwegian support
+* [Michał Janiec](https://github.com/mjjaniec) for Polish support
+* [Eileen Li](https://github.com/eileen3) for Chinese support
+* [Tommy Brunn](https://github.com/Nevon) for Swedish support
+* [Giovanni Pellerano](https://github.com/evilaliv3) for Italian support
+* [Rahma Sghaier](https://twitter.com/sghaierrahma) for Arabic support
 
 Licensed under the WTFPL, so you can do whatever you want. Enjoy!

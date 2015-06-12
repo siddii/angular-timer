@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.3 - 2015-05-28 9:05 AM
+ * angular-timer - v1.3.3 - 2015-06-12 8:43 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2015 Siddique Hameed
