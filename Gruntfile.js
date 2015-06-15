@@ -122,51 +122,6 @@ module.exports = function (grunt) {
       }
     },
 
-    /**
-     * The `index` task compiles the `index.html` file as a Grunt template. CSS
-     * and JS files co-exist here but they get split apart later.
-     */
-    index: {
-      /**
-       * During development, we don't want to have wait for compilation,
-       * concatenation, minification, etc. So to avoid these steps, we simply
-       * add all script files directly to the `<head>` of `index.html`. The
-       * `src` property contains the list of included files.
-       */
-      build: {
-        dir: '',
-        src: [
-          'bower_components/angular/angular.min.js',
-          'app/**/*.js',
-          'bower_components/momentjs/min/moment-with-locales.min.js',
-          'bower_components/humanize-duration/humanize-duration.js',
-          'docs/docs.js',
-          'bower_components/jquery/jquery.min.js',
-          'bower_components/bootstrap/docs/assets/js/bootstrap.min.js',
-          'docs/prettify.js',
-          'docs/application.js',
-          'bower_components/bootstrap/docs/assets/css/bootstrap.css',
-          'bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css',
-          'docs/css/docs.css',
-          'docs/css/prettify.css'
-        ]
-      },
-
-      /**
-       * When it is time to have a completely compiled application, we can
-       * alter the above to include only a single JavaScript and a single CSS
-       * file. Now we're back!
-       */
-      compile: {
-        dir: '<%= dist_dir %>/',
-        src: [
-          '<%= dist_dir %>/assets/js/<%= pkg.name %>-bower.js',
-          '<%= dist_dir %>/assets/js/<%= pkg.name %>-all.min.js',
-          '<%= dist_dir %>/assets/css/<%= pkg.name %>-bower.css'
-        ]
-      }
-    },
-
     'gh-pages': {
       options: {
         base: 'dist',
@@ -224,7 +179,7 @@ module.exports = function (grunt) {
   grunt.registerTask('tests', [ 'connect:testserver', 'build', 'karma:unit', 'karma:e2e']);
 
   grunt.registerTask('build', [
-    'clean', 'jshint', 'concat:compile_js', 'uglify', 'concat:compile_all_js', 'concat:compile_bower_js', 'concat:compile_bower_css','copy:examples','copy:nav','copy:example', 'index:compile', 'index:build'
+    'clean', 'jshint', 'concat:compile_js', 'uglify', 'concat:compile_all_js', 'concat:compile_bower_js', 'concat:compile_bower_css','copy:examples','copy:nav','copy:example'
   ]);
 
   /**
