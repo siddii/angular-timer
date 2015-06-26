@@ -11,10 +11,10 @@ var timerModule = angular.module('timer', [])
       restrict: 'EA',
       replace: false,
       scope: {
-        interval: '=interval',
-        startTimeAttr: '=startTime',
-        endTimeAttr: '=endTime',
-        countdownattr: '=countdown',
+        interval: '@interval',
+        startTimeAttr: '@startTime',
+        endTimeAttr: '@endTime',
+        countdownattr: '@countdown',
         finishCallback: '&finishCallback',
         autoStart: '&autoStart',
         language: '@?',
@@ -46,6 +46,8 @@ var timerModule = angular.module('timer', [])
             i18nService.init(newVal, $scope.fallback);
           }
         });
+
+        $scope.interval = parseInt($scope.interval);
 
         //init momentJS i18n, default english
         var i18nService = new I18nService();
@@ -110,8 +112,9 @@ var timerModule = angular.module('timer', [])
         });
 
         $scope.start = $element[0].start = function () {
-          $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
-          $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
+          $scope.startTime = $scope.startTimeAttr ? moment(parseInt($scope.startTimeAttr)) : moment();
+          $scope.endTime = $scope.endTimeAttr ? moment(parseInt($scope.endTimeAttr)) : null;
+          console.log($scope.endTime);
           if (!$scope.countdown) {
             $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           }
@@ -145,8 +148,8 @@ var timerModule = angular.module('timer', [])
         };
 
         $scope.reset = $element[0].reset = function () {
-          $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
-          $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
+          $scope.startTime = $scope.startTimeAttr ? moment(parseInt($scope.startTimeAttr)) : moment();
+          $scope.endTime = $scope.endTimeAttr ? moment(parseInt($scope.endTimeAttr)) : null;
           $scope.countdown = $scope.countdownattr && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
           resetTimeout();
           tick();
