@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.3 - 2015-06-15 3:07 PM
+ * angular-timer - v1.3.3 - 2015-06-29 6:31 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2015 Siddique Hameed
@@ -292,6 +292,7 @@ var timerModule = angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            $scope.$emit('timer-countdown-finished');
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
             }
@@ -312,6 +313,7 @@ var timerModule = angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
+            $scope.$emit('timer-countdown-finished');
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
             }
