@@ -285,6 +285,7 @@ var timerModule = angular.module('timer', [])
             $scope.stop();
             $scope.millis = 0;
             calculateTimeUnits();
+            $scope.$emit('timer-countdown-finished');
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
             }
@@ -305,6 +306,7 @@ var timerModule = angular.module('timer', [])
           }
           else if ($scope.countdown <= 0) {
             $scope.stop();
+            $scope.$emit('timer-countdown-finished');
             if($scope.finishCallback) {
               $scope.$eval($scope.finishCallback);
             }
