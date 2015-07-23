@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "angular": ">= 1.0.7",
-    "momentjs": "~2.9.0",
+    "moment": "~2.9.0",
     "humanize-duration": "~2.8.0"
   },
   "devDependencies": {
