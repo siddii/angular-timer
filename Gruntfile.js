@@ -143,7 +143,7 @@ module.exports = function (grunt) {
       testserver: {
         options: {
           port: 3030,
-          base: 'dist'
+          base: '.'
         }
       }
     },
