@@ -6,7 +6,7 @@ module.exports = function(config){
 
     files : [
       'bower_components/humanize-duration/humanize-duration.js',
-      'bower_components/momentjs/min/moment-with-locales.js',
+      'bower_components/moment/min/moment-with-locales.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'app/js/*.js',
