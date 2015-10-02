@@ -67,7 +67,7 @@ module.exports = function (grunt) {
       compile_all_js: {
         src: [
           '<%= dist_dir %>/<%= pkg.name %>.min.js',
-           'bower_components/momentjs/min/moment-with-locales.min.js',
+           'bower_components/moment/min/moment-with-locales.min.js',
            'bower_components/humanize-duration/humanize-duration.js'
       ],
         dest: '<%= dist_dir %>/assets/js/<%= pkg.name %>-all.min.js'
