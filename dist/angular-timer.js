@@ -20,18 +20,12 @@ var timerModule = angular.module('timer', [])
         language: '@?',
         fallback: '@?',
         maxTimeUnit: '=?',
-        seconds: '=?',
-        minutes: '=?',
-        hours: '=?',
-        days: '=?',
-        months: '=?',
-        years: '=?',     
-        sseconds: '=?',
-        mminutes: '=?',
-        hhours: '=?',
-        ddays: '=?',
-        mmonths: '=?',
-        yyears: '=?'        
+        seconds: '&?',
+        minutes: '&?',
+        hours: '&?',
+        days: '&?',
+        months: '&?',
+        years: '&?'   
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
 
