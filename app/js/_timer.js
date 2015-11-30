@@ -18,13 +18,13 @@ var timerModule = angular.module('timer', [])
         hours: '=?',
         days: '=?',
         months: '=?',
-        years: '=?',   
+        years: '=?',
         secondsS: '=?',
         minutesS: '=?',
         hoursS: '=?',
         daysS: '=?',
         monthsS: '=?',
-        yearsS: '=?'   
+        yearsS: '=?'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
 
@@ -310,7 +310,7 @@ var timerModule = angular.module('timer', [])
             $scope.$digest();
           }, $scope.interval - adjustment);
 
-          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
+          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis, timerElement: $element[0]});
 
           if ($scope.countdown > 0) {
             $scope.countdown--;
