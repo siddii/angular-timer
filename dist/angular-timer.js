@@ -5,6 +5,8 @@
  * Copyright (c) 2016 Siddique Hameed
  * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
  */
+var humanizeDuration = require("humanize-duration");
+var moment = require("moment");
 var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
