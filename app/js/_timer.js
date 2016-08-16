@@ -26,7 +26,7 @@ var timerModule = angular.module('timer', [])
         monthsS: '=?',
         yearsS: '=?'
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', '$rootScope', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService, $rootScope) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -298,7 +298,11 @@ var timerModule = angular.module('timer', [])
             $scope.millis = 0;
             calculateTimeUnits();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              if ($rootScope.$$phase) {
+                $scope.$evalAsync($scope.finishCallback);
+              } else {
+                $scope.$apply($scope.finishCallback);
+              }
             }
             return;
           }
@@ -318,7 +322,11 @@ var timerModule = angular.module('timer', [])
           else if ($scope.countdown <= 0) {
             $scope.stop();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              if ($rootScope.$$phase) {
+                $scope.$evalAsync($scope.finishCallback);
+              } else {
+                $scope.$apply($scope.finishCallback);
+              }
             }
           }
 

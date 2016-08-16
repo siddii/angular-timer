@@ -41,6 +41,5 @@ angular.module('timer-demo',['timer']).controller('TimerDemoController',['$scope
     $scope.callbackTimer.finished=function(){
         $scope.callbackTimer.status='COMPLETE!!';
         $scope.callbackTimer.callbackCount++;
-        $scope.$apply();
     };
 }]);
