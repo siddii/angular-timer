@@ -2,17 +2,17 @@
   "author": "Adrian Wardell",
   "name": "angular-timer",
   "version": "1.3.5",
-  "homepage": "https://github.com/june07/angular-timer",
+  "homepage": "https://github.com/siddii/angular-timer",
   "main": "dist/angular-timer.js",
   "license": "MIT",
   "licenses": {
     "type": "MIT",
-    "url": "https://github.com/june07/angular-timer/blob/master/LICENSE.txt"
+    "url": "https://github.com/siddii/angular-timer/blob/master/LICENSE.txt"
   },
-  "bugs": "https://github.com/june07/angular-timer/issues",
+  "bugs": "https://github.com/siddii/angular-timer/issues",
   "repository": {
     "type": "git",
-    "url": "git@github.com:june07/angular-timer.git"
+    "url": "git@github.com:siddii/angular-timer.git"
   },
   "dependencies": {},
   "devDependencies": {
