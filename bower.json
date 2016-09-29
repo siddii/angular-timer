@@ -2,11 +2,11 @@
   "author": "Adrian Wardell",
   "name": "angular-timer",
   "version": "1.3.4",
-  "homepage": "https://github.com/june07/angular-timer",
+  "homepage": "https://github.com/siddii/angular-timer",
   "description": "Angular-Timer : A simple AngularJS directive demonstrating re-usability & interoperability",
   "repository": {
     "type": "git",
-    "url": "git://github.com/june07/angular-timer.git"
+    "url": "git://github.com/siddii/angular-timer.git"
   },
   "dependencies": {
     "angular": ">= 1.0.7",
