@@ -1,12 +1,10 @@
 /**
- * angular-timer - v1.3.4 - 2016-05-01 9:52 PM
- * https://github.com/siddii/angular-timer
+ * angular-timer - v1.3.5 - 2016-08-16 4:33 PM
+ * https://github.com/june07/angular-timer
  *
- * Copyright (c) 2016 Siddique Hameed
- * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
+ * Copyright (c) 2016 Adrian Wardell
+ * Licensed MIT <https://github.com/june07/angular-timer/blob/master/LICENSE.txt>
  */
-var humanizeDuration = require("humanize-duration");
-var moment = require("moment");
 var timerModule = angular.module('timer', [])
   .directive('timer', ['$compile', function ($compile) {
     return  {
@@ -35,7 +33,7 @@ var timerModule = angular.module('timer', [])
         monthsS: '=?',
         yearsS: '=?'
       },
-      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
+      controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', '$rootScope', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService, $rootScope) {
 
         // Checking for trim function since IE8 doesn't have it
         // If not a function, create tirm with RegEx to mimic native trim
@@ -307,7 +305,11 @@ var timerModule = angular.module('timer', [])
             $scope.millis = 0;
             calculateTimeUnits();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              if ($rootScope.$$phase) {
+                $scope.$evalAsync($scope.finishCallback);
+              } else {
+                $scope.$apply($scope.finishCallback);
+              }
             }
             return;
           }
@@ -327,7 +329,11 @@ var timerModule = angular.module('timer', [])
           else if ($scope.countdown <= 0) {
             $scope.stop();
             if($scope.finishCallback) {
-              $scope.$eval($scope.finishCallback);
+              if ($rootScope.$$phase) {
+                $scope.$evalAsync($scope.finishCallback);
+              } else {
+                $scope.$apply($scope.finishCallback);
+              }
             }
           }
 
