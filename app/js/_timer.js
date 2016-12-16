@@ -13,6 +13,7 @@ var timerModule = angular.module('timer', [])
         language: '@?',
         fallback: '@?',
         maxTimeUnit: '=',
+        minTimeUnit: '=',
         seconds: '=?',
         minutes: '=?',
         hours: '=?',
@@ -166,57 +167,76 @@ var timerModule = angular.module('timer', [])
 
 
         function calculateTimeUnits() {
-          var timeUnits = {}; //will contains time with units
+          var timeUnits = {},
+              millisDisplay,
+              divider; //will contains time with units
 
           if ($attrs.startTime !== undefined){
             $scope.millis = moment().diff(moment($scope.startTimeAttr));
           }
-
-          timeUnits = i18nService.getTimeUnits($scope.millis);
+          millisDisplay = $scope.millis;
+          if ($attrs.endTime !== undefined && $attrs.minTimeUnit !== undefined){
+            switch ($scope.minTimeUnit){
+              case'minute':
+                divider = 60000;
+                break;
+              case'hour':
+                divider = 3600000;
+                break;
+              case'day':
+                divider = 86400000;
+                break;
+              default:
+                divider = 1000;
+               break;
+            }
+            millisDisplay = Math.ceil($scope.millis / divider) * divider ;
+          }
+          timeUnits = i18nService.getTimeUnits(millisDisplay);
 
           // compute time values based on maxTimeUnit specification
           if (!$scope.maxTimeUnit || $scope.maxTimeUnit === 'day') {
-            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-            $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-            $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-            $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+            $scope.seconds = Math.floor((millisDisplay / 1000) % 60);
+            $scope.minutes = Math.floor(((millisDisplay / (60000)) % 60));
+            $scope.hours = Math.floor(((millisDisplay / (3600000)) % 24));
+            $scope.days = Math.floor(((millisDisplay / (3600000)) / 24));
             $scope.months = 0;
             $scope.years = 0;
           } else if ($scope.maxTimeUnit === 'second') {
-            $scope.seconds = Math.floor($scope.millis / 1000);
+            $scope.seconds = Math.floor(millisDisplay / 1000);
             $scope.minutes = 0;
             $scope.hours = 0;
             $scope.days = 0;
             $scope.months = 0;
             $scope.years = 0;
           } else if ($scope.maxTimeUnit === 'minute') {
-            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-            $scope.minutes = Math.floor($scope.millis / 60000);
+            $scope.seconds = Math.floor((millisDisplay / 1000) % 60);
+            $scope.minutes = Math.floor(millisDisplay / 60000);
             $scope.hours = 0;
             $scope.days = 0;
             $scope.months = 0;
             $scope.years = 0;
           } else if ($scope.maxTimeUnit === 'hour') {
-            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-            $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-            $scope.hours = Math.floor($scope.millis / 3600000);
+            $scope.seconds = Math.floor((millisDisplay / 1000) % 60);
+            $scope.minutes = Math.floor(((millisDisplay / (60000)) % 60));
+            $scope.hours = Math.floor(millisDisplay / 3600000);
             $scope.days = 0;
             $scope.months = 0;
             $scope.years = 0;
           } else if ($scope.maxTimeUnit === 'month') {
-            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-            $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-            $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-            $scope.days = Math.floor((($scope.millis / (3600000)) / 24) % 30);
-            $scope.months = Math.floor((($scope.millis / (3600000)) / 24) / 30);
+            $scope.seconds = Math.floor((millisDisplay / 1000) % 60);
+            $scope.minutes = Math.floor(((millisDisplay / (60000)) % 60));
+            $scope.hours = Math.floor(((millisDisplay / (3600000)) % 24));
+            $scope.days = Math.floor(((millisDisplay / (3600000)) / 24) % 30);
+            $scope.months = Math.floor(((millisDisplay / (3600000)) / 24) / 30);
             $scope.years = 0;
           } else if ($scope.maxTimeUnit === 'year') {
-            $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
-            $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
-            $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
-            $scope.days = Math.floor((($scope.millis / (3600000)) / 24) % 30);
-            $scope.months = Math.floor((($scope.millis / (3600000)) / 24 / 30) % 12);
-            $scope.years = Math.floor(($scope.millis / (3600000)) / 24 / 365);
+            $scope.seconds = Math.floor((millisDisplay / 1000) % 60);
+            $scope.minutes = Math.floor(((millisDisplay / (60000)) % 60));
+            $scope.hours = Math.floor(((millisDisplay / (3600000)) % 24));
+            $scope.days = Math.floor(((millisDisplay / (3600000)) / 24) % 30);
+            $scope.months = Math.floor(((millisDisplay / (3600000)) / 24 / 30) % 12);
+            $scope.years = Math.floor((millisDisplay / (3600000)) / 24 / 365);
           }
           // plural - singular unit decision (old syntax, for backwards compatibility and English only, could be deprecated!)
           $scope.secondsS = ($scope.seconds === 1) ? '' : 's';
