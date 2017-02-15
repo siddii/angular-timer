@@ -114,7 +114,7 @@ var timerModule = angular.module('timer', [])
           }
         });
 
-        $scope.start = $element[0].start = function () {
+        $scope.start = function () {
           $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
           $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
           if (!angular.isNumber($scope.countdown)) {
@@ -125,7 +125,7 @@ var timerModule = angular.module('timer', [])
           $scope.isRunning = true;
         };
 
-        $scope.resume = $element[0].resume = function () {
+        $scope.resume = function () {
           resetTimeout();
           if ($scope.countdownattr) {
             $scope.countdown += 1;
@@ -135,13 +135,13 @@ var timerModule = angular.module('timer', [])
           $scope.isRunning = true;
         };
 
-        $scope.stop = $scope.pause = $element[0].stop = $element[0].pause = function () {
+        $scope.stop = $scope.pause = function () {
           var timeoutId = $scope.timeoutId;
           $scope.clear();
           $scope.$emit('timer-stopped', {timeoutId: timeoutId, millis: $scope.millis, seconds: $scope.seconds, minutes: $scope.minutes, hours: $scope.hours, days: $scope.days});
         };
 
-        $scope.clear = $element[0].clear = function () {
+        $scope.clear = function () {
           // same as stop but without the event being triggered
           $scope.stoppedTime = moment();
           resetTimeout();
@@ -149,7 +149,7 @@ var timerModule = angular.module('timer', [])
           $scope.isRunning = false;
         };
 
-        $scope.reset = $element[0].reset = function () {
+        $scope.reset = function () {
           $scope.startTime = $scope.startTimeAttr ? moment($scope.startTimeAttr) : moment();
           $scope.endTime = $scope.endTimeAttr ? moment($scope.endTimeAttr) : null;
           $scope.countdown = angular.isNumber($scope.countdownattr) && parseInt($scope.countdownattr, 10) > 0 ? parseInt($scope.countdownattr, 10) : undefined;
@@ -249,7 +249,7 @@ var timerModule = angular.module('timer', [])
         if ($scope.countdownattr) {
           $scope.millis = $scope.countdownattr * 1000;
 
-          $scope.addCDSeconds = $element[0].addCDSeconds = function (extraSeconds) {
+          $scope.addCDSeconds = function (extraSeconds) {
             $scope.countdown += extraSeconds;
             $scope.$digest();
             if (!$scope.isRunning) {
@@ -310,7 +310,7 @@ var timerModule = angular.module('timer', [])
             $scope.$digest();
           }, $scope.interval - adjustment);
 
-          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis, timerElement: $element[0]});
+          $scope.$emit('timer-tick', {timeoutId: $scope.timeoutId, millis: $scope.millis});
 
           if ($scope.countdown > 0) {
             $scope.countdown--;
