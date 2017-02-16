@@ -113,7 +113,7 @@ describe('Angular Timer E2E Tests', function () {
     expect(element('#auto-start-false-timer timer span').html()).toBeLessThan(100);
   });
 
-  it('End Time Timer - Ends at beginning of 2014', function () {
+  it('End Time Timer - Ends at beginning of next year', function () {
     var beforeTime = element('#timer-with-end-time timer span').html();
     sleep(3);
     var afterTime = element('#timer-with-end-time timer span').html();
