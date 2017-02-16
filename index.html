@@ -49,8 +49,8 @@
             <h3>
                 <timer></timer>
             </h3>
-            <button class="btn" ng-click="start()" type="button">Start</button>
-            <button class="btn" ng-click="stop()" type="button">Stop</button>
+            <button class="btn" ng-click="timerStart()" type="button">Start</button>
+            <button class="btn" ng-click="timerStop()" type="button">Stop</button>
         </div>
     </section>
     <section id="start-time-and-auto-start-set" >
@@ -76,7 +76,7 @@
             <h3>
                 <timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
             </h3>
-            <button class="btn" ng-click="toggle()" type="button">{{btnText[timerStatus]}}</button>
+            <button class="btn" ng-click="timerToggle()" type="button">{{btnText[timerStatus]}}</button>
         </div>
     </section>
     <section id="clock-timer-i18n">
@@ -132,7 +132,7 @@
             <h3>
                 <timer interval="1000">{{hhours}} hour{{hoursS}}, {{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
             </h3>
-            <button class="btn" ng-click="toggle()" type="button">{{btnText[timerStatus]}}</button>
+            <button class="btn" ng-click="timerToggle()" type="button">{{btnText[timerStatus]}}</button>
         </div>
     </section>
     <section id="timer-with-start-time">
@@ -147,7 +147,7 @@
             <h3>
                 <timer start-time="startTime">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
             </h3>
-            <button class="btn" ng-click="toggle()" type="button">{{btnText[timerStatus]}}</button>
+            <button class="btn" ng-click="timerToggle()" type="button">{{btnText[timerStatus]}}</button>
         </div>
     </section>
     <section id="timer-with-end-time">
@@ -217,8 +217,8 @@
                     </div>
                 </timer>
             </h3>
-            <button class="btn" ng-click="start()" type="button">Start</button>
-            <button class="btn" ng-click="stop()" type="button">Stop</button>
+            <button class="btn" ng-click="timerStart()" type="button">Start</button>
+            <button class="btn" ng-click="timerStop()" type="button">Stop</button>
         </div>
     </section>
     <section id="countdown-timer">
@@ -233,7 +233,7 @@
             <h3>
                 <timer countdown="100" interval="1000">{{countdown}}</timer>
             </h3>
-            <button class="btn" ng-click="addCDSeconds(10)" type="button">Add 10 Seconds</button>
+            <button class="btn" ng-click="timerAddCDSeconds(10)" type="button">Add 10 Seconds</button>
         </div>
     </section>
     <section id="auto-start-false-timer" >
@@ -246,7 +246,7 @@
             <h3>
                 <timer autostart="false" interval="1000">{{seconds}}</timer>
             </h3>
-            <button class="btn" ng-click="toggle()" type="button">{{btnText[timerStatus]}}</button>
+            <button class="btn" ng-click="timerToggle()" type="button">{{btnText[timerStatus]}}</button>
         </div>
     </section>
 

@@ -388,29 +388,29 @@ var timerModule = angular.module('timer', [])
         $scope.$on('timer-reset', function() {
           $scope.timerStatus = "reset";
         });
-        $scope.start = function() {
+        $scope.timerStart = function() {
           $scope.$broadcast('timer-start');
         };
-        $scope.stop = function() {
+        $scope.timerStop = function() {
           $scope.$broadcast('timer-stop');
         };
-        $scope.resume = function() {
+        $scope.timerResume = function() {
           $scope.$broadcast('timer-resume');
         };
-        $scope.toggle = function() {
+        $scope.timerToggle = function() {
           switch ($scope.timerStatus) {
             case "started":
-              $scope.stop();
+              $scope.timerStop();
               break;
             case "stopped":
-              $scope.resume();
+              $scope.timerResume();
               break;
             case "reset":
-              $scope.start();
+              $scope.timerStart();
               break;
           }
         };
-        $scope.addCDSeconds = function(extraSeconds) {
+        $scope.timerAddCDSeconds = function(extraSeconds) {
           $scope.$broadcast('timer-add-cd-seconds', extraSeconds);
         };
       }]
