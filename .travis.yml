@@ -5,10 +5,10 @@ node_js:
 notifications:
   email: true
 
-before_script:
+install:
+  - npm install
   - npm install -g grunt-cli
   - npm install bower
   - bower install
-
 script:
   - grunt tests
