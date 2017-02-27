@@ -13,8 +13,8 @@ With Bower install :
 * Install momentjs using [Bower](http://bower.io) - `bower install momentjs`
 
 And include these scripts in your webpage :
-* bower_components/momentjs/min/moment.min.js
-* bower_components/momentjs/min/locales.min.js
+* bower_components/moment/min/moment.min.js
+* bower_components/moment/min/locales.min.js
 * bower_components/humanize-duration/humanize-duration.js
 
 
