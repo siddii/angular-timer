@@ -21,8 +21,9 @@ app.factory('I18nService', function() {
             this.language = this.fallback;
         }
 
-        //moment init
-        moment.locale(this.language); //@TODO maybe to remove, it should be handle by the user's application itself, and not inside the directive
+        // It should be handle by the user's application itself, and not inside the directive
+        // moment init
+        // moment.locale(this.language);
 
         //human duration init, using it because momentjs does not allow accurate time (
         // momentJS: a few moment ago, human duration : 4 seconds ago
@@ -44,13 +45,13 @@ app.factory('I18nService', function() {
 
         if (typeof this.timeHumanizer != 'undefined'){
             time = {
-                'millis' : this.timeHumanizer(diffFromAlarm, { units: ["milliseconds"] }),
-                'seconds' : this.timeHumanizer(diffFromAlarm, { units: ["seconds"] }),
-                'minutes' : this.timeHumanizer(diffFromAlarm, { units: ["minutes", "seconds"] }) ,
-                'hours' : this.timeHumanizer(diffFromAlarm, { units: ["hours", "minutes", "seconds"] }) ,
-                'days' : this.timeHumanizer(diffFromAlarm, { units: ["days", "hours", "minutes", "seconds"] }) ,
-                'months' : this.timeHumanizer(diffFromAlarm, { units: ["months", "days", "hours", "minutes", "seconds"] }) ,
-                'years' : this.timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] })
+                'millis' : this.timeHumanizer(diffFromAlarm, { units: ["ms"] }),
+                'seconds' : this.timeHumanizer(diffFromAlarm, { units: ["s"] }),
+                'minutes' : this.timeHumanizer(diffFromAlarm, { units: ["m", "s"] }) ,
+                'hours' : this.timeHumanizer(diffFromAlarm, { units: ["h", "m", "s"] }) ,
+                'days' : this.timeHumanizer(diffFromAlarm, { units: ["d", "h", "m", "s"] }) ,
+                'months' : this.timeHumanizer(diffFromAlarm, { units: ["mo", "d", "h", "m", "s"] }) ,
+                'years' : this.timeHumanizer(diffFromAlarm, { units: ["y", "mo", "d", "h", "m", "s"] })
             };
         }
         else {
