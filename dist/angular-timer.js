@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.5 - 2017-03-08 6:11 PM
+ * angular-timer - v1.3.5 - 2017-03-09 11:42 AM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2017 Adrian Wardell
@@ -341,8 +341,10 @@ var timerModule = angular.module('timer', [])
 
           //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
           $scope.timeoutId = setTimeout(function () {
-            tick();
-            $scope.$digest();
+              tick();
+              // since you choose not to use $timeout, at least preserve angular cycle two way data binding
+              // by calling $scope.$apply() instead of $scope.$digest()
+              $scope.$apply();
           }, $scope.interval - adjustment);
 
           $scope.$emit('timer-tick', {
@@ -452,9 +454,8 @@ app.factory('I18nService', function() {
             this.language = this.fallback;
         }
 
-        // It should be handle by the user's application itself, and not inside the directive
-        // moment init
-        // moment.locale(this.language);
+        //moment init
+        moment.locale(this.language); // @TODO maybe to remove, it should be handle by the user's application itself, and not inside the directive
 
         //human duration init, using it because momentjs does not allow accurate time (
         // momentJS: a few moment ago, human duration : 4 seconds ago
@@ -476,13 +477,13 @@ app.factory('I18nService', function() {
 
         if (typeof this.timeHumanizer != 'undefined'){
             time = {
-                'millis' : this.timeHumanizer(diffFromAlarm, { units: ["ms"] }),
-                'seconds' : this.timeHumanizer(diffFromAlarm, { units: ["s"] }),
-                'minutes' : this.timeHumanizer(diffFromAlarm, { units: ["m", "s"] }) ,
-                'hours' : this.timeHumanizer(diffFromAlarm, { units: ["h", "m", "s"] }) ,
-                'days' : this.timeHumanizer(diffFromAlarm, { units: ["d", "h", "m", "s"] }) ,
-                'months' : this.timeHumanizer(diffFromAlarm, { units: ["mo", "d", "h", "m", "s"] }) ,
-                'years' : this.timeHumanizer(diffFromAlarm, { units: ["y", "mo", "d", "h", "m", "s"] })
+                'millis' : this.timeHumanizer(diffFromAlarm, { units: ["milliseconds"] }),
+                'seconds' : this.timeHumanizer(diffFromAlarm, { units: ["seconds"] }),
+                'minutes' : this.timeHumanizer(diffFromAlarm, { units: ["minutes", "seconds"] }) ,
+                'hours' : this.timeHumanizer(diffFromAlarm, { units: ["hours", "minutes", "seconds"] }) ,
+                'days' : this.timeHumanizer(diffFromAlarm, { units: ["days", "hours", "minutes", "seconds"] }) ,
+                'months' : this.timeHumanizer(diffFromAlarm, { units: ["months", "days", "hours", "minutes", "seconds"] }) ,
+                'years' : this.timeHumanizer(diffFromAlarm, { units: ["years", "months", "days", "hours", "minutes", "seconds"] })
             };
         }
         else {
