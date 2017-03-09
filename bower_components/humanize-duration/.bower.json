@@ -2,6 +2,7 @@
   "name": "humanize-duration",
   "authors": [
     "Evan Hahn <me@evanhahn.com> (http://evanhahn.com)",
+    "Óli Tómas Freysson (https://github.com/olitomas)",
     "Martin Prins (https://github.com/magarcia)",
     "Filipi Siqueira (https://github.com/filipi777)",
     "Peter Rekdal Sunde (https://github.com/peters)",
@@ -9,9 +10,18 @@
     "Eileen Li (https://github.com/eileen3)",
     "Tommy Brunn (https://github.com/Nevon)",
     "Giovanni Pellerano (https://github.com/evilaliv3)",
-    "Rahma Sghaier (https://twitter.com/sghaierrahma)"
+    "Rahma Sghaier (https://twitter.com/sghaierrahma)",
+    "Evgenios Kastanias (https://github.com/evgenios)",
+    "Oleksii Mylotskyi (https://github.com/spalax)",
+    "Matthew Brandly (https://github.com/brandly)",
+    "Patrik Simek (https://github.com/patriksimek)",
+    "Toni Helminen (https://github.com/tonihelminen)",
+    "Vidmantas Drasutis (https://github.com/drasius2)",
+    "Manh Tuan (https://github.com/J2TeaM)",
+    "Leonard Lee (https://github.com/sheeeng)",
+    "Jesse Jackson (https://github.com/jsejcksn)"
   ],
-  "version": "2.8.0",
+  "version": "3.10.0",
   "description": "Convert millisecond durations to English and many other languages.",
   "main": "humanize-duration.js",
   "homepage": "https://github.com/EvanHahn/HumanizeDuration.js",
@@ -26,7 +36,7 @@
     "years",
     "months"
   ],
-  "license": "WTFPL",
+  "license": "Unlicense",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -38,13 +48,13 @@
     "type": "git",
     "url": "git://github.com/EvanHahn/HumanizeDuration.js.git"
   },
-  "_release": "2.8.0",
+  "_release": "3.10.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.8.0",
-    "commit": "dcab6eaf100968c008351c70ae3dea9a8a86d929"
+    "tag": "v3.10.0",
+    "commit": "18243414dc4ce75d93f6a501f0e88130f2126421"
   },
-  "_source": "git://github.com/EvanHahn/HumanizeDuration.js.git",
-  "_target": "~2.8.0",
+  "_source": "https://github.com/EvanHahn/HumanizeDuration.js.git",
+  "_target": "~3.10.0",
   "_originalSource": "humanize-duration"
 }
