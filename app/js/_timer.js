@@ -200,7 +200,7 @@ var timerModule = angular.module('timer', [])
         function calculateTimeUnits() {
           var timeUnits = {}; //will contains time with units
 
-          if ($attrs.startTime !== undefined){
+          if ($attrs.startTime !== undefined && typeof $attrs.startTime === 'number'){
             $scope.millis = moment().diff(moment($scope.startTimeAttr));
           }
 
