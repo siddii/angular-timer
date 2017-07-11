@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.5 - 2017-03-09 2:18 PM
+ * angular-timer - v1.3.5 - 2017-07-07 4:34 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2017 Adrian Wardell
@@ -31,7 +31,8 @@ var timerModule = angular.module('timer', [])
         hoursS: '=?',
         daysS: '=?',
         monthsS: '=?',
-        yearsS: '=?'
+        yearsS: '=?',
+        currentTime: '=?'
       },
       controller: ['$scope', '$element', '$attrs', '$timeout', 'I18nService', '$interpolate', 'progressBarService', function ($scope, $element, $attrs, $timeout, I18nService, $interpolate, progressBarService) {
 
@@ -281,6 +282,8 @@ var timerModule = angular.module('timer', [])
           $scope.mmonths = $scope.months < 10 ? '0' + $scope.months : $scope.months;
           $scope.yyears = $scope.years < 10 ? '0' + $scope.years : $scope.years;
 
+          // expose the time (in milliseconds) for the parent controller
+          $scope.currentTime = $scope.millis;
         }
 
         //determine initial values of time units and add AddSeconds functionality
