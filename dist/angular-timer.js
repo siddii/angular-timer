@@ -1,5 +1,5 @@
 /**
- * angular-timer - v1.3.5 - 2017-03-09 2:18 PM
+ * angular-timer - v1.3.5 - 2017-07-23 2:18 PM
  * https://github.com/siddii/angular-timer
  *
  * Copyright (c) 2017 Adrian Wardell
@@ -187,8 +187,8 @@ var timerModule = angular.module('timer', [])
           tick();
           $scope.isRunning = false;
           $scope.clear();
-          $scope.$emit('timer-reset', {
-            timeoutId: timeoutId,
+          $scope.$emit('timer-reseted', {
+            timeoutId: $scope.timeoutId,
             millis: $scope.millis,
             seconds: $scope.seconds,
             minutes: $scope.minutes,
