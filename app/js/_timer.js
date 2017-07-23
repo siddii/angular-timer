@@ -180,7 +180,7 @@ var timerModule = angular.module('timer', [])
           tick();
           $scope.isRunning = false;
           $scope.clear();
-          $scope.$emit('timer-reset', {
+          $scope.$emit('timer-reseted', {
             timeoutId: $scope.timeoutId,
             millis: $scope.millis,
             seconds: $scope.seconds,
