@@ -2,7 +2,7 @@
  * angular-timer - v1.3.5 - 2017-07-23 2:18 PM
  * https://github.com/siddii/angular-timer
  *
- * Copyright (c) 2017 Adrian Wardell
+ * Copyright (c) 2017 Siddique Hameed
  * Licensed MIT <https://github.com/siddii/angular-timer/blob/master/LICENSE.txt>
  */
 var timerModule = angular.module('timer', [])
