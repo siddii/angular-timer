@@ -146,6 +146,7 @@ var timerModule = angular.module('timer', [])
             $scope.countdown += 1;
           }
           $scope.startTime = moment().diff((moment($scope.stoppedTime).diff(moment($scope.startTime))));
+          $scope.endTime += moment().diff(moment($scope.stoppedTime));
           tick();
           $scope.isRunning = true;
           $scope.$emit('timer-started', {
