@@ -6,6 +6,8 @@ Humanize Duration
 
 I have the time in milliseconds and I want it to become "30 minutes" or "3 days, 1 hour". Enter Humanize Duration!
 
+**This library is in maintenance mode. New languages and bug fixes will be added but no new features will be. If you're interested in helping out by taking over the project, please see [this GitHub issue](https://github.com/EvanHahn/HumanizeDuration.js/issues/120).**
+
 Basic usage
 -----------
 
@@ -24,7 +26,7 @@ In Node (or Browserify or Webpack or anywhere with CommonJS):
 
 ```js
 var humanizeDuration = require('humanize-duration')
-humanizeDuration(12000)
+humanizeDuration(12000) // '12 seconds'
 ```
 
 Usage
@@ -34,7 +36,7 @@ By default, Humanize Duration will humanize down to the second, and will return 
 
 ```js
 humanizeDuration(3000)      // '3 seconds'
-humanizeDuration(2015)      // '2.25 seconds'
+humanizeDuration(2250)      // '2.25 seconds'
 humanizeDuration(97320000)  // '1 day, 3 hours, 2 minutes'
 ```
 
@@ -142,8 +144,7 @@ humanizeDuration(3602000, {
   round: true,
   spacer: ' glorioso ',
   units: ['m']
-})
-// '60 glorioso minutos'
+}) // '60 glorioso minutos'
 ```
 
 ### Humanizers
