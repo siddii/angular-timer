@@ -1,4 +1,7 @@
-## angular-timer — A simple, re-usable, inter-operable timer directive [![Build Status](https://travis-ci.org/siddii/angular-timer.png)](https://travis-ci.org/siddii/angular-timer)
+## angular-timer — A simple, re-usable, inter-operable timer directive
+
+[![Build Status](https://travis-ci.org/siddii/angular-timer.png)](https://travis-ci.org/siddii/angular-timer)
+[![](https://www.codeshelter.co/static/badges/badge-flat.svg)](https://www.codeshelter.co/)
 
 ### Getting started
 With any of the following options...
