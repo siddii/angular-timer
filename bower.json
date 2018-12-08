@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "angular": ">= 1.0.7",
-    "moment": "~2.9.0",
+    "moment": "~2.11.2",
     "humanize-duration": "~3.10.0"
   },
   "devDependencies": {
