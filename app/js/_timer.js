@@ -291,7 +291,7 @@ var timerModule = angular.module('timer', [])
              $scope.addCDSeconds(extraSeconds);
           });
 
-          $scope.$on('timer-set-countdown-seconds', function (e, countdownSeconds) {
+          $scope.setCountdownSeconds = function (countdownSeconds) {
             if (!$scope.isRunning) {
               $scope.clear();
             }
@@ -299,6 +299,14 @@ var timerModule = angular.module('timer', [])
             $scope.countdown = countdownSeconds;
             $scope.millis = countdownSeconds * 1000;
             calculateTimeUnits();
+
+            if(!$scope.$$phase && !$scope.$root.$$phase) {
+              $scope.$apply();
+            }
+          };
+
+          $scope.$on('timer-set-countdown-seconds', function (e, countdownSeconds) {
+            $scope.setCountdownSeconds(countdownSeconds);
           });
         } else {
           $scope.millis = 0;
@@ -319,6 +327,7 @@ var timerModule = angular.module('timer', [])
           if ($scope.countdownattr) {
             typeTimer = $scope.countdownattr;
             $scope.millis = $scope.countdown * 1000;
+            $scope.setCountdownSeconds($scope.countdown);
           }
 
           if ($scope.millis < 0) {
